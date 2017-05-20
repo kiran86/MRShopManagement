@@ -37,7 +37,6 @@ Partial Class frmMain
         Me.menuRegister = New System.Windows.Forms.ToolStripMenuItem()
         Me.ViewSalesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.StockRegisterToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.SaleRegisterToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SystemToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.BackupToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.RestoreToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -163,7 +162,7 @@ Partial Class frmMain
         '
         'menuRegister
         '
-        Me.menuRegister.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ViewSalesToolStripMenuItem, Me.StockRegisterToolStripMenuItem, Me.SaleRegisterToolStripMenuItem})
+        Me.menuRegister.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ViewSalesToolStripMenuItem, Me.StockRegisterToolStripMenuItem})
         Me.menuRegister.Name = "menuRegister"
         Me.menuRegister.Size = New System.Drawing.Size(61, 20)
         Me.menuRegister.Text = "Register"
@@ -171,20 +170,14 @@ Partial Class frmMain
         'ViewSalesToolStripMenuItem
         '
         Me.ViewSalesToolStripMenuItem.Name = "ViewSalesToolStripMenuItem"
-        Me.ViewSalesToolStripMenuItem.Size = New System.Drawing.Size(148, 22)
+        Me.ViewSalesToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.ViewSalesToolStripMenuItem.Text = "View Sales"
         '
         'StockRegisterToolStripMenuItem
         '
         Me.StockRegisterToolStripMenuItem.Name = "StockRegisterToolStripMenuItem"
-        Me.StockRegisterToolStripMenuItem.Size = New System.Drawing.Size(148, 22)
-        Me.StockRegisterToolStripMenuItem.Text = "Stock Register"
-        '
-        'SaleRegisterToolStripMenuItem
-        '
-        Me.SaleRegisterToolStripMenuItem.Name = "SaleRegisterToolStripMenuItem"
-        Me.SaleRegisterToolStripMenuItem.Size = New System.Drawing.Size(148, 22)
-        Me.SaleRegisterToolStripMenuItem.Text = "Sale Register"
+        Me.StockRegisterToolStripMenuItem.Size = New System.Drawing.Size(166, 22)
+        Me.StockRegisterToolStripMenuItem.Text = "Generate Register"
         '
         'SystemToolStripMenuItem
         '
@@ -564,7 +557,7 @@ Partial Class frmMain
         Me.lblTotal.Location = New System.Drawing.Point(879, 457)
         Me.lblTotal.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblTotal.Name = "lblTotal"
-        Me.lblTotal.Size = New System.Drawing.Size(48, 16)
+        Me.lblTotal.Size = New System.Drawing.Size(49, 16)
         Me.lblTotal.TabIndex = 51
         Me.lblTotal.Text = "Total:"
         '
@@ -725,7 +718,6 @@ Partial Class frmMain
     Friend WithEvents PricingToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ViewSalesToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents StockRegisterToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents SaleRegisterToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents txtbxRicePrice As TextBox
     Friend WithEvents txtbxWhtPrice As TextBox
     Friend WithEvents txtbxSugarPrice As TextBox

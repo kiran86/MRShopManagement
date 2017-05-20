@@ -38,6 +38,7 @@ Partial Class frmStock
         Me.Label2 = New System.Windows.Forms.Label()
         Me.txtbxAtta = New System.Windows.Forms.TextBox()
         Me.lblAtta = New System.Windows.Forms.Label()
+        Me.bttnReset = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'lblCategory
@@ -147,7 +148,7 @@ Partial Class frmStock
         '
         'bttnUpdate
         '
-        Me.bttnUpdate.Location = New System.Drawing.Point(95, 314)
+        Me.bttnUpdate.Location = New System.Drawing.Point(37, 314)
         Me.bttnUpdate.Margin = New System.Windows.Forms.Padding(4)
         Me.bttnUpdate.Name = "bttnUpdate"
         Me.bttnUpdate.Size = New System.Drawing.Size(112, 32)
@@ -157,7 +158,7 @@ Partial Class frmStock
         '
         'bttnCancel
         '
-        Me.bttnCancel.Location = New System.Drawing.Point(219, 314)
+        Me.bttnCancel.Location = New System.Drawing.Point(277, 314)
         Me.bttnCancel.Margin = New System.Windows.Forms.Padding(4)
         Me.bttnCancel.Name = "bttnCancel"
         Me.bttnCancel.Size = New System.Drawing.Size(112, 32)
@@ -193,11 +194,22 @@ Partial Class frmStock
         Me.lblAtta.TabIndex = 8
         Me.lblAtta.Text = "Atta:"
         '
+        'bttnReset
+        '
+        Me.bttnReset.Location = New System.Drawing.Point(157, 314)
+        Me.bttnReset.Margin = New System.Windows.Forms.Padding(4)
+        Me.bttnReset.Name = "bttnReset"
+        Me.bttnReset.Size = New System.Drawing.Size(112, 32)
+        Me.bttnReset.TabIndex = 16
+        Me.bttnReset.Text = "Reset"
+        Me.bttnReset.UseVisualStyleBackColor = True
+        '
         'frmStock
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 18.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(426, 361)
+        Me.Controls.Add(Me.bttnReset)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.txtbxAtta)
         Me.Controls.Add(Me.lblAtta)
@@ -240,4 +252,5 @@ Partial Class frmStock
     Friend WithEvents Label2 As Label
     Friend WithEvents txtbxAtta As TextBox
     Friend WithEvents lblAtta As Label
+    Friend WithEvents bttnReset As Button
 End Class

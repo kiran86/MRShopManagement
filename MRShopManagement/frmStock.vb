@@ -88,4 +88,11 @@ Public Class frmStock
         End If
         connection.Close()
     End Sub
+
+    Private Sub bttnReset_Click(sender As Object, e As EventArgs) Handles bttnReset.Click
+        txtbxRice.Text = 0.000
+        txtbxWheat.Text = 0.000
+        txtbxAtta.Text = 0.000
+        txtbxSugar.Text = 0.000
+    End Sub
 End Class

@@ -433,4 +433,9 @@ Public Class frmMain
     Private Sub RestoreToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RestoreToolStripMenuItem.Click
 
     End Sub
+
+    Private Sub StockRegisterToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles StockRegisterToolStripMenuItem.Click
+        Me.Enabled = False
+        frmGenRegister.Show()
+    End Sub
 End Class
