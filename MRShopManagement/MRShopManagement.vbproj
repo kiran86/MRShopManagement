@@ -110,6 +110,12 @@
     <Compile Include="frmGetBenfDetails.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmLoadFamilyID.Designer.vb">
+      <DependentUpon>frmLoadFamilyID.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmLoadFamilyID.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmPricing.Designer.vb">
       <DependentUpon>frmPricing.vb</DependentUpon>
     </Compile>
@@ -174,6 +180,9 @@
   <ItemGroup>
     <EmbeddedResource Include="frmGetBenfDetails.resx">
       <DependentUpon>frmGetBenfDetails.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmLoadFamilyID.resx">
+      <DependentUpon>frmLoadFamilyID.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmPricing.resx">
       <DependentUpon>frmPricing.vb</DependentUpon>

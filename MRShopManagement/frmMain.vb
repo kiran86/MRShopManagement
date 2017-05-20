@@ -426,79 +426,8 @@ Public Class frmMain
     End Sub
 
     Private Sub LoadDataToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles LoadDataToolStripMenuItem.Click
-        Try
-            connection.Open()
-            Dim sql As String
-            Dim count As Integer = 0
-            Dim frmProgress As New Form
-            Dim progress As New ProgressBar
-            Dim txtbxStatus As New TextBox
-
-            frmProgress.Width = 400
-            frmProgress.Height = 300
-            frmProgress.Font = New Font(Me.Font.Name, Me.Font.SizeInPoints, Me.Font.Style, Me.Font.Unit)
-            AddHandler txtbxStatus.Click, Sub(sender2 As Object, e2 As EventArgs)
-                                              frmProgress.Close()
-                                              Me.Enabled = True
-                                          End Sub
-
-            progress.Width = frmProgress.Width - 41
-            progress.Height = 10
-            progress.Margin = New Padding(4, 4, 4, 4)
-            progress.Minimum = 0
-            frmProgress.Controls.Add(progress)
-
-            txtbxStatus.Width = frmProgress.Width - 41
-            txtbxStatus.Height = 280
-            txtbxStatus.Margin = New Padding(4, 4, 4, 4)
-            frmProgress.Controls.Add(txtbxStatus)
-
-
-
-            Me.Enabled = False
-            frmProgress.Enabled = True
-            frmProgress.Show()
-
-            sql = "SELECT COUNT(RCNo) FROM Beneficiaries WHERE FamilyID IS NULL"
-                                              Dim cmd As OleDbCommand = New OleDbCommand(sql, connection)
-                                              dr = cmd.ExecuteReader
-                                              If Not dr.HasRows Then
-                                                  MsgBox("No matching data found", MsgBoxStyle.OkOnly, "Error")
-                                              Else
-                                                  dr.Read()
-                                                  progress.Maximum = Integer.Parse(dr(0).ToString)
-                                                  progress.Step = 1
-                                              End If
-
-                                              sql = "SELECT RCNo FROM Beneficiaries WHERE FamilyID IS NULL"
-                                              cmd = New OleDbCommand(sql, connection)
-                                              dr = cmd.ExecuteReader
-                                              If Not dr.HasRows Then
-                                                  MsgBox("No matching data found", MsgBoxStyle.OkOnly, "Error")
-                                              Else
-                                                  count = 0
-                                                  progress.Show()
-                                                  While dr.Read()
-                                                      progress.PerformStep()
-                                                      progress.Refresh()
-                                                      Console.WriteLine(progress.Value)
-                                                      'Try
-                                                      '    source = New Net.WebClient().DownloadString("https://www.wbpds.gov.in/DisplayRCData.aspx?RCNO=00" + dr("RCNo").ToString)
-                                                      '    Dim recentSource As String = frmGetBenfDetails.GetTagContents(source, "<table width=""100%"" cellpadding=""5px"">", "</table>")
-                                                      '    Dim familyID As String = frmGetBenfDetails.GetTagContents(recentSource, "<span id=""ctl00_ContentPlaceHolder1_lblFamily""><i>", "</i></span>")
-                                                      '    sql = "UPDATE TABLE Beneficiaries SET FamilyID = " + familyID + " WHERE RCNo = " + dr("RCNo").ToString
-                                                      '    cmd = New OleDbCommand(sql, connection)
-                                                      '    If cmd.ExecuteNonQuery = 1 Then
-                                                      '        count = count + 1
-                                                      '    End If
-                                                      'Catch exception As Exception
-                                                      '    Console.WriteLine(exception.ToString)
-                                                      'End Try
-                                                  End While
-                                              End If
-        Catch ex As Exception
-            MsgBox("Error:" + ex.Message + "\n" + ex.StackTrace)
-        End Try
+        Me.Enabled = False
+        frmLoadFamilyID.Show()
     End Sub
 
     Private Sub RestoreToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RestoreToolStripMenuItem.Click
