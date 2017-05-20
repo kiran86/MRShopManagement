@@ -24,6 +24,7 @@ Partial Class frmLoadFamilyID
     Private Sub InitializeComponent()
         Me.prgbrStatus = New System.Windows.Forms.ProgressBar()
         Me.txtbxStatus = New System.Windows.Forms.TextBox()
+        Me.bttnLoad = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'prgbrStatus
@@ -41,18 +42,28 @@ Partial Class frmLoadFamilyID
         Me.txtbxStatus.Name = "txtbxStatus"
         Me.txtbxStatus.ReadOnly = True
         Me.txtbxStatus.ScrollBars = System.Windows.Forms.ScrollBars.Both
-        Me.txtbxStatus.Size = New System.Drawing.Size(487, 267)
+        Me.txtbxStatus.Size = New System.Drawing.Size(487, 238)
         Me.txtbxStatus.TabIndex = 1
+        '
+        'bttnLoad
+        '
+        Me.bttnLoad.Location = New System.Drawing.Point(219, 287)
+        Me.bttnLoad.Name = "bttnLoad"
+        Me.bttnLoad.Size = New System.Drawing.Size(75, 23)
+        Me.bttnLoad.TabIndex = 2
+        Me.bttnLoad.Text = "Load"
+        Me.bttnLoad.UseVisualStyleBackColor = True
         '
         'frmLoadFamilyID
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(512, 322)
+        Me.Controls.Add(Me.bttnLoad)
         Me.Controls.Add(Me.txtbxStatus)
         Me.Controls.Add(Me.prgbrStatus)
         Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "frmLoadFamilyID"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Load Family IDs"
@@ -63,4 +74,5 @@ Partial Class frmLoadFamilyID
 
     Friend WithEvents prgbrStatus As ProgressBar
     Friend WithEvents txtbxStatus As TextBox
+    Friend WithEvents bttnLoad As Button
 End Class
