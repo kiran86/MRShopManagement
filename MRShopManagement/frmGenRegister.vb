@@ -1,10 +1,21 @@
-﻿Imports Microsoft.Office.Interop
+﻿Imports System.Data.OleDb
 Public Class frmGenRegister
+    Dim provider As String
+    Dim dataFile As String
+    Dim connString As String
+    Public connection As OleDbConnection = New OleDbConnection
+    Public dr As OleDbDataReader
+
     Private regDate As String = ""
-    Private regStock As Integer = 1
-    Private regSale As Integer = 2
+    Private regStock As Integer = 0
+    Private regSale As Integer = 1
 
     Private Sub frmGenRegister_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        provider = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source ="
+        dataFile = "|DataDirectory|\mrshop.mdb"
+        connString = provider & dataFile
+        connection.ConnectionString = connString
+
         With System.DateTime.Today
             regDate = regDate + .Day.ToString + "-"
             regDate = regDate + .Month.ToString + "-"
@@ -15,15 +26,6 @@ Public Class frmGenRegister
         Me.Dispose()
         frmMain.Enabled = True
         frmMain.BringToFront()
-    End Sub
-
-    Private Sub bttnBrowse_Click(sender As Object, e As EventArgs) Handles bttnBrowse.Click
-        If ValidateForm(sender) Then
-            SaveRegFileDialog.FileName = "RegisterBook_" + regDate + ".xls"
-            If SaveRegFileDialog.ShowDialog() = Windows.Forms.DialogResult.OK Then
-                txtbxFileLoc.Text = SaveRegFileDialog.FileName
-            End If
-        End If
     End Sub
 
     Private Sub cmboxRegisterType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmboxRegisterType.SelectedIndexChanged
@@ -38,7 +40,12 @@ Public Class frmGenRegister
 
     Private Sub bttnGenerate_Click(sender As Object, e As EventArgs) Handles bttnGenerate.Click
         If ValidateForm(sender) Then
-            GenerateRegister(cmboxRegisterType.SelectedIndex, cmboxCategory.SelectedItem.ToString, txtbxFileLoc.Text)
+            Select Case cmboxRegisterType.SelectedIndex
+                Case regStock
+                    GenerateRegister(regStock, vbNullString)
+                Case regSale
+                    GenerateRegister(regSale, cmboxCategory.SelectedItem.ToString)
+            End Select
         End If
     End Sub
 
@@ -48,52 +55,39 @@ Public Class frmGenRegister
             MsgBox("Select Register!")
         ElseIf cmboxRegisterType.SelectedIndex = 1 And cmboxCategory.SelectedIndex = -1 Then
             MsgBox("Select Category!")
-        ElseIf DirectCast(sender, Button).Text = "Generate" And txtbxFileLoc.Text = "" Then
-            MsgBox("Choose save file location!")
         Else
             flag = True
         End If
         Return flag
     End Function
 
-    Private Sub GenerateRegister(ByVal RegType As Integer, ByVal Category As String, ByVal FileLoc As String)
-        'Dim exlApp As Excel.Application
-        'Dim exlWrkBk As Excel._Workbook
-        'Dim exlWrkBks As Excel.Workbooks
-        'Dim exlSheets As Excel.Sheets
-        'Dim exlSheet As Excel._Worksheet
-        'Dim exlRange As Excel.Range
-        'Dim exlSheetName As String = ""
-        'If RegType = regStock Then
-        '    exlSheetName = "Stock"
-        'ElseIf RegType = regSale Then
-        '    exlSheetName = "Sale : " + Category
-        'End If
-        'Try
-        '    exlApp = New Excel.Application()
-        '    exlWrkBks = exlApp.Workbooks
-        '    exlWrkBk = exlWrkBks.Add
-        '    exlSheets = exlWrkBk.Sheets
-        '    exlSheet = exlSheets(1)
-        '    exlSheet.Name = exlSheetName
+    Private Sub GenerateRegister(ByVal RegType As Integer, ByVal Category As String)
+        Dim dataAdapter As OleDbDataAdapter
+        Dim dataSet As DataSet = New DataSet
+        Dim dataTable = dataSet.Tables
+        Dim bindingSource As New BindingSource
+        Dim sql As String
+        Dim dataview As DataView
+        Dim cmd As OleDbCommand
+        Dim dr As OleDbDataReader
 
-        '    exlSheet.Cells(1, 1) = "Date"
-        '    exlSheet.Cells(1, 2) = "Category"
-        '    exlSheet.Cells(1, 3) = "Comodity"
-        '    exlSheet.Cells(1, 4) = "Opening Balance (in qt-kg-gms)"
-        '    exlSheet.Cells(1, 5) = "Stock Received (in qt-kg-gms)"
-        '    exlSheet.Cells(1, 6) = "Total Stock (in qt-kg-gms)"
-        '    exlSheet.Cells(1, 7) = "Stock Sold (in qt-kg-gms)"
-        '    exlSheet.Cells(1, 8) = "Handling Loss (in qt-kg-gms)"
-        '    exlSheet.Cells(1, 9) = "Closing Balance (in qt-kg-gms)"
-        '    exlSheet.Cells(1, 10) = "Sale Register Page Serial No"
-        '    exlSheet.Cells(1, 11) = "Signature & Remarks of Inspector, F&S"
+        dataSet.Clear()
+        connection.Open()
 
-        '    exlApp.Visible = True
-        '    exlApp.UserControl = True
-        'Catch ex As Exception
-        '    Console.WriteLine(ex.Message + ":" + ex.StackTrace)
-        'End Try
-
+        sql = "SELECT MIN(Delivery) FROM Delivery"
+        cmd = New OleDbCommand(sql, connection)
+        dr = cmd.ExecuteReader
+        If dr.HasRows Then
+            dr.Read()
+            Dim startDate As String = dr.GetDateTime(0).ToShortDateString
+        End If
+        sql = "SELECT MAX(Delivery) FROM Delivery"
+        cmd = New OleDbCommand(sql, connection)
+        dr = cmd.ExecuteReader
+        If dr.HasRows Then
+            dr.Read()
+            Dim endDate As String = dr.GetDateTime(0).ToShortDateString
+        End If
+        connection.Close()
     End Sub
 End Class
