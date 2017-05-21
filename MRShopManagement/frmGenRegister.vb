@@ -21,8 +21,8 @@ Public Class frmGenRegister
         AAY
         PHH
         SPHH
-        RKSYI
-        RKSYII
+        RKSY_I
+        RKSY_II
     End Enum
 
     Private Sub frmGenRegister_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -86,6 +86,8 @@ Public Class frmGenRegister
         Dim cmd As OleDbCommand
         Dim dr As OleDbDataReader
 
+        Dim row As String()
+
         Dim startDate As Date
         Dim endDate As Date
         Dim delvDate As Date
@@ -112,27 +114,41 @@ Public Class frmGenRegister
         Try
             connection.Open()
 
-            sql = "SELECT MIN(Delivery) FROM Delivery WHERE Delivery IS NOT NULL"
+            sql = "SELECT MIN(Delivery) FROM Delivery"
             cmd = New OleDbCommand(sql, connection)
             dr = cmd.ExecuteReader
             dr.Read()
             If dr.HasRows And Not dr.IsDBNull(0) Then
                 startDate = dr.GetDateTime(0)
             End If
-            sql = "SELECT MAX(Delivery) FROM Delivery WHERE Delivery IS NOT NULL"
+
+            sql = "SELECT MAX(Delivery) FROM Delivery"
             cmd = New OleDbCommand(sql, connection)
             dr = cmd.ExecuteReader
-            dr.Read
+            dr.Read()
             If dr.HasRows And Not dr.IsDBNull(0) Then
-                dr.Read()
                 endDate = dr.GetDateTime(0).ToShortDateString
             End If
 
-
+            delvDate = startDate
+            While delvDate.Date <> endDate.AddDays(1).Date
+                sql = "SELECT RCNo FROM Delivery WHERE Category = '" + Category + "' AND Delivery = #" + delvDate + "#"
+                cmd = New OleDbCommand(sql, connection)
+                dr = cmd.ExecuteReader
+                If dr.HasRows Then
+                    While dr.Read()
+                        row = New String() {delvDate.ToShortDateString, "", dr(0).ToString, Category, "", "", "", "", ""}
+                        datagridRegister.Rows.Add(row)
+                    End While
+                End If
+                row = New String() {delvDate.ToShortDateString, "", "Total", Category, "", "", "", "", ""}
+                datagridRegister.Rows.Add(row)
+                delvDate = delvDate.AddDays(1)
+            End While
 
             connection.Close()
         Catch ex As Exception
-            MsgBox("Fatal Error: " + ex.Message)
+            MsgBox("Fatal Error: " + ex.Message + "->" + ex.StackTrace)
         End Try
 
     End Sub
