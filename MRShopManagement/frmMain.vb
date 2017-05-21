@@ -1,4 +1,5 @@
 ﻿Imports System.Data.OleDb
+Imports System.Drawing.Text
 
 Public Class frmMain
     Dim provider As String
@@ -25,7 +26,10 @@ Public Class frmMain
         connString = provider & dataFile
         connection.ConnectionString = connString
         DeliveryDate = Now.ToShortDateString
-        lblDateText.Text = DeliveryDate
+        Dim customFont As PrivateFontCollection = New PrivateFontCollection
+        customFont.AddFontFile("Fonts/digital-7.ttf")
+        lblSystemDateTime.Font = New Font(customFont.Families(0), 16, FontStyle.Regular)
+        timerSystemDateTime.Start()
     End Sub
 
     Private Sub btnFind_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnFind.Click
@@ -367,7 +371,7 @@ Public Class frmMain
         Dim sql As String
         connection.Open()
         For i As Integer = 0 To lstvwRcNos.Items.Count - 1
-            sql = "UPDATE Delivery Set [Delivery] = '" & lblDateText.Text & "' WHERE [RCNo] = " & lstvwRcNos.Items(i).Text
+            sql = "UPDATE Delivery Set [Delivery] = '" & Now & "' WHERE [RCNo] = " & lstvwRcNos.Items(i).Text
             Dim cmd = New OleDbCommand(sql, connection)
             cmd.ExecuteNonQuery()
         Next
@@ -379,7 +383,7 @@ Public Class frmMain
 
     Private Sub ApplicationReload()
         For Each control As Control In Me.Controls
-            If control.GetType Is GetType(TextBox) And control.Name <> lblDateText.Name Then
+            If control.GetType Is GetType(TextBox) And control.Name <> lblSystemDateTime.Name Then
                 control.Text = ""
             End If
             lstvwFamily.Clear()
@@ -437,5 +441,9 @@ Public Class frmMain
     Private Sub StockRegisterToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles StockRegisterToolStripMenuItem.Click
         Me.Enabled = False
         frmGenRegister.Show()
+    End Sub
+
+    Private Sub timerSystemDateTime_Tick(sender As Object, e As EventArgs) Handles timerSystemDateTime.Tick
+        lblSystemDateTime.Text = Format(Now, "dd/MM/yyyy hh:mm:ss")
     End Sub
 End Class

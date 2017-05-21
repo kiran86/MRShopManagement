@@ -22,6 +22,7 @@ Partial Class frmMain
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.MenuMRShopManagement = New System.Windows.Forms.MenuStrip()
         Me.BenefiToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AddToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -50,7 +51,6 @@ Partial Class frmMain
         Me.txtbxCardNo = New System.Windows.Forms.TextBox()
         Me.btnFind = New System.Windows.Forms.Button()
         Me.lblRCNo = New System.Windows.Forms.Label()
-        Me.lblDtTime = New System.Windows.Forms.Label()
         Me.btnAdd = New System.Windows.Forms.Button()
         Me.btnAddAll = New System.Windows.Forms.Button()
         Me.lstvwRcNos = New System.Windows.Forms.ListView()
@@ -77,10 +77,11 @@ Partial Class frmMain
         Me.txtbxSugarPrice = New System.Windows.Forms.TextBox()
         Me.lblTotal = New System.Windows.Forms.Label()
         Me.txtbxTotal = New System.Windows.Forms.TextBox()
-        Me.lblDateText = New System.Windows.Forms.Label()
         Me.txtbxAttaPrice = New System.Windows.Forms.TextBox()
         Me.txtbxAttaQty = New System.Windows.Forms.TextBox()
         Me.lblAtta = New System.Windows.Forms.Label()
+        Me.lblSystemDateTime = New System.Windows.Forms.Label()
+        Me.timerSystemDateTime = New System.Windows.Forms.Timer(Me.components)
         Me.MenuMRShopManagement.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -170,7 +171,7 @@ Partial Class frmMain
         'ViewSalesToolStripMenuItem
         '
         Me.ViewSalesToolStripMenuItem.Name = "ViewSalesToolStripMenuItem"
-        Me.ViewSalesToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.ViewSalesToolStripMenuItem.Size = New System.Drawing.Size(166, 22)
         Me.ViewSalesToolStripMenuItem.Text = "View Sales"
         '
         'StockRegisterToolStripMenuItem
@@ -296,16 +297,6 @@ Partial Class frmMain
         Me.lblRCNo.Size = New System.Drawing.Size(51, 16)
         Me.lblRCNo.TabIndex = 11
         Me.lblRCNo.Text = "RC No:"
-        '
-        'lblDtTime
-        '
-        Me.lblDtTime.AutoSize = True
-        Me.lblDtTime.Location = New System.Drawing.Point(839, 31)
-        Me.lblDtTime.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.lblDtTime.Name = "lblDtTime"
-        Me.lblDtTime.Size = New System.Drawing.Size(40, 16)
-        Me.lblDtTime.TabIndex = 13
-        Me.lblDtTime.Text = "Date:"
         '
         'btnAdd
         '
@@ -557,7 +548,7 @@ Partial Class frmMain
         Me.lblTotal.Location = New System.Drawing.Point(879, 457)
         Me.lblTotal.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblTotal.Name = "lblTotal"
-        Me.lblTotal.Size = New System.Drawing.Size(49, 16)
+        Me.lblTotal.Size = New System.Drawing.Size(48, 16)
         Me.lblTotal.TabIndex = 51
         Me.lblTotal.Text = "Total:"
         '
@@ -571,15 +562,6 @@ Partial Class frmMain
         Me.txtbxTotal.Size = New System.Drawing.Size(60, 22)
         Me.txtbxTotal.TabIndex = 52
         Me.txtbxTotal.Text = "Price"
-        '
-        'lblDateText
-        '
-        Me.lblDateText.AutoSize = True
-        Me.lblDateText.Location = New System.Drawing.Point(886, 31)
-        Me.lblDateText.Name = "lblDateText"
-        Me.lblDateText.Size = New System.Drawing.Size(0, 16)
-        Me.lblDateText.TabIndex = 53
-        Me.lblDateText.UseWaitCursor = True
         '
         'txtbxAttaPrice
         '
@@ -611,16 +593,30 @@ Partial Class frmMain
         Me.lblAtta.TabIndex = 54
         Me.lblAtta.Text = "Atta:"
         '
+        'lblSystemDateTime
+        '
+        Me.lblSystemDateTime.AutoSize = True
+        Me.lblSystemDateTime.Font = New System.Drawing.Font("Courier New", 12.0!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblSystemDateTime.ForeColor = System.Drawing.Color.Blue
+        Me.lblSystemDateTime.Location = New System.Drawing.Point(796, 31)
+        Me.lblSystemDateTime.Name = "lblSystemDateTime"
+        Me.lblSystemDateTime.Size = New System.Drawing.Size(199, 19)
+        Me.lblSystemDateTime.TabIndex = 57
+        Me.lblSystemDateTime.Text = "dd-MM-yyyy hh:mm:ss"
+        '
+        'timerSystemDateTime
+        '
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(1008, 522)
+        Me.Controls.Add(Me.lblSystemDateTime)
         Me.Controls.Add(Me.txtbxAttaPrice)
         Me.Controls.Add(Me.txtbxAttaQty)
         Me.Controls.Add(Me.lblAtta)
-        Me.Controls.Add(Me.lblDateText)
         Me.Controls.Add(Me.txtbxTotal)
         Me.Controls.Add(Me.lblTotal)
         Me.Controls.Add(Me.txtbxSugarPrice)
@@ -647,7 +643,6 @@ Partial Class frmMain
         Me.Controls.Add(Me.lstvwRcNos)
         Me.Controls.Add(Me.btnAddAll)
         Me.Controls.Add(Me.btnAdd)
-        Me.Controls.Add(Me.lblDtTime)
         Me.Controls.Add(Me.lblRCNo)
         Me.Controls.Add(Me.txtbxGender)
         Me.Controls.Add(Me.lblGender)
@@ -685,7 +680,6 @@ Partial Class frmMain
     Friend WithEvents txtbxCardNo As System.Windows.Forms.TextBox
     Friend WithEvents btnFind As System.Windows.Forms.Button
     Friend WithEvents lblRCNo As System.Windows.Forms.Label
-    Friend WithEvents lblDtTime As System.Windows.Forms.Label
     Friend WithEvents btnAdd As System.Windows.Forms.Button
     Friend WithEvents btnAddAll As System.Windows.Forms.Button
     Friend WithEvents lstvwRcNos As System.Windows.Forms.ListView
@@ -723,7 +717,6 @@ Partial Class frmMain
     Friend WithEvents txtbxSugarPrice As TextBox
     Friend WithEvents lblTotal As Label
     Friend WithEvents txtbxTotal As TextBox
-    Friend WithEvents lblDateText As Label
     Friend WithEvents txtbxAttaPrice As TextBox
     Friend WithEvents txtbxAttaQty As TextBox
     Friend WithEvents lblAtta As Label
@@ -732,4 +725,6 @@ Partial Class frmMain
     Friend WithEvents RestoreToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator2 As ToolStripSeparator
     Friend WithEvents LoadDataToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents lblSystemDateTime As Label
+    Friend WithEvents timerSystemDateTime As Timer
 End Class
