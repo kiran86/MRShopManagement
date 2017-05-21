@@ -10,6 +10,21 @@ Public Class frmGenRegister
     Private regStock As Integer = 0
     Private regSale As Integer = 1
 
+    Private Enum Products
+        Rice
+        Wheat
+        Atta
+        Sugar
+    End Enum
+
+    Private Enum Category
+        AAY
+        PHH
+        SPHH
+        RKSYI
+        RKSYII
+    End Enum
+
     Private Sub frmGenRegister_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         provider = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source ="
         dataFile = "|DataDirectory|\mrshop.mdb"
@@ -30,11 +45,11 @@ Public Class frmGenRegister
 
     Private Sub cmboxRegisterType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmboxRegisterType.SelectedIndexChanged
         If cmboxRegisterType.SelectedItem.ToString = "Sale" Then
-            lblCategory.Visible = True
-            cmboxCategory.Visible = True
+            lblCategory.Enabled = True
+            cmboxCategory.Enabled = True
         Else
-            lblCategory.Visible = False
-            cmboxCategory.Visible = False
+            lblCategory.Enabled = False
+            cmboxCategory.Enabled = False
         End If
     End Sub
 
@@ -71,23 +86,54 @@ Public Class frmGenRegister
         Dim cmd As OleDbCommand
         Dim dr As OleDbDataReader
 
-        dataSet.Clear()
-        connection.Open()
+        Dim startDate As Date
+        Dim endDate As Date
+        Dim delvDate As Date
 
-        sql = "SELECT MIN(Delivery) FROM Delivery"
-        cmd = New OleDbCommand(sql, connection)
-        dr = cmd.ExecuteReader
-        If dr.HasRows Then
+        Select Case RegType
+            Case regStock
+
+            Case regSale
+                With datagridRegister
+                    .Columns.Add("delvDate", "Date")
+                    .Columns.Add("rcNo", "Ration Card No.")
+                    .Columns.Add("memoNo", "Cash Memo No.")
+                    .Columns.Add("rcCategory", "Category")
+                    .Columns.Add("rcFamily", "Family")
+                    .Columns.Add("headNo", "No(s) of Head")
+                    .Columns.Add("riceQty", "Rice")
+                    .Columns.Add("whtQty", "Wheat")
+                    .Columns.Add("attaQty", "Atta")
+                    .Columns.Add("sugarQty", "Sugar")
+                End With
+        End Select
+
+        dataSet.Clear()
+        Try
+            connection.Open()
+
+            sql = "SELECT MIN(Delivery) FROM Delivery WHERE Delivery IS NOT NULL"
+            cmd = New OleDbCommand(sql, connection)
+            dr = cmd.ExecuteReader
             dr.Read()
-            Dim startDate As String = dr.GetDateTime(0).ToShortDateString
-        End If
-        sql = "SELECT MAX(Delivery) FROM Delivery"
-        cmd = New OleDbCommand(sql, connection)
-        dr = cmd.ExecuteReader
-        If dr.HasRows Then
-            dr.Read()
-            Dim endDate As String = dr.GetDateTime(0).ToShortDateString
-        End If
-        connection.Close()
+            If dr.HasRows And Not dr.IsDBNull(0) Then
+                startDate = dr.GetDateTime(0)
+            End If
+            sql = "SELECT MAX(Delivery) FROM Delivery WHERE Delivery IS NOT NULL"
+            cmd = New OleDbCommand(sql, connection)
+            dr = cmd.ExecuteReader
+            dr.Read
+            If dr.HasRows And Not dr.IsDBNull(0) Then
+                dr.Read()
+                endDate = dr.GetDateTime(0).ToShortDateString
+            End If
+
+
+
+            connection.Close()
+        Catch ex As Exception
+            MsgBox("Fatal Error: " + ex.Message)
+        End Try
+
     End Sub
 End Class
