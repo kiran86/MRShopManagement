@@ -92,6 +92,8 @@ Public Class frmGenRegister
         Dim endDate As Date
         Dim delvDate As Date
 
+        datagridRegister.Rows.Clear()
+
         Select Case RegType
             Case regStock
 
@@ -114,7 +116,7 @@ Public Class frmGenRegister
         Try
             connection.Open()
 
-            sql = "SELECT MIN(Delivery) FROM Delivery"
+            sql = "SELECT MIN(Delivery) FROM Delivery WHERE Category = '" + Category + "'"
             cmd = New OleDbCommand(sql, connection)
             dr = cmd.ExecuteReader
             dr.Read()
@@ -122,7 +124,7 @@ Public Class frmGenRegister
                 startDate = dr.GetDateTime(0)
             End If
 
-            sql = "SELECT MAX(Delivery) FROM Delivery"
+            sql = "SELECT MAX(Delivery) FROM Delivery WHERE Category = '" + Category + "'"
             cmd = New OleDbCommand(sql, connection)
             dr = cmd.ExecuteReader
             dr.Read()
@@ -137,16 +139,18 @@ Public Class frmGenRegister
                 dr = cmd.ExecuteReader
                 If dr.HasRows Then
                     While dr.Read()
-                        row = New String() {delvDate.ToShortDateString, "", dr(0).ToString, Category, "", "", "", "", ""}
+                        row = New String() {delvDate.ToShortDateString, dr(0).ToString, "", Category, "", "", "", "", ""}
                         datagridRegister.Rows.Add(row)
                     End While
                 End If
-                row = New String() {delvDate.ToShortDateString, "", "Total", Category, "", "", "", "", ""}
+                row = New String() {delvDate.ToShortDateString, "Total", "", Category, "", "", "", "", ""}
                 datagridRegister.Rows.Add(row)
                 delvDate = delvDate.AddDays(1)
             End While
 
             connection.Close()
+
+
         Catch ex As Exception
             MsgBox("Fatal Error: " + ex.Message + "->" + ex.StackTrace)
         End Try
