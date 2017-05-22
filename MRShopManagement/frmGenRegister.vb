@@ -36,6 +36,8 @@ Public Class frmGenRegister
             regDate = regDate + .Month.ToString + "-"
             regDate = regDate + .Year.ToString
         End With
+
+        datagridRegister.AutoGenerateColumns = False
     End Sub
     Private Sub frmStockReg_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
         Me.Dispose()
@@ -133,12 +135,12 @@ Public Class frmGenRegister
 
             delvDate = startDate
             While delvDate.Date <> endDate.AddDays(1).Date
-                sql = "SELECT RCNo FROM Delivery WHERE Category = '" + Category + "' AND Delivery = #" + delvDate + "#"
+                sql = "SELECT RCNo, CashMemoNo FROM Delivery WHERE Category = '" + Category + "' AND Delivery = #" + delvDate + "#"
                 cmd = New OleDbCommand(sql, connection)
                 dr = cmd.ExecuteReader
                 If dr.HasRows Then
                     While dr.Read()
-                        row = New String() {delvDate.ToShortDateString, dr(0).ToString, "", Category, "", "", "", "", ""}
+                        row = New String() {delvDate.ToShortDateString, dr(0).ToString, dr(1).ToString, Category, "", "", "", "", ""}
                         datagridRegister.Rows.Add(row)
                     End While
                 End If
@@ -154,5 +156,40 @@ Public Class frmGenRegister
             MsgBox("Fatal Error: " + ex.Message + "->" + ex.StackTrace)
         End Try
 
+    End Sub
+
+    Private Function IsCellValueEqual(ByVal row As Integer, ByVal col As Integer) As Boolean
+        Dim flag As Boolean = False
+        Dim cell1 As DataGridViewCell = datagridRegister.Rows(row).Cells(col)
+        Dim cell2 As DataGridViewCell = datagridRegister.Rows(row - 1).Cells(col)
+        If cell1.Value = vbNull Or cell2.Value = vbNull Then
+            Return flag
+        End If
+        If Integer.Parse(cell1.Value.ToString) = Integer.Parse(cell2.Value.ToString()) Then
+            flag = True
+        End If
+        Return flag
+    End Function
+
+    Private Sub datagridRegister_CellPainting(sender As Object, e As DataGridViewCellPaintingEventArgs) Handles datagridRegister.CellPainting
+        e.AdvancedBorderStyle.Bottom = DataGridViewAdvancedCellBorderStyle.None
+        If e.RowIndex < 1 Or e.ColumnIndex < 0 Then
+            Return
+        End If
+        If IsCellValueEqual(e.RowIndex, e.ColumnIndex) Then
+            e.AdvancedBorderStyle.Top = DataGridViewAdvancedCellBorderStyle.None
+        Else
+            e.AdvancedBorderStyle.Top = datagridRegister.AdvancedCellBorderStyle.Top
+        End If
+    End Sub
+
+    Private Sub datagridRegister_CellFormatting(sender As Object, e As DataGridViewCellFormattingEventArgs) Handles datagridRegister.CellFormatting
+        If e.RowIndex = 0 Then
+            Return
+        End If
+        If IsCellValueEqual(e.RowIndex, e.ColumnIndex) Then
+            e.Value = ""
+        End If
+        e.FormattingApplied = True
     End Sub
 End Class
