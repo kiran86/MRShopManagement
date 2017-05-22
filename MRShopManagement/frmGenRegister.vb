@@ -92,6 +92,10 @@ Public Class frmGenRegister
         Dim endDate As Date
         Dim delvDate As Date
 
+        Dim minMemoNo As Integer
+        Dim maxMemoNo As Integer
+        Dim cashMemoNo As Integer
+
         datagridRegister.Rows.Clear()
 
         Select Case RegType
@@ -116,20 +120,15 @@ Public Class frmGenRegister
         Try
             connection.Open()
 
-            sql = "SELECT MIN(Delivery) FROM Delivery WHERE Category = '" + Category + "'"
+            sql = "SELECT MIN(Delivery), MAX(Delivery), MIN(CashMemoNo), MAX(CashMemoNo) FROM Delivery WHERE Category = '" + Category + "'"
             cmd = New OleDbCommand(sql, connection)
             dr = cmd.ExecuteReader
             dr.Read()
             If dr.HasRows And Not dr.IsDBNull(0) Then
                 startDate = dr.GetDateTime(0)
-            End If
-
-            sql = "SELECT MAX(Delivery) FROM Delivery WHERE Category = '" + Category + "'"
-            cmd = New OleDbCommand(sql, connection)
-            dr = cmd.ExecuteReader
-            dr.Read()
-            If dr.HasRows And Not dr.IsDBNull(0) Then
-                endDate = dr.GetDateTime(0).ToShortDateString
+                endDate = dr.GetDateTime(1)
+                minMemoNo = dr.GetInt32(2)
+                maxMemoNo = dr.GetInt32(3)
             End If
 
             delvDate = startDate
