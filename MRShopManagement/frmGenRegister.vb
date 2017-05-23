@@ -95,6 +95,11 @@ Public Class frmGenRegister
         Dim totalHead As Integer = 0
         Dim totalFamily As Integer = 0
 
+        Dim totalRicePrice As Double = 0.0
+        Dim totalWhetPrice As Double = 0.0
+        Dim totalAttaPrice As Double = 0.0
+        Dim totalSugrPrice As Double = 0.0
+
         Dim riceScale As Double
         Dim whetScale As Double
         Dim attaScale As Double
@@ -163,13 +168,17 @@ Public Class frmGenRegister
             While delvDate.Date <> endDate.AddDays(1).Date
                 totalHead = 0
                 totalFamily = 0
+                totalRicePrice = 0
+                totalWhetPrice = 0
+                totalAttaPrice = 0
+                totalSugrPrice = 0
                 sql = "SELECT RCNo, CashMemoNo FROM Delivery WHERE Category = '" + Category + "' AND Delivery = #" + delvDate + "#"
                 cmd = New OleDbCommand(Sql, connection)
                 dr = cmd.ExecuteReader
                 If dr.HasRows Then
                     While dr.Read()
                         rowID = datagridRegister.Rows.Add
-                        Console.WriteLine(rowID)
+                        totalHead = totalHead + 1
                         row = datagridRegister.Rows(rowID)
                         With row
                             .Cells(0).Value = delvDate.ToShortDateString
@@ -189,7 +198,6 @@ Public Class frmGenRegister
                             Else
                                 parentRowID = rowID
                                 totalFamily = totalFamily + 1
-                                totalHead = totalHead + noHead
                                 noHead = 1
                                 .Cells(2).Value = dr.GetInt32(1)
                                 .Cells(4).Value = 1
@@ -217,17 +225,39 @@ Public Class frmGenRegister
                             End If
                         End With
                     End While
+
+                    rowID = datagridRegister.Rows.Add
+                    row = datagridRegister.Rows(rowID)
+                    With row
+                        .Cells(0).Value = delvDate.ToShortDateString
+                        .Cells(1).Value = "Total"
+                        .Cells(2).Value = "-"
+                        .Cells(3).Value = Category
+                        .Cells(4).Value = totalFamily
+                        .Cells(5).Value = totalHead
+                        For Each r As DataGridViewRow In datagridRegister.Rows
+                            If r.Cells(0).Value = .Cells(0).Value And Not r.Index = rowID Then
+                                If Not r.Cells(6).Value = Nothing Then
+                                    totalRicePrice = totalRicePrice + Double.Parse(r.Cells(6).Value)
+                                End If
+                                If Not r.Cells(7).Value = Nothing Then
+                                    totalWhetPrice = totalWhetPrice + Double.Parse(r.Cells(7).Value)
+                                End If
+                                If Not r.Cells(8).Value = Nothing Then
+                                    totalAttaPrice = totalAttaPrice + Double.Parse(r.Cells(8).Value)
+                                End If
+                                If Not r.Cells(9).Value = Nothing Then
+                                    totalSugrPrice = totalSugrPrice + Double.Parse(r.Cells(9).Value)
+                                End If
+                            End If
+                        Next
+                        .Cells(6).Value = Format(totalRicePrice, "###0.000")
+                        .Cells(7).Value = Format(totalWhetPrice, "###0.000")
+                        .Cells(8).Value = Format(totalAttaPrice, "###0.000")
+                        .Cells(9).Value = Format(totalSugrPrice, "###0.000")
+                    End With
                 End If
-                rowID = datagridRegister.Rows.Add
-                row = datagridRegister.Rows(rowID)
-                With row
-                    .Cells(0).Value = delvDate.ToShortDateString
-                    .Cells(1).Value = "Total"
-                    .Cells(2).Value = "-"
-                    .Cells(3).Value = Category
-                    .Cells(4).Value = totalFamily
-                    .Cells(5).Value = totalHead
-                End With
+
                 delvDate = delvDate.AddDays(1)
             End While
             connection.Close()
