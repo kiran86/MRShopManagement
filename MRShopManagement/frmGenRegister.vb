@@ -37,7 +37,7 @@ Public Class frmGenRegister
             regDate = regDate + .Year.ToString
         End With
 
-        datagridRegister.AutoGenerateColumns = False
+        datagridRegister.AutoGenerateColumns = True
     End Sub
     Private Sub frmStockReg_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
         Me.Dispose()
@@ -84,14 +84,16 @@ Public Class frmGenRegister
         Dim sql As String
 
         Dim row As DataGridViewRow
+        Dim rowID As Integer
+        Dim parentRowID As Integer
 
         Dim startDate As Date
         Dim endDate As Date
         Dim delvDate As Date
 
-        Dim minMemoNo As Integer
-        Dim maxMemoNo As Integer
-        Dim cashMemoNo As Integer
+        Dim noHead As Integer = 1
+        Dim totalHead As Integer = 0
+        Dim totalFamily As Integer = 0
 
         Dim riceScale As Double
         Dim whetScale As Double
@@ -126,15 +128,13 @@ Public Class frmGenRegister
         Try
             connection.Open()
 
-            Sql = "SELECT MIN(Delivery), MAX(Delivery), MIN(CashMemoNo), MAX(CashMemoNo) FROM Delivery WHERE Category = '" + Category + "'"
+            sql = "SELECT MIN(Delivery), MAX(Delivery) FROM Delivery WHERE Category = '" + Category + "'"
             cmd = New OleDbCommand(Sql, connection)
             dr = cmd.ExecuteReader
             dr.Read()
             If dr.HasRows And Not dr.IsDBNull(0) Then
                 startDate = dr.GetDateTime(0)
                 endDate = dr.GetDateTime(1)
-                minMemoNo = dr.GetInt32(2)
-                maxMemoNo = dr.GetInt32(3)
             End If
 
             Sql = "SELECT * FROM Allotment WHERE Category = '" + Category + "'"
@@ -161,52 +161,88 @@ Public Class frmGenRegister
 
             delvDate = startDate
             While delvDate.Date <> endDate.AddDays(1).Date
-                Sql = "SELECT RCNo, CashMemoNo FROM Delivery WHERE Category = '" + Category + "' AND Delivery = #" + delvDate + "#"
+                totalHead = 0
+                totalFamily = 0
+                sql = "SELECT RCNo, CashMemoNo FROM Delivery WHERE Category = '" + Category + "' AND Delivery = #" + delvDate + "#"
                 cmd = New OleDbCommand(Sql, connection)
                 dr = cmd.ExecuteReader
                 If dr.HasRows Then
                     While dr.Read()
-                        'row = New String() {delvDate.ToShortDateString, dr(0).ToString, dr(1).ToString, Category, Format(riceScale, "###0.000"), Format(whetScale, "###0.000"), Format(attaScale, "###0.000"), Format(sugrScale, "###0.000"), Format(riceScale, "###0.000")}
-                        'datagridRegister.Rows.Add(row)
-                        Dim rowID As Integer = datagridRegister.Rows.Add
+                        rowID = datagridRegister.Rows.Add
+                        Console.WriteLine(rowID)
                         row = datagridRegister.Rows(rowID)
-
+                        With row
+                            .Cells(0).Value = delvDate.ToShortDateString
+                            .Cells(1).Value = dr(0).ToString
+                            If rowID = 0 Then
+                                parentRowID = rowID
+                                totalFamily = totalFamily + 1
+                                .Cells(2).Value = dr.GetInt32(1)
+                                .Cells(4).Value = 1
+                                .Cells(5).Value = noHead
+                            ElseIf dr.GetInt32(1) = datagridRegister.Rows(parentRowID).Cells(2).Value Then
+                                '.Cells(2).Value = 
+                                '.Cells(4).Value =
+                                '.Cells(5).Value = 
+                                noHead = noHead + 1
+                                datagridRegister.Rows(parentRowID).Cells(5).Value = noHead
+                            Else
+                                parentRowID = rowID
+                                totalFamily = totalFamily + 1
+                                totalHead = totalHead + noHead
+                                noHead = 1
+                                .Cells(2).Value = dr.GetInt32(1)
+                                .Cells(4).Value = 1
+                                .Cells(5).Value = noHead
+                            End If
+                            .Cells(3).Value = Category
+                            If parentRowID = rowID Then
+                                .Cells(6).Value = Format(riceScale, "###0.000")
+                                .Cells(7).Value = Format(whetScale, "###0.000")
+                                .Cells(8).Value = Format(attaScale, "###0.000")
+                                .Cells(9).Value = Format(sugrScale, "###0.000")
+                            Else
+                                If riceUnit = "Head" Then
+                                    .Cells(6).Value = Format(riceScale, "###0.000")
+                                End If
+                                If whetUnit = "Head" Then
+                                    .Cells(7).Value = Format(whetScale, "###0.000")
+                                End If
+                                If attaUnit = "Head" Then
+                                    .Cells(8).Value = Format(attaScale, "###0.000")
+                                End If
+                                If sugrUnit = "Head" Then
+                                    .Cells(9).Value = Format(sugrScale, "###0.000")
+                                End If
+                            End If
+                        End With
                     End While
                 End If
-                'row = New String() {delvDate.ToShortDateString, "Total", "", Category, "", "", "", "", ""}
-                'datagridRegister.Rows.Add(row)
+                rowID = datagridRegister.Rows.Add
+                row = datagridRegister.Rows(rowID)
+                With row
+                    .Cells(0).Value = delvDate.ToShortDateString
+                    .Cells(1).Value = "Total"
+                    .Cells(2).Value = "-"
+                    .Cells(3).Value = Category
+                    .Cells(4).Value = totalFamily
+                    .Cells(5).Value = totalHead
+                End With
                 delvDate = delvDate.AddDays(1)
             End While
-
             connection.Close()
-
-
         Catch ex As Exception
             MsgBox("Fatal Error: " + ex.Message + "->" + ex.StackTrace)
         End Try
 
     End Sub
 
-    Private Function IsCellValueEqual(ByVal row As Integer) As Boolean
-        Dim flag As Boolean = False
-        Dim cell1 As DataGridViewCell = datagridRegister.Rows(row).Cells(2)
-        Dim cell2 As DataGridViewCell = datagridRegister.Rows(row - 1).Cells(2)
-
-        If cell1.Value.ToString = String.Empty Or cell2.Value.ToString = String.Empty Then
-            Return flag
-        End If
-        If Integer.Parse(cell1.Value.ToString) = Integer.Parse(cell2.Value.ToString()) Then
-            flag = True
-        End If
-        Return flag
-    End Function
-
     Private Sub datagridRegister_CellPainting(sender As Object, e As DataGridViewCellPaintingEventArgs) Handles datagridRegister.CellPainting
         e.AdvancedBorderStyle.Bottom = DataGridViewAdvancedCellBorderStyle.None
         If e.RowIndex < 1 Or e.ColumnIndex < 0 Then
             Return
         End If
-        If IsCellValueEqual(e.RowIndex) Then
+        If e.Value = Nothing Then
             e.AdvancedBorderStyle.Top = DataGridViewAdvancedCellBorderStyle.None
         Else
             e.AdvancedBorderStyle.Top = datagridRegister.AdvancedCellBorderStyle.Top
@@ -214,12 +250,12 @@ Public Class frmGenRegister
     End Sub
 
     Private Sub datagridRegister_CellFormatting(sender As Object, e As DataGridViewCellFormattingEventArgs) Handles datagridRegister.CellFormatting
-        If e.RowIndex = 0 Or Not e.ColumnIndex = 2 Then
-            Return
-        End If
-        If IsCellValueEqual(e.RowIndex) Then
-            e.Value = ""
-        End If
-        e.FormattingApplied = True
+        'If e.RowIndex = 0 Then
+        '    Return
+        'End If
+        'If IsCellValueEqual(e.RowIndex, e.ColumnIndex) Then
+        '    e.Value = ""
+        'End If
+        'e.FormattingApplied = True
     End Sub
 End Class
