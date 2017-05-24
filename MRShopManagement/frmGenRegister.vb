@@ -1,4 +1,5 @@
 ﻿Imports System.Data.OleDb
+
 Public Class frmGenRegister
     Dim provider As String
     Dim dataFile As String
@@ -111,6 +112,7 @@ Public Class frmGenRegister
         Dim sugrUnit As String
 
         datagridRegister.Rows.Clear()
+        datagridRegister.Columns.Clear()
 
         Select Case RegType
             Case regStock
@@ -287,5 +289,16 @@ Public Class frmGenRegister
         '    e.Value = ""
         'End If
         'e.FormattingApplied = True
+    End Sub
+
+    Private Sub ExportToExcelToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExportToExcelToolStripMenuItem.Click
+        If datagridRegister.RowCount > 0 Then
+            Dim fileName As String = System.Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) & "\Sale_Reg_" + cmboxCategory.SelectedItem.ToString + "_" + Format(Now, "dd-MM-yyyy").ToString + ".xls"
+            datagridRegister.ClipboardCopyMode = DataGridViewClipboardCopyMode.EnableAlwaysIncludeHeaderText
+            datagridRegister.SelectAll()
+            IO.File.WriteAllText(fileName, datagridRegister.GetClipboardContent.GetText.TrimEnd)
+            datagridRegister.ClearSelection()
+            Process.Start(fileName)
+        End If
     End Sub
 End Class
