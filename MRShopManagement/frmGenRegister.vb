@@ -11,21 +11,6 @@ Public Class frmGenRegister
     Private regStock As Integer = 0
     Private regSale As Integer = 1
 
-    Private Enum Products
-        Rice
-        Wheat
-        Atta
-        Sugar
-    End Enum
-
-    Private Enum Category
-        AAY
-        PHH
-        SPHH
-        RKSY_I
-        RKSY_II
-    End Enum
-
     Private Sub frmGenRegister_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         provider = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source ="
         dataFile = "|DataDirectory|\mrshop.mdb"
@@ -258,15 +243,16 @@ Public Class frmGenRegister
                         .Cells(8).Value = Format(totalAttaPrice, "###0.000")
                         .Cells(9).Value = Format(totalSugrPrice, "###0.000")
                     End With
+                    Dim style As DataGridViewCellStyle = New DataGridViewCellStyle
+                    style.Font = New Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold)
+                    row.DefaultCellStyle = style
                 End If
-
                 delvDate = delvDate.AddDays(1)
             End While
             connection.Close()
         Catch ex As Exception
             MsgBox("Fatal Error: " + ex.Message + "->" + ex.StackTrace)
         End Try
-
     End Sub
 
     Private Sub datagridRegister_CellPainting(sender As Object, e As DataGridViewCellPaintingEventArgs) Handles datagridRegister.CellPainting
@@ -281,24 +267,101 @@ Public Class frmGenRegister
         End If
     End Sub
 
-    Private Sub datagridRegister_CellFormatting(sender As Object, e As DataGridViewCellFormattingEventArgs) Handles datagridRegister.CellFormatting
-        'If e.RowIndex = 0 Then
-        '    Return
+    Private Sub ExportToExcelToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExportToExcelToolStripMenuItem.Click
+        'If datagridRegister.RowCount > 0 Then
+        '    Dim fileName As String = System.Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) & "\Sale_Reg_" + cmboxCategory.SelectedItem.ToString + "_" + Format(Now, "dd-MM-yyyy").ToString + ".xls"
+        '    datagridRegister.ClipboardCopyMode = DataGridViewClipboardCopyMode.EnableAlwaysIncludeHeaderText
+        '    datagridRegister.SelectAll()
+        '    IO.File.WriteAllText(fileName, datagridRegister.GetClipboardContent.GetText.TrimEnd)
+        '    datagridRegister.ClearSelection()
+        '    Process.Start(fileName)
         'End If
-        'If IsCellValueEqual(e.RowIndex, e.ColumnIndex) Then
-        '    e.Value = ""
-        'End If
-        'e.FormattingApplied = True
+        ExportToExcel()
     End Sub
 
-    Private Sub ExportToExcelToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExportToExcelToolStripMenuItem.Click
-        If datagridRegister.RowCount > 0 Then
-            Dim fileName As String = System.Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) & "\Sale_Reg_" + cmboxCategory.SelectedItem.ToString + "_" + Format(Now, "dd-MM-yyyy").ToString + ".xls"
-            datagridRegister.ClipboardCopyMode = DataGridViewClipboardCopyMode.EnableAlwaysIncludeHeaderText
-            datagridRegister.SelectAll()
-            IO.File.WriteAllText(fileName, datagridRegister.GetClipboardContent.GetText.TrimEnd)
-            datagridRegister.ClearSelection()
-            Process.Start(fileName)
-        End If
+    Private Sub ExportToExcel()
+        Dim familyMember As Integer = 0
+        ' Choose the path, name, and extension for the Excel file
+        Dim myFile As String = System.Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) & "\Sale_Reg_" + cmboxCategory.SelectedItem.ToString + "_" + Format(Now, "dd-MM-yyyy").ToString + ".xls"
+        ' Open the file and write the headers
+        Dim fs As New IO.StreamWriter(myFile, False)
+        Try
+            fs.WriteLine("<?xml version=""1.0""?>")
+            fs.WriteLine("<?mso-application progid=""Excel.Sheet""?>")
+            fs.WriteLine("<ss:Workbook xmlns:ss=""urn:schemas-microsoft-com:office:spreadsheet"">")
+
+            ' Create the styles for the worksheet
+            fs.WriteLine("  <ss:Styles>")
+            ' Style for the column headers
+            fs.WriteLine("    <ss:Style ss:ID=""1"">")
+            fs.WriteLine("      <ss:Font ss:Bold=""1""/>")
+            fs.WriteLine("      <ss:Alignment ss:Horizontal=""Center"" ss:Vertical=""Center"" " & "ss:WrapText=""1""/>")
+            fs.WriteLine("      <ss:Interior ss:Color=""#C0C0C0"" ss:Pattern=""Solid""/>")
+            fs.WriteLine("    </ss:Style>")
+            ' Styles for the column information
+            fs.WriteLine("    <ss:Style ss:ID=""2"">")
+            fs.WriteLine("      <ss:Alignment ss:Vertical=""Center"" ss:WrapText=""1""/>")
+            fs.WriteLine("    </ss:Style>")
+            fs.WriteLine("  </ss:Styles>")
+
+            ' Write the worksheet contents
+
+            fs.WriteLine("<ss:Worksheet ss:Name=""Sheet1"">")
+            fs.WriteLine("  <ss:Table>")
+
+            For i As Integer = 0 To datagridRegister.Columns.Count - 1
+                fs.WriteLine(String.Format("    <ss:Column ss:Width=""{0}""/>", datagridRegister.Columns.Item(i).Width))
+            Next
+
+            fs.WriteLine("    <ss:Row>")
+            For i As Integer = 0 To datagridRegister.Columns.Count - 1
+                If datagridRegister.Columns(i).Visible Then
+                    fs.WriteLine(String.Format("      <ss:Cell ss:StyleID=""1"">" & "<ss:Data ss:Type=""String"">{0}</ss:Data></ss:Cell>",
+                        datagridRegister.Columns.Item(i).HeaderText))
+                End If
+            Next
+            fs.WriteLine("    </ss:Row>")
+
+            '' Check for an empty row at the end due to Adding allowed on the DataGridView
+            Dim subtractBy As Integer, cellText As String
+            If datagridRegister.AllowUserToAddRows = True Then subtractBy = 2 Else subtractBy = 1
+            ' Write contents for each cell
+            For i As Integer = 0 To datagridRegister.RowCount - subtractBy
+                If datagridRegister.Rows(i).Visible Then
+                    fs.WriteLine(String.Format("    <ss:Row ss:Height=""{0}"">", datagridRegister.Rows(i).Height))
+                    For intCol As Integer = 0 To datagridRegister.Columns.Count - 1
+                        If datagridRegister.Columns(intCol).Visible And Not datagridRegister.Item(intCol, i).Value = Nothing Then
+                            cellText = datagridRegister.Item(intCol, i).Value.ToString
+                            ' Check for null cell and change it to empty to avoid error
+                            If cellText = vbNullString Then cellText = ""
+                            Select Case intCol
+                                Case 0, 1, 3
+                                    fs.WriteLine(String.Format("      <ss:Cell ss:StyleID=""2"">" & "<ss:Data ss:Type=""String"">{0}</ss:Data></ss:Cell>", cellText.ToString))
+                                Case 2, 4, 5
+                                    If Not datagridRegister.Item(1, i).Value.ToString = "Total" Then familyMember = datagridRegister.Item(5, i).Value - 1 Else familyMember = 0
+                                    Console.WriteLine(familyMember)
+                                    fs.WriteLine(String.Format("      <ss:Cell ss:MergeDown=""{0}"" ss:StyleID=""2"">" & "<ss:Data ss:Type=""String"">{1}</ss:Data></ss:Cell>", 1, cellText.ToString))
+                                Case 6, 7, 8, 9
+                                    fs.WriteLine(String.Format("      <ss:Cell ss:StyleID=""2"">" & "<ss:Data ss:Type=""String"">{0}</ss:Data></ss:Cell>", cellText.ToString))
+                            End Select
+                        End If
+                    Next
+                    fs.WriteLine("    </ss:Row>")
+                End If
+            Next
+
+            '' Close up the document
+            fs.WriteLine("  </ss:Table>")
+            fs.WriteLine("</ss:Worksheet>")
+            fs.WriteLine("</ss:Workbook>")
+            fs.Close()
+            Process.Start(myFile)
+        Catch ex As Exception
+            MessageBox.Show(ex.Message & ":" & ex.StackTrace, "ERROR: ", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Err.Clear()
+        Finally
+            myFile = Nothing
+            fs = Nothing
+        End Try
     End Sub
 End Class
