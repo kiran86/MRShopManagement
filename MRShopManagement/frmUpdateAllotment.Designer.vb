@@ -40,14 +40,14 @@ Partial Class frmUpdateAllotment
         'TableLayoutPanel1
         '
         Me.TableLayoutPanel1.AutoSize = True
-        Me.TableLayoutPanel1.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.[Single]
+        Me.TableLayoutPanel1.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.OutsetPartial
         Me.TableLayoutPanel1.ColumnCount = 6
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 787.0!))
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 788.0!))
         Me.TableLayoutPanel1.Controls.Add(Me.lblCategory, 0, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.lblRiceStock, 1, 1)
         Me.TableLayoutPanel1.Controls.Add(Me.lblRiceAllotment, 2, 1)
@@ -61,6 +61,7 @@ Partial Class frmUpdateAllotment
         Me.TableLayoutPanel1.Controls.Add(Me.cmbxRiceUnit, 4, 2)
         Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 0)
+        Me.TableLayoutPanel1.Margin = New System.Windows.Forms.Padding(0)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 4
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
@@ -74,7 +75,7 @@ Partial Class frmUpdateAllotment
         '
         Me.lblCategory.AutoSize = True
         Me.lblCategory.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.lblCategory.Location = New System.Drawing.Point(4, 4)
+        Me.lblCategory.Location = New System.Drawing.Point(6, 6)
         Me.lblCategory.Margin = New System.Windows.Forms.Padding(3)
         Me.lblCategory.Name = "lblCategory"
         Me.lblCategory.Size = New System.Drawing.Size(63, 16)
@@ -86,7 +87,7 @@ Partial Class frmUpdateAllotment
         '
         Me.lblRiceStock.AutoSize = True
         Me.lblRiceStock.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.lblRiceStock.Location = New System.Drawing.Point(74, 27)
+        Me.lblRiceStock.Location = New System.Drawing.Point(78, 31)
         Me.lblRiceStock.Margin = New System.Windows.Forms.Padding(3)
         Me.lblRiceStock.Name = "lblRiceStock"
         Me.lblRiceStock.Size = New System.Drawing.Size(94, 16)
@@ -98,7 +99,7 @@ Partial Class frmUpdateAllotment
         '
         Me.lblRiceAllotment.AutoSize = True
         Me.lblRiceAllotment.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.lblRiceAllotment.Location = New System.Drawing.Point(175, 27)
+        Me.lblRiceAllotment.Location = New System.Drawing.Point(181, 31)
         Me.lblRiceAllotment.Margin = New System.Windows.Forms.Padding(3)
         Me.lblRiceAllotment.Name = "lblRiceAllotment"
         Me.lblRiceAllotment.Size = New System.Drawing.Size(94, 16)
@@ -110,7 +111,7 @@ Partial Class frmUpdateAllotment
         '
         Me.lblRicePrice.AutoSize = True
         Me.lblRicePrice.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.lblRicePrice.Location = New System.Drawing.Point(276, 27)
+        Me.lblRicePrice.Location = New System.Drawing.Point(284, 31)
         Me.lblRicePrice.Margin = New System.Windows.Forms.Padding(3)
         Me.lblRicePrice.Name = "lblRicePrice"
         Me.lblRicePrice.Size = New System.Drawing.Size(94, 16)
@@ -122,7 +123,7 @@ Partial Class frmUpdateAllotment
         '
         Me.lblRiceUnit.AutoSize = True
         Me.lblRiceUnit.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.lblRiceUnit.Location = New System.Drawing.Point(377, 27)
+        Me.lblRiceUnit.Location = New System.Drawing.Point(387, 31)
         Me.lblRiceUnit.Margin = New System.Windows.Forms.Padding(3)
         Me.lblRiceUnit.Name = "lblRiceUnit"
         Me.lblRiceUnit.Size = New System.Drawing.Size(115, 16)
@@ -135,10 +136,10 @@ Partial Class frmUpdateAllotment
         Me.lblRice.AutoSize = True
         Me.TableLayoutPanel1.SetColumnSpan(Me.lblRice, 4)
         Me.lblRice.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.lblRice.Location = New System.Drawing.Point(74, 4)
+        Me.lblRice.Location = New System.Drawing.Point(78, 6)
         Me.lblRice.Margin = New System.Windows.Forms.Padding(3)
         Me.lblRice.Name = "lblRice"
-        Me.lblRice.Size = New System.Drawing.Size(418, 16)
+        Me.lblRice.Size = New System.Drawing.Size(424, 16)
         Me.lblRice.TabIndex = 1
         Me.lblRice.Text = "Rice"
         Me.lblRice.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -147,7 +148,7 @@ Partial Class frmUpdateAllotment
         '
         Me.lblAAY.AutoSize = True
         Me.lblAAY.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.lblAAY.Location = New System.Drawing.Point(4, 50)
+        Me.lblAAY.Location = New System.Drawing.Point(6, 56)
         Me.lblAAY.Margin = New System.Windows.Forms.Padding(3)
         Me.lblAAY.Name = "lblAAY"
         Me.lblAAY.Size = New System.Drawing.Size(63, 18)
@@ -157,17 +158,21 @@ Partial Class frmUpdateAllotment
         '
         'txtbxRiceStock
         '
-        Me.txtbxRiceStock.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtbxRiceStock.Location = New System.Drawing.Point(71, 47)
+        Me.txtbxRiceStock.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtbxRiceStock.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.txtbxRiceStock.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtbxRiceStock.Location = New System.Drawing.Point(75, 53)
         Me.txtbxRiceStock.Margin = New System.Windows.Forms.Padding(0)
         Me.txtbxRiceStock.Name = "txtbxRiceStock"
-        Me.txtbxRiceStock.Size = New System.Drawing.Size(100, 22)
+        Me.txtbxRiceStock.Size = New System.Drawing.Size(100, 17)
         Me.txtbxRiceStock.TabIndex = 7
         '
         'txtbxRiceAllot
         '
         Me.txtbxRiceAllot.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtbxRiceAllot.Location = New System.Drawing.Point(172, 47)
+        Me.txtbxRiceAllot.Location = New System.Drawing.Point(178, 53)
         Me.txtbxRiceAllot.Margin = New System.Windows.Forms.Padding(0)
         Me.txtbxRiceAllot.Name = "txtbxRiceAllot"
         Me.txtbxRiceAllot.Size = New System.Drawing.Size(100, 22)
@@ -176,7 +181,7 @@ Partial Class frmUpdateAllotment
         'txtbxRicePrice
         '
         Me.txtbxRicePrice.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtbxRicePrice.Location = New System.Drawing.Point(273, 47)
+        Me.txtbxRicePrice.Location = New System.Drawing.Point(281, 53)
         Me.txtbxRicePrice.Margin = New System.Windows.Forms.Padding(0)
         Me.txtbxRicePrice.Name = "txtbxRicePrice"
         Me.txtbxRicePrice.Size = New System.Drawing.Size(100, 22)
@@ -185,7 +190,7 @@ Partial Class frmUpdateAllotment
         'cmbxRiceUnit
         '
         Me.cmbxRiceUnit.FormattingEnabled = True
-        Me.cmbxRiceUnit.Location = New System.Drawing.Point(374, 47)
+        Me.cmbxRiceUnit.Location = New System.Drawing.Point(384, 53)
         Me.cmbxRiceUnit.Margin = New System.Windows.Forms.Padding(0)
         Me.cmbxRiceUnit.Name = "cmbxRiceUnit"
         Me.cmbxRiceUnit.Size = New System.Drawing.Size(121, 24)
