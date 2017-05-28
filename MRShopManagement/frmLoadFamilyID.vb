@@ -30,6 +30,10 @@ Public Class frmLoadFamilyID
             End If
         Catch ex As Exception
             MsgBox("Error:" + ex.Message + "\n" + ex.StackTrace)
+        Finally
+            If connection.State = ConnectionState.Open Then
+                connection.Close()
+            End If
         End Try
     End Sub
 
@@ -48,6 +52,7 @@ Public Class frmLoadFamilyID
         Dim source As String
 
         Try
+            connection.Open()
             sql = "SELECT RCNo FROM Beneficiaries WHERE FamilyID IS NULL"
             cmd = New OleDbCommand(sql, connection)
             dr = cmd.ExecuteReader
@@ -63,7 +68,8 @@ Public Class frmLoadFamilyID
                         source = New Net.WebClient().DownloadString("https://www.wbpds.gov.in/DisplayRCData.aspx?RCNO=00" + dr("RCNo").ToString)
                         Dim recentSource As String = frmGetBenfDetails.GetTagContents(source, "<table width=""100%"" cellpadding=""5px"">", "</table>")
                         Dim familyID As String = frmGetBenfDetails.GetTagContents(recentSource, "<span id=""ctl00_ContentPlaceHolder1_lblFamily""><i>", "</i></span>")
-                        sql = "UPDATE TABLE Beneficiaries SET FamilyID = " + familyID + " WHERE RCNo = " + dr("RCNo").ToString
+                        sql = "UPDATE Beneficiaries SET [FamilyID] = '" + familyID + "' WHERE [RCNo] = " + dr("RCNo").ToString
+                        Console.WriteLine(sql)
                         cmd = New OleDbCommand(sql, connection)
                         If cmd.ExecuteNonQuery = 1 Then
                             txtbxStatus.AppendText("Success" + Environment.NewLine)
@@ -75,6 +81,10 @@ Public Class frmLoadFamilyID
             End If
         Catch ex As Exception
             MsgBox("Error:" + ex.Message + "\n" + ex.StackTrace)
+        Finally
+            If connection.State = ConnectionState.Open Then
+                connection.Close()
+            End If
         End Try
     End Sub
 End Class
