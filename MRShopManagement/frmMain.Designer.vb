@@ -82,6 +82,8 @@ Partial Class frmMain
         Me.lblAtta = New System.Windows.Forms.Label()
         Me.lblSystemDateTime = New System.Windows.Forms.Label()
         Me.timerSystemDateTime = New System.Windows.Forms.Timer(Me.components)
+        Me.lblCashMemoNo = New System.Windows.Forms.Label()
+        Me.txtbxCashMemoNo = New System.Windows.Forms.TextBox()
         Me.MenuMRShopManagement.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -598,7 +600,7 @@ Partial Class frmMain
         Me.lblSystemDateTime.AutoSize = True
         Me.lblSystemDateTime.Font = New System.Drawing.Font("Courier New", 12.0!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblSystemDateTime.ForeColor = System.Drawing.Color.Blue
-        Me.lblSystemDateTime.Location = New System.Drawing.Point(796, 31)
+        Me.lblSystemDateTime.Location = New System.Drawing.Point(796, 33)
         Me.lblSystemDateTime.Name = "lblSystemDateTime"
         Me.lblSystemDateTime.Size = New System.Drawing.Size(199, 19)
         Me.lblSystemDateTime.TabIndex = 57
@@ -607,12 +609,32 @@ Partial Class frmMain
         'timerSystemDateTime
         '
         '
+        'lblCashMemoNo
+        '
+        Me.lblCashMemoNo.AutoSize = True
+        Me.lblCashMemoNo.Location = New System.Drawing.Point(328, 34)
+        Me.lblCashMemoNo.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblCashMemoNo.Name = "lblCashMemoNo"
+        Me.lblCashMemoNo.Size = New System.Drawing.Size(104, 16)
+        Me.lblCashMemoNo.TabIndex = 58
+        Me.lblCashMemoNo.Text = "Cash Memo No:"
+        '
+        'txtbxCashMemoNo
+        '
+        Me.txtbxCashMemoNo.Location = New System.Drawing.Point(440, 31)
+        Me.txtbxCashMemoNo.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtbxCashMemoNo.Name = "txtbxCashMemoNo"
+        Me.txtbxCashMemoNo.Size = New System.Drawing.Size(132, 22)
+        Me.txtbxCashMemoNo.TabIndex = 59
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(1008, 522)
+        Me.Controls.Add(Me.txtbxCashMemoNo)
+        Me.Controls.Add(Me.lblCashMemoNo)
         Me.Controls.Add(Me.lblSystemDateTime)
         Me.Controls.Add(Me.txtbxAttaPrice)
         Me.Controls.Add(Me.txtbxAttaQty)
@@ -727,4 +749,6 @@ Partial Class frmMain
     Friend WithEvents LoadDataToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents lblSystemDateTime As Label
     Friend WithEvents timerSystemDateTime As Timer
+    Friend WithEvents lblCashMemoNo As Label
+    Friend WithEvents txtbxCashMemoNo As TextBox
 End Class

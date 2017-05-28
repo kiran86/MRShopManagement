@@ -25,6 +25,26 @@ Public Class frmMain
         dataFile = "|DataDirectory|\mrshop.mdb"
         connString = provider & dataFile
         connection.ConnectionString = connString
+        Try
+            connection.Open()
+            Dim memoNo As Integer
+            Dim sql As String = "SELECT MAX(CashMemoNo) FROM Delivery"
+            Dim cmd As OleDbCommand = New OleDbCommand(sql, connection)
+            Dim dr As OleDbDataReader = cmd.ExecuteReader
+            If dr.HasRows Then
+                dr.Read()
+                Console.WriteLine(dr.IsDBNull(0))
+                memoNo = IIf(dr.IsDBNull(0), 1, dr.GetInt32(0) + 1)
+                'memoNo = dr.GetInt32(0) + 1
+            Else
+                memoNo = 0
+            End If
+            txtbxCashMemoNo.Text = memoNo
+        Catch ex As Exception
+            Console.WriteLine(ex.StackTrace)
+        Finally
+            connection.Close()
+        End Try
         DeliveryDate = Now.ToShortDateString
         Dim customFont As PrivateFontCollection = New PrivateFontCollection
         customFont.AddFontFile("Fonts/digital-7.ttf")
@@ -376,7 +396,7 @@ Public Class frmMain
             cmd.ExecuteNonQuery()
         Next
         connection.Close()
-        If MsgBox("Food supply delivered!", MsgBoxStyle.OkOnly, "Done") = MsgBoxResult.Ok Then
+        If MsgBox("Food supply delivered!", MsgBoxStyle.OkOnly, "Delivered") = MsgBoxResult.Ok Then
             ApplicationReload()
         End If
     End Sub
