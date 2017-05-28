@@ -34,8 +34,11 @@ Public Class frmMain
             If dr.HasRows Then
                 dr.Read()
                 Console.WriteLine(dr.IsDBNull(0))
-                memoNo = IIf(dr.IsDBNull(0), 1, dr.GetInt32(0) + 1)
-                'memoNo = dr.GetInt32(0) + 1
+                If Not dr.IsDBNull(0) Then
+                    memoNo = dr.GetInt32(0) + 1
+                Else
+                    memoNo = 0
+                End If
             Else
                 memoNo = 0
             End If
