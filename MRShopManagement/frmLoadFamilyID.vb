@@ -6,6 +6,7 @@ Public Class frmLoadFamilyID
     Dim connString As String
     Public connection As OleDbConnection = New OleDbConnection
     Public dr As OleDbDataReader
+    Dim stopLoop As Boolean = False
 
     Private Sub frmLoadFamilyID_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         provider = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source ="
@@ -50,7 +51,7 @@ Public Class frmLoadFamilyID
         Dim sql As String
         Dim cmd As OleDbCommand
         Dim source As String
-
+        Me.Cursor = Cursors.WaitCursor
         Try
             connection.Open()
             sql = "SELECT RCNo FROM Beneficiaries WHERE FamilyID IS NULL"
@@ -59,17 +60,15 @@ Public Class frmLoadFamilyID
             If Not dr.HasRows Then
                 MsgBox("No matching data found", MsgBoxStyle.OkOnly, "Error")
             Else
-                While dr.Read()
+                While dr.Read() And Not stopLoop
                     prgbrStatus.PerformStep()
                     prgbrStatus.Refresh()
                     txtbxStatus.AppendText("RC No " + dr("RCNo").ToString + ": ")
-                    'Console.WriteLine("RC No " + dr("RCNo").ToString + ": ")
                     Try
                         source = New Net.WebClient().DownloadString("https://www.wbpds.gov.in/DisplayRCData.aspx?RCNO=00" + dr("RCNo").ToString)
                         Dim recentSource As String = frmGetBenfDetails.GetTagContents(source, "<table width=""100%"" cellpadding=""5px"">", "</table>")
                         Dim familyID As String = frmGetBenfDetails.GetTagContents(recentSource, "<span id=""ctl00_ContentPlaceHolder1_lblFamily""><i>", "</i></span>")
                         sql = "UPDATE Beneficiaries SET [FamilyID] = '" + familyID + "' WHERE [RCNo] = " + dr("RCNo").ToString
-                        Console.WriteLine(sql)
                         cmd = New OleDbCommand(sql, connection)
                         If cmd.ExecuteNonQuery = 1 Then
                             txtbxStatus.AppendText("Success" + Environment.NewLine)
@@ -85,6 +84,7 @@ Public Class frmLoadFamilyID
             If connection.State = ConnectionState.Open Then
                 connection.Close()
             End If
+            Me.Cursor = Cursors.Default
         End Try
     End Sub
 End Class

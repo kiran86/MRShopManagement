@@ -46,7 +46,9 @@ Public Class frmMain
         Catch ex As Exception
             Console.WriteLine(ex.StackTrace)
         Finally
-            connection.Close()
+            If connection.State = ConnectionState.Open Then
+                connection.Close()
+            End If
         End Try
         DeliveryDate = Now.ToShortDateString
         Dim customFont As PrivateFontCollection = New PrivateFontCollection
@@ -74,6 +76,7 @@ Public Class frmMain
     End Sub
 
     Private Sub LoadData()
+        Dim familyID As String = ""
         Try
             connection.Open()
             Dim sql As String
@@ -95,8 +98,12 @@ Public Class frmMain
                     txtbxGender.Text = dr("Gender").ToString
                     txtbxFHName.Text = dr("FHName").ToString
                     txtbxHoF.Text = dr("HoFName").ToString
+                    familyID = dr("FamilyID").ToString
                 End While
-                If txtbxHoF.Text = "" Or txtbxHoF.Text = vbNullString Or Trim(txtbxHoF.Text) = "" Then
+
+                If Not familyID = DBNull.Value.ToString Then
+                    sql = "SELECT Beneficiaries.*, Delivery.Delivery FROM Beneficiaries, Delivery WHERE (((Beneficiaries.FamilyID)= '" & familyID & "') AND ((Delivery.RCNo)=(Beneficiaries.RCNo)))"
+                ElseIf txtbxHoF.Text = "" Or txtbxHoF.Text = vbNullString Or Trim(txtbxHoF.Text) = "" Then
                     sql = "SELECT Beneficiaries.*, Delivery.Delivery FROM Beneficiaries, Delivery WHERE (((Beneficiaries.RCNo)= " & txtbxCardNo.Text & ") AND ((Delivery.RCNo)=(Beneficiaries.RCNo)))"
                 Else
                     sql = "SELECT Beneficiaries.*, Delivery.Delivery FROM Beneficiaries, Delivery WHERE (((Beneficiaries.HoFName)= '" & txtbxHoF.Text & "') AND ((Delivery.RCNo)=(Beneficiaries.RCNo)))"
@@ -152,7 +159,7 @@ Public Class frmMain
             End If
         End Try
     End Sub
-    
+
     Private Sub btnAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAdd.Click
         Dim category As String
         If lstvwFamily.SelectedItems.Count > 0 Then
