@@ -6,7 +6,7 @@ Public Class frmLoadFamilyID
     Dim connString As String
     Public connection As OleDbConnection = New OleDbConnection
     Public dr As OleDbDataReader
-    Dim stopLoop As Boolean = False
+    Dim threadLoadFamilyID As Threading.Thread
 
     Private Sub frmLoadFamilyID_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         provider = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source ="
@@ -14,8 +14,27 @@ Public Class frmLoadFamilyID
         connString = provider & dataFile
         connection.ConnectionString = connString
 
-        Dim sql As String
+        LoadForm()
+        CheckForIllegalCrossThreadCalls = False
+    End Sub
 
+    Private Sub frmLoadFamilyID_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
+        If connection.State = ConnectionState.Open Then
+            connection.Close()
+        End If
+        Me.Visible = False
+        Me.Dispose()
+        frmMain.Enabled = True
+    End Sub
+
+    Private Sub bttnLoad_Click(sender As Object, e As EventArgs) Handles bttnLoad.Click
+        threadLoadFamilyID = New Threading.Thread(AddressOf LoadFamilyID)
+        threadLoadFamilyID.Start()
+    End Sub
+
+    Private Sub LoadForm()
+        Dim sql As String
+        txtbxStatus.Text = ""
         Try
             connection.Open()
             sql = "SELECT COUNT(RCNo) FROM Beneficiaries WHERE FamilyID IS NULL"
@@ -38,20 +57,11 @@ Public Class frmLoadFamilyID
         End Try
     End Sub
 
-    Private Sub frmLoadFamilyID_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
-        If connection.State = ConnectionState.Open Then
-            connection.Close()
-        End If
-        Me.Visible = False
-        Me.Dispose()
-        frmMain.Enabled = True
-    End Sub
-
-    Private Sub bttnLoad_Click(sender As Object, e As EventArgs) Handles bttnLoad.Click
+    Private Sub LoadFamilyID()
         Dim sql As String
         Dim cmd As OleDbCommand
         Dim source As String
-        Me.Cursor = Cursors.WaitCursor
+        txtbxStatus.Cursor = Cursors.WaitCursor
         Try
             connection.Open()
             sql = "SELECT RCNo FROM Beneficiaries WHERE FamilyID IS NULL"
@@ -60,7 +70,7 @@ Public Class frmLoadFamilyID
             If Not dr.HasRows Then
                 MsgBox("No matching data found", MsgBoxStyle.OkOnly, "Error")
             Else
-                While dr.Read() And Not stopLoop
+                While dr.Read()
                     prgbrStatus.PerformStep()
                     prgbrStatus.Refresh()
                     txtbxStatus.AppendText("RC No " + dr("RCNo").ToString + ": ")
@@ -79,12 +89,21 @@ Public Class frmLoadFamilyID
                 End While
             End If
         Catch ex As Exception
-            MsgBox("Error:" + ex.Message + "\n" + ex.StackTrace)
+            MsgBox("Error:" + ex.Message, MsgBoxStyle.OkOnly)
         Finally
             If connection.State = ConnectionState.Open Then
                 connection.Close()
             End If
-            Me.Cursor = Cursors.Default
+            txtbxStatus.Cursor = Cursors.Default
         End Try
+    End Sub
+
+    Private Sub bttnStop_Click(sender As Object, e As EventArgs) Handles bttnStop.Click
+        If threadLoadFamilyID.IsAlive Then
+            threadLoadFamilyID.Abort()
+        End If
+        If Not threadLoadFamilyID.IsAlive Then
+            LoadForm()
+        End If
     End Sub
 End Class

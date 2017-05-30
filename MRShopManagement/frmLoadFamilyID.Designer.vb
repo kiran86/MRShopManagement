@@ -25,6 +25,7 @@ Partial Class frmLoadFamilyID
         Me.prgbrStatus = New System.Windows.Forms.ProgressBar()
         Me.txtbxStatus = New System.Windows.Forms.TextBox()
         Me.bttnLoad = New System.Windows.Forms.Button()
+        Me.bttnStop = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'prgbrStatus
@@ -47,18 +48,28 @@ Partial Class frmLoadFamilyID
         '
         'bttnLoad
         '
-        Me.bttnLoad.Location = New System.Drawing.Point(219, 287)
+        Me.bttnLoad.Location = New System.Drawing.Point(178, 287)
         Me.bttnLoad.Name = "bttnLoad"
         Me.bttnLoad.Size = New System.Drawing.Size(75, 23)
         Me.bttnLoad.TabIndex = 2
         Me.bttnLoad.Text = "Load"
         Me.bttnLoad.UseVisualStyleBackColor = True
         '
+        'bttnStop
+        '
+        Me.bttnStop.Location = New System.Drawing.Point(259, 287)
+        Me.bttnStop.Name = "bttnStop"
+        Me.bttnStop.Size = New System.Drawing.Size(75, 23)
+        Me.bttnStop.TabIndex = 3
+        Me.bttnStop.Text = "Stop"
+        Me.bttnStop.UseVisualStyleBackColor = True
+        '
         'frmLoadFamilyID
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(512, 322)
+        Me.Controls.Add(Me.bttnStop)
         Me.Controls.Add(Me.bttnLoad)
         Me.Controls.Add(Me.txtbxStatus)
         Me.Controls.Add(Me.prgbrStatus)
@@ -75,4 +86,5 @@ Partial Class frmLoadFamilyID
     Friend WithEvents prgbrStatus As ProgressBar
     Friend WithEvents txtbxStatus As TextBox
     Friend WithEvents bttnLoad As Button
+    Friend WithEvents bttnStop As Button
 End Class
