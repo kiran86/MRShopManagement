@@ -63,6 +63,8 @@ Public Class frmMain
                 Console.WriteLine(dr.IsDBNull(0))
                 If Not dr.IsDBNull(0) Then
                     memoNo = dr.GetInt32(0) + 1
+                Else
+                    memoNo = 1
                 End If
             Else
                 memoNo = 1

@@ -173,7 +173,7 @@ Public Class frmGenRegister
                             If rowID = 0 Then
                                 parentRowID = rowID
                                 totalFamily = totalFamily + 1
-                                .Cells(2).Value = dr.GetInt32(1)
+                                .Cells(2).Value = dr(1).ToString
                                 .Cells(4).Value = 1
                                 .Cells(5).Value = noHead
                             ElseIf dr.GetInt32(1) = datagridRegister.Rows(parentRowID).Cells(2).Value Then
@@ -186,7 +186,7 @@ Public Class frmGenRegister
                                 parentRowID = rowID
                                 totalFamily = totalFamily + 1
                                 noHead = 1
-                                .Cells(2).Value = dr.GetInt32(1)
+                                .Cells(2).Value = dr(1).ToString
                                 .Cells(4).Value = 1
                                 .Cells(5).Value = noHead
                             End If
