@@ -6,13 +6,6 @@ Public Class frmViewSales
     Public connection As OleDbConnection = New OleDbConnection
     Public dr As OleDbDataReader
 
-    'Dim dataAdapter As OleDbDataAdapter
-    'Dim dataSet As DataSet = New DataSet
-    'Dim dataTable = dataSet.Tables
-    'Dim bindingSource As New BindingSource
-    'Dim sql
-    'Dim view As DataView
-
     Dim categoryComboClicked As Boolean = False
     Dim datepickFromClicked As Boolean = False
     Dim datepickToClicked As Boolean = False
@@ -64,7 +57,7 @@ Public Class frmViewSales
         datagridRegister.DataSource = DBNull.Value
         dataSet.Clear()
 
-        sql = "SELECT Beneficiaries.*, Delivery.Delivery FROM Beneficiaries, Delivery WHERE ((Delivery.RCNo)=(Beneficiaries.RCNo))"
+        sql = "SELECT Beneficiaries.RCNo, Beneficiaries.Category, Beneficiaries.Name, Beneficiaries.Gender, Beneficiaries.Age, Beneficiaries.FamilyID, Delivery.Delivery, Delivery.CashMemoNo FROM Beneficiaries, Delivery WHERE ((Delivery.RCNo)=(Beneficiaries.RCNo))"
 
         If isCategorySet And cmboxCategory.SelectedIndex <> 0 Then
             sql = sql + " AND Beneficiaries.Category = '" + cmboxCategory.SelectedItem.ToString + "'"

@@ -30,11 +30,14 @@ Public Class frmLoadFamilyID
     Private Sub bttnLoad_Click(sender As Object, e As EventArgs) Handles bttnLoad.Click
         threadLoadFamilyID = New Threading.Thread(AddressOf LoadFamilyID)
         threadLoadFamilyID.Start()
+        bttnStop.Enabled = True
+        bttnLoad.Enabled = False
     End Sub
 
     Private Sub LoadForm()
         Dim sql As String
         txtbxStatus.Text = ""
+        bttnStop.Enabled = False
         Try
             connection.Open()
             sql = "SELECT COUNT(RCNo) FROM Beneficiaries WHERE FamilyID IS NULL"
@@ -101,6 +104,8 @@ Public Class frmLoadFamilyID
     Private Sub bttnStop_Click(sender As Object, e As EventArgs) Handles bttnStop.Click
         If threadLoadFamilyID.IsAlive Then
             threadLoadFamilyID.Abort()
+            threadLoadFamilyID.Join()
+            bttnLoad.Enabled = True
         End If
         If Not threadLoadFamilyID.IsAlive Then
             LoadForm()

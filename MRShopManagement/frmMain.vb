@@ -25,32 +25,8 @@ Public Class frmMain
         dataFile = "|DataDirectory|\mrshop.mdb"
         connString = provider & dataFile
         connection.ConnectionString = connString
-        Try
-            connection.Open()
-            Dim memoNo As Integer
-            Dim sql As String = "SELECT MAX(CashMemoNo) FROM Delivery"
-            Dim cmd As OleDbCommand = New OleDbCommand(sql, connection)
-            Dim dr As OleDbDataReader = cmd.ExecuteReader
-            If dr.HasRows Then
-                dr.Read()
-                Console.WriteLine(dr.IsDBNull(0))
-                If Not dr.IsDBNull(0) Then
-                    memoNo = dr.GetInt32(0) + 1
-                Else
-                    memoNo = 0
-                End If
-            Else
-                memoNo = 0
-            End If
-            txtbxCashMemoNo.Text = memoNo
-        Catch ex As Exception
-            Console.WriteLine(ex.StackTrace)
-        Finally
-            If connection.State = ConnectionState.Open Then
-                connection.Close()
-            End If
-        End Try
         DeliveryDate = Now.ToShortDateString
+        SetMemoNo()
         Dim customFont As PrivateFontCollection = New PrivateFontCollection
         customFont.AddFontFile("Fonts/digital-7.ttf")
         lblSystemDateTime.Font = New Font(customFont.Families(0), 16, FontStyle.Regular)
@@ -73,6 +49,32 @@ Public Class frmMain
         If Not txtbxCardNo.Text.Equals("") And IsNumeric(txtbxCardNo.Text) Then
             LoadData()
         End If
+    End Sub
+
+    Private Sub SetMemoNo()
+        Try
+            connection.Open()
+            Dim memoNo As Integer
+            Dim sql As String = "SELECT MAX(CashMemoNo) FROM Delivery"
+            Dim cmd As OleDbCommand = New OleDbCommand(sql, connection)
+            Dim dr As OleDbDataReader = cmd.ExecuteReader
+            If dr.HasRows Then
+                dr.Read()
+                Console.WriteLine(dr.IsDBNull(0))
+                If Not dr.IsDBNull(0) Then
+                    memoNo = dr.GetInt32(0) + 1
+                End If
+            Else
+                memoNo = 1
+            End If
+            txtbxCashMemoNo.Text = memoNo
+        Catch ex As Exception
+            Console.WriteLine(ex.StackTrace)
+        Finally
+            If connection.State = ConnectionState.Open Then
+                connection.Close()
+            End If
+        End Try
     End Sub
 
     Private Sub LoadData()
@@ -100,7 +102,7 @@ Public Class frmMain
                     txtbxHoF.Text = dr("HoFName").ToString
                     familyID = dr("FamilyID").ToString
                 End While
-
+                Console.WriteLine(familyID)
                 If Not familyID = DBNull.Value.ToString Then
                     sql = "SELECT Beneficiaries.*, Delivery.Delivery FROM Beneficiaries, Delivery WHERE (((Beneficiaries.FamilyID)= '" & familyID & "') AND ((Delivery.RCNo)=(Beneficiaries.RCNo)))"
                 ElseIf txtbxHoF.Text = "" Or txtbxHoF.Text = vbNullString Or Trim(txtbxHoF.Text) = "" Then
@@ -401,7 +403,7 @@ Public Class frmMain
         Dim sql As String
         connection.Open()
         For i As Integer = 0 To lstvwRcNos.Items.Count - 1
-            sql = "UPDATE Delivery Set [Delivery] = '" & Now & "' WHERE [RCNo] = " & lstvwRcNos.Items(i).Text
+            sql = "UPDATE Delivery Set [Delivery] = '" & Now & "', [CashMemoNo] = " & txtbxCashMemoNo.Text & " WHERE [RCNo] = " & lstvwRcNos.Items(i).Text
             Dim cmd = New OleDbCommand(sql, connection)
             cmd.ExecuteNonQuery()
         Next
@@ -419,6 +421,7 @@ Public Class frmMain
             lstvwFamily.Clear()
             lstvwRcNos.Clear()
         Next
+        SetMemoNo()
     End Sub
 
     Private Sub ViewSalesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ViewSalesToolStripMenuItem.Click
