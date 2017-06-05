@@ -624,6 +624,7 @@ Partial Class frmMain
         Me.txtbxCashMemoNo.Location = New System.Drawing.Point(440, 31)
         Me.txtbxCashMemoNo.Margin = New System.Windows.Forms.Padding(4)
         Me.txtbxCashMemoNo.Name = "txtbxCashMemoNo"
+        Me.txtbxCashMemoNo.ReadOnly = True
         Me.txtbxCashMemoNo.Size = New System.Drawing.Size(132, 22)
         Me.txtbxCashMemoNo.TabIndex = 59
         '

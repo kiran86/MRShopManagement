@@ -47,6 +47,7 @@ Public Class frmLoadFamilyID
                 MsgBox("No matching data found", MsgBoxStyle.OkOnly, "Error")
             Else
                 dr.Read()
+                prgbrStatus.Value = 0
                 prgbrStatus.Maximum = Integer.Parse(dr(0).ToString)
                 prgbrStatus.Step = 1
                 txtbxStatus.AppendText("Total " + dr(0).ToString + " no. of Benificiaries Familiy ID not present." + Environment.NewLine)
