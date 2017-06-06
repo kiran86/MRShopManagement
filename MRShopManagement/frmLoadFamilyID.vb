@@ -65,6 +65,8 @@ Public Class frmLoadFamilyID
         Dim sql As String
         Dim cmd As OleDbCommand
         Dim source As String
+        Dim RCNo As String
+        Dim count As Integer = 0
         txtbxStatus.Cursor = Cursors.WaitCursor
         Try
             connection.Open()
@@ -77,15 +79,17 @@ Public Class frmLoadFamilyID
                 While dr.Read()
                     prgbrStatus.PerformStep()
                     prgbrStatus.Refresh()
-                    txtbxStatus.AppendText("RC No " + dr("RCNo").ToString + ": ")
+                    RCNo = dr("RCNo").ToString.PadLeft(10, "0"c)
+                    txtbxStatus.AppendText("RC No " & RCNo & ": ")
                     Try
-                        source = New Net.WebClient().DownloadString("https://www.wbpds.gov.in/DisplayRCData.aspx?RCNO=00" + dr("RCNo").ToString)
+                        source = New Net.WebClient().DownloadString("https://www.wbpds.gov.in/DisplayRCData.aspx?RCNO=" + RCNo)
                         Dim recentSource As String = frmGetBenfDetails.GetTagContents(source, "<table width=""100%"" cellpadding=""5px"">", "</table>")
                         Dim familyID As String = frmGetBenfDetails.GetTagContents(recentSource, "<span id=""ctl00_ContentPlaceHolder1_lblFamily""><i>", "</i></span>")
                         sql = "UPDATE Beneficiaries SET [FamilyID] = '" + familyID + "' WHERE [RCNo] = " + dr("RCNo").ToString
                         cmd = New OleDbCommand(sql, connection)
                         If cmd.ExecuteNonQuery = 1 Then
                             txtbxStatus.AppendText("Success" + Environment.NewLine)
+                            count = count + 1
                         End If
                     Catch exception As Exception
                         txtbxStatus.AppendText("Failed " + exception.Message + Environment.NewLine)
@@ -98,7 +102,11 @@ Public Class frmLoadFamilyID
             If connection.State = ConnectionState.Open Then
                 connection.Close()
             End If
+            txtbxStatus.AppendText("Total " & count & " no of Benificiaries data updated successfully." & Environment.NewLine)
             txtbxStatus.Cursor = Cursors.Default
+            If bttnStop.Enabled = True Then
+                bttnStop.Enabled = False
+            End If
         End Try
     End Sub
 
