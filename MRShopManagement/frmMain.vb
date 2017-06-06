@@ -481,4 +481,14 @@ Public Class frmMain
     Private Sub timerSystemDateTime_Tick(sender As Object, e As EventArgs) Handles timerSystemDateTime.Tick
         lblSystemDateTime.Text = Format(Now, "dd/MM/yyyy hh:mm:ss")
     End Sub
+
+    Private Sub EditFamilyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EditFamilyToolStripMenuItem.Click
+        Me.Enabled = False
+        frmEditFamilyID.Show()
+    End Sub
+
+    Private Sub AutoDeliveryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AutoDeliveryToolStripMenuItem.Click
+        Me.Enabled = False
+        frmAutoDelivery.Show()
+    End Sub
 End Class

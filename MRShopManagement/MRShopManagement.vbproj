@@ -104,10 +104,22 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationEvents.vb" />
+    <Compile Include="frmAutoDelivery.Designer.vb">
+      <DependentUpon>frmAutoDelivery.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmAutoDelivery.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmGetBenfDetails.Designer.vb">
       <DependentUpon>frmGetBenfDetails.vb</DependentUpon>
     </Compile>
     <Compile Include="frmGetBenfDetails.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmEditFamilyID.Designer.vb">
+      <DependentUpon>frmEditFamilyID.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmEditFamilyID.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmLoadFamilyID.Designer.vb">
@@ -191,8 +203,14 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="frmAutoDelivery.resx">
+      <DependentUpon>frmAutoDelivery.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmGetBenfDetails.resx">
       <DependentUpon>frmGetBenfDetails.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmEditFamilyID.resx">
+      <DependentUpon>frmEditFamilyID.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmLoadFamilyID.resx">
       <DependentUpon>frmLoadFamilyID.vb</DependentUpon>
@@ -235,6 +253,7 @@
     <Content Include="Fonts\digital-7.ttf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="ClassDiagram3.cd" />
     <None Include="mrshopDataSet.xsc">
       <DependentUpon>mrshopDataSet.xsd</DependentUpon>
     </None>

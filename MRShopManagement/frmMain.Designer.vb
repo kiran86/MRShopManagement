@@ -29,7 +29,6 @@ Partial Class frmMain
         Me.EditToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.EditFamilyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.LoadDataToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.FoodSupplyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.StockToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -84,6 +83,7 @@ Partial Class frmMain
         Me.timerSystemDateTime = New System.Windows.Forms.Timer(Me.components)
         Me.lblCashMemoNo = New System.Windows.Forms.Label()
         Me.txtbxCashMemoNo = New System.Windows.Forms.TextBox()
+        Me.AutoDeliveryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuMRShopManagement.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -99,7 +99,7 @@ Partial Class frmMain
         '
         'BenefiToolStripMenuItem
         '
-        Me.BenefiToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AddToolStripMenuItem, Me.EditToolStripMenuItem, Me.ToolStripSeparator1, Me.EditFamilyToolStripMenuItem, Me.ToolStripSeparator2, Me.LoadDataToolStripMenuItem})
+        Me.BenefiToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AddToolStripMenuItem, Me.EditToolStripMenuItem, Me.ToolStripSeparator1, Me.EditFamilyToolStripMenuItem, Me.LoadDataToolStripMenuItem})
         Me.BenefiToolStripMenuItem.Name = "BenefiToolStripMenuItem"
         Me.BenefiToolStripMenuItem.Size = New System.Drawing.Size(85, 20)
         Me.BenefiToolStripMenuItem.Text = "Beneficiaries"
@@ -107,36 +107,31 @@ Partial Class frmMain
         'AddToolStripMenuItem
         '
         Me.AddToolStripMenuItem.Name = "AddToolStripMenuItem"
-        Me.AddToolStripMenuItem.Size = New System.Drawing.Size(132, 22)
+        Me.AddToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.AddToolStripMenuItem.Text = "Add "
         '
         'EditToolStripMenuItem
         '
         Me.EditToolStripMenuItem.Name = "EditToolStripMenuItem"
-        Me.EditToolStripMenuItem.Size = New System.Drawing.Size(132, 22)
+        Me.EditToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.EditToolStripMenuItem.Text = "Edit"
         '
         'ToolStripSeparator1
         '
         Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(129, 6)
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(149, 6)
         '
         'EditFamilyToolStripMenuItem
         '
         Me.EditFamilyToolStripMenuItem.Name = "EditFamilyToolStripMenuItem"
-        Me.EditFamilyToolStripMenuItem.Size = New System.Drawing.Size(132, 22)
-        Me.EditFamilyToolStripMenuItem.Text = "Edit Family"
-        '
-        'ToolStripSeparator2
-        '
-        Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
-        Me.ToolStripSeparator2.Size = New System.Drawing.Size(129, 6)
+        Me.EditFamilyToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.EditFamilyToolStripMenuItem.Text = "Edit Family ID"
         '
         'LoadDataToolStripMenuItem
         '
         Me.LoadDataToolStripMenuItem.Name = "LoadDataToolStripMenuItem"
-        Me.LoadDataToolStripMenuItem.Size = New System.Drawing.Size(132, 22)
-        Me.LoadDataToolStripMenuItem.Text = "Load Data"
+        Me.LoadDataToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.LoadDataToolStripMenuItem.Text = "Load Family ID"
         '
         'FoodSupplyToolStripMenuItem
         '
@@ -184,7 +179,7 @@ Partial Class frmMain
         '
         'SystemToolStripMenuItem
         '
-        Me.SystemToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.BackupToolStripMenuItem, Me.RestoreToolStripMenuItem})
+        Me.SystemToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.BackupToolStripMenuItem, Me.RestoreToolStripMenuItem, Me.AutoDeliveryToolStripMenuItem})
         Me.SystemToolStripMenuItem.Name = "SystemToolStripMenuItem"
         Me.SystemToolStripMenuItem.Size = New System.Drawing.Size(57, 20)
         Me.SystemToolStripMenuItem.Text = "System"
@@ -628,6 +623,12 @@ Partial Class frmMain
         Me.txtbxCashMemoNo.Size = New System.Drawing.Size(132, 22)
         Me.txtbxCashMemoNo.TabIndex = 59
         '
+        'AutoDeliveryToolStripMenuItem
+        '
+        Me.AutoDeliveryToolStripMenuItem.Name = "AutoDeliveryToolStripMenuItem"
+        Me.AutoDeliveryToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.AutoDeliveryToolStripMenuItem.Text = "Auto Delivery"
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -746,10 +747,10 @@ Partial Class frmMain
     Friend WithEvents SystemToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents BackupToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents RestoreToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ToolStripSeparator2 As ToolStripSeparator
     Friend WithEvents LoadDataToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents lblSystemDateTime As Label
     Friend WithEvents timerSystemDateTime As Timer
     Friend WithEvents lblCashMemoNo As Label
     Friend WithEvents txtbxCashMemoNo As TextBox
+    Friend WithEvents AutoDeliveryToolStripMenuItem As ToolStripMenuItem
 End Class
