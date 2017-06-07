@@ -488,7 +488,28 @@ Public Class frmMain
     End Sub
 
     Private Sub AutoDeliveryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AutoDeliveryToolStripMenuItem.Click
-        Me.Enabled = False
-        frmAutoDelivery.Show()
+        'Me.Enabled = False
+        'frmAutoDelivery.Show()
+    End Sub
+
+    Private Sub ClearDeliveryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ClearDeliveryToolStripMenuItem.Click
+        Dim sql As String
+        If MsgBox("Are you sure to clear past deliveries?", MsgBoxStyle.YesNo, "Alert!") = MsgBoxResult.Yes Then
+            Try
+                connection.Open()
+                sql = "UPDATE Delivery Set [Delivery] = NULL"
+                Dim cmd = New OleDbCommand(sql, connection)
+                If cmd.ExecuteNonQuery() > 0 Then
+                    MsgBox("Delivery Cleared!", MsgBoxStyle.OkOnly)
+                End If
+            Catch ex As Exception
+                Console.WriteLine(ex.StackTrace)
+            Finally
+                If connection.State = ConnectionState.Open Then
+                    connection.Close()
+                End If
+            End Try
+
+        End If
     End Sub
 End Class
