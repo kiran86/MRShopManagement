@@ -47,7 +47,7 @@ Partial Class frmUpdateAllotment
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 788.0!))
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 791.0!))
         Me.TableLayoutPanel1.Controls.Add(Me.lblCategory, 0, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.lblRiceStock, 1, 1)
         Me.TableLayoutPanel1.Controls.Add(Me.lblRiceAllotment, 2, 1)
