@@ -25,12 +25,38 @@ Public Class frmMain
         dataFile = "|DataDirectory|\mrshop.mdb"
         connString = provider & dataFile
         connection.ConnectionString = connString
+
         DeliveryDate = Now.ToShortDateString
         SetMemoNo()
         Dim customFont As PrivateFontCollection = New PrivateFontCollection
         customFont.AddFontFile("Fonts/digital-7.ttf")
         lblSystemDateTime.Font = New Font(customFont.Families(0), 16, FontStyle.Regular)
         timerSystemDateTime.Start()
+    End Sub
+
+    Private Sub frmMain_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
+        Dim lastDelvDate As Date = Date.Now
+        Try
+            connection.Open()
+            Dim sql As String = "SELECT MAX(Delivery) FROM Delivery"
+            Dim cmd As OleDbCommand = New OleDbCommand(sql, connection)
+            Dim dr As OleDbDataReader = cmd.ExecuteReader
+            If dr.HasRows Then
+                dr.Read()
+                lastDelvDate = dr.GetDateTime(0)
+            End If
+        Catch ex As Exception
+            Console.WriteLine(ex.StackTrace)
+        Finally
+            If connection.State = ConnectionState.Open Then
+                connection.Close()
+            End If
+        End Try
+        If Now.AddDays(-4).Date >= lastDelvDate.Date Then
+            If MsgBox("Looks like its a new week. Clear previous deliveries?", MsgBoxStyle.YesNo, "New Week") = MsgBoxResult.Yes Then
+                ClearDelivery()
+            End If
+        End If
     End Sub
 
     Private Sub btnFind_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnFind.Click
@@ -493,6 +519,10 @@ Public Class frmMain
     End Sub
 
     Private Sub ClearDeliveryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ClearDeliveryToolStripMenuItem.Click
+        ClearDelivery()
+    End Sub
+
+    Private Sub ClearDelivery()
         Dim sql As String
         If MsgBox("Are you sure to clear past deliveries?", MsgBoxStyle.YesNo, "Alert!") = MsgBoxResult.Yes Then
             Try
@@ -509,7 +539,6 @@ Public Class frmMain
                     connection.Close()
                 End If
             End Try
-
         End If
     End Sub
 End Class

@@ -41,6 +41,7 @@ Partial Class frmMain
         Me.BackupToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.RestoreToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AutoDeliveryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ClearDeliveryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.lblName = New System.Windows.Forms.Label()
         Me.txtbxName = New System.Windows.Forms.TextBox()
         Me.lblHoF = New System.Windows.Forms.Label()
@@ -84,7 +85,6 @@ Partial Class frmMain
         Me.timerSystemDateTime = New System.Windows.Forms.Timer(Me.components)
         Me.lblCashMemoNo = New System.Windows.Forms.Label()
         Me.txtbxCashMemoNo = New System.Windows.Forms.TextBox()
-        Me.ClearDeliveryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuMRShopManagement.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -188,20 +188,26 @@ Partial Class frmMain
         'BackupToolStripMenuItem
         '
         Me.BackupToolStripMenuItem.Name = "BackupToolStripMenuItem"
-        Me.BackupToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.BackupToolStripMenuItem.Size = New System.Drawing.Size(146, 22)
         Me.BackupToolStripMenuItem.Text = "Backup"
         '
         'RestoreToolStripMenuItem
         '
         Me.RestoreToolStripMenuItem.Name = "RestoreToolStripMenuItem"
-        Me.RestoreToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.RestoreToolStripMenuItem.Size = New System.Drawing.Size(146, 22)
         Me.RestoreToolStripMenuItem.Text = "Restore"
         '
         'AutoDeliveryToolStripMenuItem
         '
         Me.AutoDeliveryToolStripMenuItem.Name = "AutoDeliveryToolStripMenuItem"
-        Me.AutoDeliveryToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.AutoDeliveryToolStripMenuItem.Size = New System.Drawing.Size(146, 22)
         Me.AutoDeliveryToolStripMenuItem.Text = "Auto Delivery"
+        '
+        'ClearDeliveryToolStripMenuItem
+        '
+        Me.ClearDeliveryToolStripMenuItem.Name = "ClearDeliveryToolStripMenuItem"
+        Me.ClearDeliveryToolStripMenuItem.Size = New System.Drawing.Size(146, 22)
+        Me.ClearDeliveryToolStripMenuItem.Text = "Clear Delivery"
         '
         'lblName
         '
@@ -629,12 +635,6 @@ Partial Class frmMain
         Me.txtbxCashMemoNo.ReadOnly = True
         Me.txtbxCashMemoNo.Size = New System.Drawing.Size(132, 22)
         Me.txtbxCashMemoNo.TabIndex = 59
-        '
-        'ClearDeliveryToolStripMenuItem
-        '
-        Me.ClearDeliveryToolStripMenuItem.Name = "ClearDeliveryToolStripMenuItem"
-        Me.ClearDeliveryToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.ClearDeliveryToolStripMenuItem.Text = "Clear Delivery"
         '
         'frmMain
         '
