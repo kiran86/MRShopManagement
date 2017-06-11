@@ -500,7 +500,7 @@ Public Class frmMain
     End Sub
 
     Private Sub StockRegisterToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles StockRegisterToolStripMenuItem.Click
-        Me.Enabled = False
+        Me.Hide()
         frmGenRegister.Show()
     End Sub
 

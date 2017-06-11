@@ -21,14 +21,11 @@ Public Class frmStock
     End Sub
 
     Private Sub frmStock_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
-        Me.Visible = False
-        Me.Dispose()
         frmMain.Enabled = True
     End Sub
 
     Private Sub bttnCancel_Click(sender As Object, e As EventArgs) Handles bttnCancel.Click
-        Dim evt As FormClosedEventArgs
-        frmStock_FormClosed(sender, evt)
+        Me.Close()
     End Sub
 
     Private Sub cmboxCategory_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmboxCategory.SelectedIndexChanged

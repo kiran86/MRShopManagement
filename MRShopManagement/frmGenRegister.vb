@@ -26,9 +26,7 @@ Public Class frmGenRegister
         datagridRegister.AutoGenerateColumns = True
     End Sub
     Private Sub frmStockReg_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
-        Me.Dispose()
-        frmMain.Enabled = True
-        frmMain.BringToFront()
+        frmMain.Show()
     End Sub
 
     Private Sub cmboxRegisterType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmboxRegisterType.SelectedIndexChanged

@@ -11,7 +11,6 @@ Public Class frmViewSales
     Dim datepickToClicked As Boolean = False
 
     Private Sub frmViewSales_FormClosed(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosedEventArgs) Handles Me.FormClosed
-        frmMain.Activate()
         frmMain.Show()
     End Sub
 
