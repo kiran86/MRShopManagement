@@ -12,11 +12,25 @@ Public Class frmUpdateAllotment
         connString = provider & dataFile
         connection.ConnectionString = connString
 
-        LoadAllotmentData("AAY")
+        rdobtnAAY.Select()
     End Sub
 
     Private Sub frmUpdateAllotment_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
         frmMain.Show()
+    End Sub
+
+    Private Sub TextBox_TextChanged(sender As Object, e As EventArgs) Handles txtbxRiceStock.TextChanged, txtbxWhtStock.TextChanged, txtbxAttaStock.TextChanged, txtbxWhtPricing.TextChanged, txtbxWhtAllotment.TextChanged, txtbxSugarStock.TextChanged, txtbxSugarPricing.TextChanged, txtbxSugarAllotment.TextChanged, txtbxRicePricing.TextChanged, txtbxRiceAllotment.TextChanged, txtbxAttaPricing.TextChanged, txtbxAttaAllotment.TextChanged
+        Dim txtbxControl As TextBox = CType(sender, TextBox)
+        If txtbxControl.Name.Contains("Pricing") Then
+            txtbxControl.Text = String.Format("{0:n2}", Double.Parse(txtbxControl.Text))
+        Else
+            txtbxControl.Text = String.Format("{0:n3}", Double.Parse(txtbxControl.Text))
+        End If
+    End Sub
+
+    Private Sub RadioButton_SelectionChange(sender As Object, e As EventArgs) Handles rdobtnAAY.CheckedChanged, rdobtnPHH.CheckedChanged, rdobtnSPHH.CheckedChanged, rdobtnRKSYI.CheckedChanged, rdobtnRKSYII.CheckedChanged
+        Dim rdobtnCategory As RadioButton = CType(sender, RadioButton)
+        LoadAllotmentData(rdobtnCategory.Text)
     End Sub
 
     Private Sub LoadAllotmentData(category As String)
@@ -25,7 +39,6 @@ Public Class frmUpdateAllotment
         Dim dr As OleDbDataReader
         For Each table As String In {"Stock", "Allotment", "Pricing"}
             sql = "SELECT * FROM " & table & " WHERE Category = '" & category & "'"
-            Console.WriteLine(sql)
             Try
                 connection.Open()
                 cmd = New OleDbCommand(sql, connection)
@@ -46,21 +59,31 @@ Public Class frmUpdateAllotment
     End Sub
 
     Private Sub UpdateControls(table As String, dr As OleDbDataReader)
-        Dim controlName As String = "txtbx"
+        Dim txtbxName As String = "txtbx"
+        Dim cmbxName As String = "cmbx"
         Dim txtbxControl As TextBox
+        Dim cmbxControl As ComboBox
         Select Case Integer.Parse(dr("ProductID").ToString)
             Case 1
-                controlName = controlName & "Rice"
+                txtbxName = txtbxName & "Rice"
+                cmbxName = cmbxName & "Rice"
             Case 2
-                controlName = controlName & "Wht"
+                txtbxName = txtbxName & "Wht"
+                cmbxName = cmbxName & "Wht"
             Case 3
-                controlName = controlName & "Atta"
+                txtbxName = txtbxName & "Atta"
+                cmbxName = cmbxName & "Atta"
             Case 4
-                controlName = controlName & "Sugar"
+                txtbxName = txtbxName & "Sugar"
+                cmbxName = cmbxName & "Sugar"
         End Select
-        controlName = controlName & table
-        Console.WriteLine(controlName)
-        txtbxControl = Me.Controls.Find(controlName, True)(0)
+        txtbxName = txtbxName & table
+        txtbxControl = Me.Controls.Find(txtbxName, True)(0)
         txtbxControl.Text = dr.GetDouble(2)
+        If table Is "Allotment" Then
+            cmbxName = cmbxName & "Unit"
+            cmbxControl = Me.Controls.Find(cmbxName, True)(0)
+            cmbxControl.SelectedItem = dr.GetString(3)
+        End If
     End Sub
 End Class

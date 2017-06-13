@@ -52,12 +52,12 @@ Partial Class frmUpdateAllotment
         Me.cmbxRiceUnit = New System.Windows.Forms.ComboBox()
         Me.chkbxAAYRice = New System.Windows.Forms.CheckBox()
         Me.lnklblAAYUpdate = New System.Windows.Forms.LinkLabel()
-        Me.rdobtnAAY = New System.Windows.Forms.RadioButton()
-        Me.rdobtnPHH = New System.Windows.Forms.RadioButton()
-        Me.rdobtnSPHH = New System.Windows.Forms.RadioButton()
-        Me.rdobtnRKSYI = New System.Windows.Forms.RadioButton()
-        Me.rdobtnRKSYII = New System.Windows.Forms.RadioButton()
         Me.grpbxCategory = New System.Windows.Forms.GroupBox()
+        Me.rdobtnRKSYII = New System.Windows.Forms.RadioButton()
+        Me.rdobtnRKSYI = New System.Windows.Forms.RadioButton()
+        Me.rdobtnSPHH = New System.Windows.Forms.RadioButton()
+        Me.rdobtnPHH = New System.Windows.Forms.RadioButton()
+        Me.rdobtnAAY = New System.Windows.Forms.RadioButton()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.grpbxCategory.SuspendLayout()
         Me.SuspendLayout()
@@ -427,61 +427,6 @@ Partial Class frmUpdateAllotment
         Me.lnklblAAYUpdate.Text = "Update"
         Me.lnklblAAYUpdate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'rdobtnAAY
-        '
-        Me.rdobtnAAY.AutoSize = True
-        Me.rdobtnAAY.Location = New System.Drawing.Point(3, 3)
-        Me.rdobtnAAY.Name = "rdobtnAAY"
-        Me.rdobtnAAY.Size = New System.Drawing.Size(53, 20)
-        Me.rdobtnAAY.TabIndex = 0
-        Me.rdobtnAAY.TabStop = True
-        Me.rdobtnAAY.Text = "AAY"
-        Me.rdobtnAAY.UseVisualStyleBackColor = True
-        '
-        'rdobtnPHH
-        '
-        Me.rdobtnPHH.AutoSize = True
-        Me.rdobtnPHH.Location = New System.Drawing.Point(3, 29)
-        Me.rdobtnPHH.Name = "rdobtnPHH"
-        Me.rdobtnPHH.Size = New System.Drawing.Size(55, 20)
-        Me.rdobtnPHH.TabIndex = 1
-        Me.rdobtnPHH.TabStop = True
-        Me.rdobtnPHH.Text = "PHH"
-        Me.rdobtnPHH.UseVisualStyleBackColor = True
-        '
-        'rdobtnSPHH
-        '
-        Me.rdobtnSPHH.AutoSize = True
-        Me.rdobtnSPHH.Location = New System.Drawing.Point(3, 55)
-        Me.rdobtnSPHH.Name = "rdobtnSPHH"
-        Me.rdobtnSPHH.Size = New System.Drawing.Size(64, 20)
-        Me.rdobtnSPHH.TabIndex = 2
-        Me.rdobtnSPHH.TabStop = True
-        Me.rdobtnSPHH.Text = "SPHH"
-        Me.rdobtnSPHH.UseVisualStyleBackColor = True
-        '
-        'rdobtnRKSYI
-        '
-        Me.rdobtnRKSYI.AutoSize = True
-        Me.rdobtnRKSYI.Location = New System.Drawing.Point(3, 81)
-        Me.rdobtnRKSYI.Name = "rdobtnRKSYI"
-        Me.rdobtnRKSYI.Size = New System.Drawing.Size(69, 20)
-        Me.rdobtnRKSYI.TabIndex = 3
-        Me.rdobtnRKSYI.TabStop = True
-        Me.rdobtnRKSYI.Text = "RKSY-I"
-        Me.rdobtnRKSYI.UseVisualStyleBackColor = True
-        '
-        'rdobtnRKSYII
-        '
-        Me.rdobtnRKSYII.AutoSize = True
-        Me.rdobtnRKSYII.Location = New System.Drawing.Point(3, 107)
-        Me.rdobtnRKSYII.Name = "rdobtnRKSYII"
-        Me.rdobtnRKSYII.Size = New System.Drawing.Size(72, 20)
-        Me.rdobtnRKSYII.TabIndex = 4
-        Me.rdobtnRKSYII.TabStop = True
-        Me.rdobtnRKSYII.Text = "RKSY-II"
-        Me.rdobtnRKSYII.UseVisualStyleBackColor = True
-        '
         'grpbxCategory
         '
         Me.grpbxCategory.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
@@ -502,6 +447,61 @@ Partial Class frmUpdateAllotment
         Me.grpbxCategory.Size = New System.Drawing.Size(78, 136)
         Me.grpbxCategory.TabIndex = 42
         Me.grpbxCategory.TabStop = False
+        '
+        'rdobtnRKSYII
+        '
+        Me.rdobtnRKSYII.AutoSize = True
+        Me.rdobtnRKSYII.Location = New System.Drawing.Point(3, 107)
+        Me.rdobtnRKSYII.Name = "rdobtnRKSYII"
+        Me.rdobtnRKSYII.Size = New System.Drawing.Size(72, 20)
+        Me.rdobtnRKSYII.TabIndex = 4
+        Me.rdobtnRKSYII.TabStop = True
+        Me.rdobtnRKSYII.Text = "RKSY-II"
+        Me.rdobtnRKSYII.UseVisualStyleBackColor = True
+        '
+        'rdobtnRKSYI
+        '
+        Me.rdobtnRKSYI.AutoSize = True
+        Me.rdobtnRKSYI.Location = New System.Drawing.Point(3, 81)
+        Me.rdobtnRKSYI.Name = "rdobtnRKSYI"
+        Me.rdobtnRKSYI.Size = New System.Drawing.Size(69, 20)
+        Me.rdobtnRKSYI.TabIndex = 3
+        Me.rdobtnRKSYI.TabStop = True
+        Me.rdobtnRKSYI.Text = "RKSY-I"
+        Me.rdobtnRKSYI.UseVisualStyleBackColor = True
+        '
+        'rdobtnSPHH
+        '
+        Me.rdobtnSPHH.AutoSize = True
+        Me.rdobtnSPHH.Location = New System.Drawing.Point(3, 55)
+        Me.rdobtnSPHH.Name = "rdobtnSPHH"
+        Me.rdobtnSPHH.Size = New System.Drawing.Size(64, 20)
+        Me.rdobtnSPHH.TabIndex = 2
+        Me.rdobtnSPHH.TabStop = True
+        Me.rdobtnSPHH.Text = "SPHH"
+        Me.rdobtnSPHH.UseVisualStyleBackColor = True
+        '
+        'rdobtnPHH
+        '
+        Me.rdobtnPHH.AutoSize = True
+        Me.rdobtnPHH.Location = New System.Drawing.Point(3, 29)
+        Me.rdobtnPHH.Name = "rdobtnPHH"
+        Me.rdobtnPHH.Size = New System.Drawing.Size(55, 20)
+        Me.rdobtnPHH.TabIndex = 1
+        Me.rdobtnPHH.TabStop = True
+        Me.rdobtnPHH.Text = "PHH"
+        Me.rdobtnPHH.UseVisualStyleBackColor = True
+        '
+        'rdobtnAAY
+        '
+        Me.rdobtnAAY.AutoSize = True
+        Me.rdobtnAAY.Location = New System.Drawing.Point(3, 3)
+        Me.rdobtnAAY.Name = "rdobtnAAY"
+        Me.rdobtnAAY.Size = New System.Drawing.Size(53, 20)
+        Me.rdobtnAAY.TabIndex = 0
+        Me.rdobtnAAY.TabStop = True
+        Me.rdobtnAAY.Text = "AAY"
+        Me.rdobtnAAY.UseVisualStyleBackColor = True
         '
         'frmUpdateAllotment
         '
