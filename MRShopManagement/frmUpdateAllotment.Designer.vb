@@ -23,18 +23,18 @@ Partial Class frmUpdateAllotment
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
-        Me.lnklblAAYClear = New System.Windows.Forms.LinkLabel()
+        Me.lnklblClear = New System.Windows.Forms.LinkLabel()
         Me.lblAction = New System.Windows.Forms.Label()
         Me.cmbxSugarUnit = New System.Windows.Forms.ComboBox()
         Me.txtbxSugarPricing = New System.Windows.Forms.TextBox()
         Me.txtbxSugarAllotment = New System.Windows.Forms.TextBox()
         Me.txtbxSugarStock = New System.Windows.Forms.TextBox()
-        Me.chkbxAAYSugar = New System.Windows.Forms.CheckBox()
+        Me.chkbxSugar = New System.Windows.Forms.CheckBox()
         Me.cmbxAttaUnit = New System.Windows.Forms.ComboBox()
         Me.txtbxAttaPricing = New System.Windows.Forms.TextBox()
         Me.txtbxAttaAllotment = New System.Windows.Forms.TextBox()
-        Me.chkbxAAYAtta = New System.Windows.Forms.CheckBox()
-        Me.chkbxAAYWheat = New System.Windows.Forms.CheckBox()
+        Me.chkbxAtta = New System.Windows.Forms.CheckBox()
+        Me.chkbxWht = New System.Windows.Forms.CheckBox()
         Me.txtbxAttaStock = New System.Windows.Forms.TextBox()
         Me.cmbxWhtUnit = New System.Windows.Forms.ComboBox()
         Me.txtbxWhtPricing = New System.Windows.Forms.TextBox()
@@ -50,8 +50,8 @@ Partial Class frmUpdateAllotment
         Me.txtbxRiceAllotment = New System.Windows.Forms.TextBox()
         Me.txtbxRicePricing = New System.Windows.Forms.TextBox()
         Me.cmbxRiceUnit = New System.Windows.Forms.ComboBox()
-        Me.chkbxAAYRice = New System.Windows.Forms.CheckBox()
-        Me.lnklblAAYUpdate = New System.Windows.Forms.LinkLabel()
+        Me.chkbxRice = New System.Windows.Forms.CheckBox()
+        Me.lnklblUpdate = New System.Windows.Forms.LinkLabel()
         Me.grpbxCategory = New System.Windows.Forms.GroupBox()
         Me.rdobtnRKSYII = New System.Windows.Forms.RadioButton()
         Me.rdobtnRKSYI = New System.Windows.Forms.RadioButton()
@@ -74,18 +74,18 @@ Partial Class frmUpdateAllotment
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
-        Me.TableLayoutPanel1.Controls.Add(Me.lnklblAAYClear, 6, 3)
+        Me.TableLayoutPanel1.Controls.Add(Me.lnklblClear, 6, 3)
         Me.TableLayoutPanel1.Controls.Add(Me.lblAction, 6, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.cmbxSugarUnit, 5, 4)
         Me.TableLayoutPanel1.Controls.Add(Me.txtbxSugarPricing, 4, 4)
         Me.TableLayoutPanel1.Controls.Add(Me.txtbxSugarAllotment, 3, 4)
         Me.TableLayoutPanel1.Controls.Add(Me.txtbxSugarStock, 2, 4)
-        Me.TableLayoutPanel1.Controls.Add(Me.chkbxAAYSugar, 1, 4)
+        Me.TableLayoutPanel1.Controls.Add(Me.chkbxSugar, 1, 4)
         Me.TableLayoutPanel1.Controls.Add(Me.cmbxAttaUnit, 5, 3)
         Me.TableLayoutPanel1.Controls.Add(Me.txtbxAttaPricing, 4, 3)
         Me.TableLayoutPanel1.Controls.Add(Me.txtbxAttaAllotment, 3, 3)
-        Me.TableLayoutPanel1.Controls.Add(Me.chkbxAAYAtta, 1, 3)
-        Me.TableLayoutPanel1.Controls.Add(Me.chkbxAAYWheat, 1, 2)
+        Me.TableLayoutPanel1.Controls.Add(Me.chkbxAtta, 1, 3)
+        Me.TableLayoutPanel1.Controls.Add(Me.chkbxWht, 1, 2)
         Me.TableLayoutPanel1.Controls.Add(Me.txtbxAttaStock, 2, 3)
         Me.TableLayoutPanel1.Controls.Add(Me.cmbxWhtUnit, 5, 2)
         Me.TableLayoutPanel1.Controls.Add(Me.txtbxWhtPricing, 4, 2)
@@ -101,8 +101,8 @@ Partial Class frmUpdateAllotment
         Me.TableLayoutPanel1.Controls.Add(Me.txtbxRiceAllotment, 3, 1)
         Me.TableLayoutPanel1.Controls.Add(Me.txtbxRicePricing, 4, 1)
         Me.TableLayoutPanel1.Controls.Add(Me.cmbxRiceUnit, 5, 1)
-        Me.TableLayoutPanel1.Controls.Add(Me.chkbxAAYRice, 1, 1)
-        Me.TableLayoutPanel1.Controls.Add(Me.lnklblAAYUpdate, 6, 1)
+        Me.TableLayoutPanel1.Controls.Add(Me.chkbxRice, 1, 1)
+        Me.TableLayoutPanel1.Controls.Add(Me.lnklblUpdate, 6, 1)
         Me.TableLayoutPanel1.Controls.Add(Me.grpbxCategory, 0, 1)
         Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 0)
@@ -117,19 +117,19 @@ Partial Class frmUpdateAllotment
         Me.TableLayoutPanel1.Size = New System.Drawing.Size(679, 175)
         Me.TableLayoutPanel1.TabIndex = 0
         '
-        'lnklblAAYClear
+        'lnklblClear
         '
-        Me.lnklblAAYClear.AutoSize = True
-        Me.lnklblAAYClear.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.lnklblAAYClear.Location = New System.Drawing.Point(612, 102)
-        Me.lnklblAAYClear.Margin = New System.Windows.Forms.Padding(0)
-        Me.lnklblAAYClear.Name = "lnklblAAYClear"
-        Me.TableLayoutPanel1.SetRowSpan(Me.lnklblAAYClear, 2)
-        Me.lnklblAAYClear.Size = New System.Drawing.Size(64, 70)
-        Me.lnklblAAYClear.TabIndex = 41
-        Me.lnklblAAYClear.TabStop = True
-        Me.lnklblAAYClear.Text = "Clear"
-        Me.lnklblAAYClear.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.lnklblClear.AutoSize = True
+        Me.lnklblClear.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.lnklblClear.Location = New System.Drawing.Point(612, 102)
+        Me.lnklblClear.Margin = New System.Windows.Forms.Padding(0)
+        Me.lnklblClear.Name = "lnklblClear"
+        Me.TableLayoutPanel1.SetRowSpan(Me.lnklblClear, 2)
+        Me.lnklblClear.Size = New System.Drawing.Size(64, 70)
+        Me.lnklblClear.TabIndex = 41
+        Me.lnklblClear.TabStop = True
+        Me.lnklblClear.Text = "Clear"
+        Me.lnklblClear.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'lblAction
         '
@@ -179,18 +179,18 @@ Partial Class frmUpdateAllotment
         Me.txtbxSugarStock.Size = New System.Drawing.Size(100, 24)
         Me.txtbxSugarStock.TabIndex = 35
         '
-        'chkbxAAYSugar
+        'chkbxSugar
         '
-        Me.chkbxAAYSugar.AutoSize = True
-        Me.chkbxAAYSugar.Checked = True
-        Me.chkbxAAYSugar.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.chkbxAAYSugar.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.chkbxAAYSugar.Location = New System.Drawing.Point(87, 138)
-        Me.chkbxAAYSugar.Name = "chkbxAAYSugar"
-        Me.chkbxAAYSugar.Size = New System.Drawing.Size(66, 31)
-        Me.chkbxAAYSugar.TabIndex = 34
-        Me.chkbxAAYSugar.Text = "Sugar"
-        Me.chkbxAAYSugar.UseVisualStyleBackColor = True
+        Me.chkbxSugar.AutoSize = True
+        Me.chkbxSugar.Checked = True
+        Me.chkbxSugar.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.chkbxSugar.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.chkbxSugar.Location = New System.Drawing.Point(87, 138)
+        Me.chkbxSugar.Name = "chkbxSugar"
+        Me.chkbxSugar.Size = New System.Drawing.Size(66, 31)
+        Me.chkbxSugar.TabIndex = 34
+        Me.chkbxSugar.Text = "Sugar"
+        Me.chkbxSugar.UseVisualStyleBackColor = True
         '
         'cmbxAttaUnit
         '
@@ -219,31 +219,31 @@ Partial Class frmUpdateAllotment
         Me.txtbxAttaAllotment.Size = New System.Drawing.Size(100, 24)
         Me.txtbxAttaAllotment.TabIndex = 31
         '
-        'chkbxAAYAtta
+        'chkbxAtta
         '
-        Me.chkbxAAYAtta.AutoSize = True
-        Me.chkbxAAYAtta.Checked = True
-        Me.chkbxAAYAtta.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.chkbxAAYAtta.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.chkbxAAYAtta.Location = New System.Drawing.Point(87, 105)
-        Me.chkbxAAYAtta.Name = "chkbxAAYAtta"
-        Me.chkbxAAYAtta.Size = New System.Drawing.Size(66, 24)
-        Me.chkbxAAYAtta.TabIndex = 30
-        Me.chkbxAAYAtta.Text = "Atta"
-        Me.chkbxAAYAtta.UseVisualStyleBackColor = True
+        Me.chkbxAtta.AutoSize = True
+        Me.chkbxAtta.Checked = True
+        Me.chkbxAtta.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.chkbxAtta.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.chkbxAtta.Location = New System.Drawing.Point(87, 105)
+        Me.chkbxAtta.Name = "chkbxAtta"
+        Me.chkbxAtta.Size = New System.Drawing.Size(66, 24)
+        Me.chkbxAtta.TabIndex = 30
+        Me.chkbxAtta.Text = "Atta"
+        Me.chkbxAtta.UseVisualStyleBackColor = True
         '
-        'chkbxAAYWheat
+        'chkbxWht
         '
-        Me.chkbxAAYWheat.AutoSize = True
-        Me.chkbxAAYWheat.Checked = True
-        Me.chkbxAAYWheat.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.chkbxAAYWheat.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.chkbxAAYWheat.Location = New System.Drawing.Point(87, 72)
-        Me.chkbxAAYWheat.Name = "chkbxAAYWheat"
-        Me.chkbxAAYWheat.Size = New System.Drawing.Size(66, 24)
-        Me.chkbxAAYWheat.TabIndex = 29
-        Me.chkbxAAYWheat.Text = "Wheat"
-        Me.chkbxAAYWheat.UseVisualStyleBackColor = True
+        Me.chkbxWht.AutoSize = True
+        Me.chkbxWht.Checked = True
+        Me.chkbxWht.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.chkbxWht.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.chkbxWht.Location = New System.Drawing.Point(87, 72)
+        Me.chkbxWht.Name = "chkbxWht"
+        Me.chkbxWht.Size = New System.Drawing.Size(66, 24)
+        Me.chkbxWht.TabIndex = 29
+        Me.chkbxWht.Text = "Wheat"
+        Me.chkbxWht.UseVisualStyleBackColor = True
         '
         'txtbxAttaStock
         '
@@ -400,32 +400,32 @@ Partial Class frmUpdateAllotment
         Me.cmbxRiceUnit.Size = New System.Drawing.Size(117, 24)
         Me.cmbxRiceUnit.TabIndex = 10
         '
-        'chkbxAAYRice
+        'chkbxRice
         '
-        Me.chkbxAAYRice.AutoSize = True
-        Me.chkbxAAYRice.Checked = True
-        Me.chkbxAAYRice.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.chkbxAAYRice.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.chkbxAAYRice.Location = New System.Drawing.Point(87, 39)
-        Me.chkbxAAYRice.Name = "chkbxAAYRice"
-        Me.chkbxAAYRice.Size = New System.Drawing.Size(66, 24)
-        Me.chkbxAAYRice.TabIndex = 28
-        Me.chkbxAAYRice.Text = "Rice"
-        Me.chkbxAAYRice.UseVisualStyleBackColor = True
+        Me.chkbxRice.AutoSize = True
+        Me.chkbxRice.Checked = True
+        Me.chkbxRice.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.chkbxRice.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.chkbxRice.Location = New System.Drawing.Point(87, 39)
+        Me.chkbxRice.Name = "chkbxRice"
+        Me.chkbxRice.Size = New System.Drawing.Size(66, 24)
+        Me.chkbxRice.TabIndex = 28
+        Me.chkbxRice.Text = "Rice"
+        Me.chkbxRice.UseVisualStyleBackColor = True
         '
-        'lnklblAAYUpdate
+        'lnklblUpdate
         '
-        Me.lnklblAAYUpdate.AutoSize = True
-        Me.lnklblAAYUpdate.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.lnklblAAYUpdate.Location = New System.Drawing.Point(612, 36)
-        Me.lnklblAAYUpdate.Margin = New System.Windows.Forms.Padding(0)
-        Me.lnklblAAYUpdate.Name = "lnklblAAYUpdate"
-        Me.TableLayoutPanel1.SetRowSpan(Me.lnklblAAYUpdate, 2)
-        Me.lnklblAAYUpdate.Size = New System.Drawing.Size(64, 63)
-        Me.lnklblAAYUpdate.TabIndex = 40
-        Me.lnklblAAYUpdate.TabStop = True
-        Me.lnklblAAYUpdate.Text = "Update"
-        Me.lnklblAAYUpdate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.lnklblUpdate.AutoSize = True
+        Me.lnklblUpdate.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.lnklblUpdate.Location = New System.Drawing.Point(612, 36)
+        Me.lnklblUpdate.Margin = New System.Windows.Forms.Padding(0)
+        Me.lnklblUpdate.Name = "lnklblUpdate"
+        Me.TableLayoutPanel1.SetRowSpan(Me.lnklblUpdate, 2)
+        Me.lnklblUpdate.Size = New System.Drawing.Size(64, 63)
+        Me.lnklblUpdate.TabIndex = 40
+        Me.lnklblUpdate.TabStop = True
+        Me.lnklblUpdate.Text = "Update"
+        Me.lnklblUpdate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'grpbxCategory
         '
@@ -540,20 +540,20 @@ Partial Class frmUpdateAllotment
     Friend WithEvents txtbxWhtAllotment As TextBox
     Friend WithEvents txtbxWhtStock As TextBox
     Friend WithEvents txtbxAttaStock As TextBox
-    Friend WithEvents chkbxAAYRice As CheckBox
+    Friend WithEvents chkbxRice As CheckBox
     Friend WithEvents cmbxAttaUnit As ComboBox
     Friend WithEvents txtbxAttaPricing As TextBox
     Friend WithEvents txtbxAttaAllotment As TextBox
-    Friend WithEvents chkbxAAYAtta As CheckBox
-    Friend WithEvents chkbxAAYWheat As CheckBox
-    Friend WithEvents chkbxAAYSugar As CheckBox
+    Friend WithEvents chkbxAtta As CheckBox
+    Friend WithEvents chkbxWht As CheckBox
+    Friend WithEvents chkbxSugar As CheckBox
     Friend WithEvents cmbxSugarUnit As ComboBox
     Friend WithEvents txtbxSugarPricing As TextBox
     Friend WithEvents txtbxSugarAllotment As TextBox
     Friend WithEvents txtbxSugarStock As TextBox
-    Friend WithEvents lnklblAAYClear As LinkLabel
+    Friend WithEvents lnklblClear As LinkLabel
     Friend WithEvents lblAction As Label
-    Friend WithEvents lnklblAAYUpdate As LinkLabel
+    Friend WithEvents lnklblUpdate As LinkLabel
     Friend WithEvents grpbxCategory As GroupBox
     Friend WithEvents rdobtnRKSYII As RadioButton
     Friend WithEvents rdobtnRKSYI As RadioButton
