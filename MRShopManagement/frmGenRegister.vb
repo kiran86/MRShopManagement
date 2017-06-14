@@ -363,4 +363,24 @@ Public Class frmGenRegister
             fs = Nothing
         End Try
     End Sub
+
+    Private Sub PrintToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PrintToolStripMenuItem.Click
+        'Open the print dialog
+        Dim printDialog As PrintDialog = New PrintDialog()
+        printDialog.Document = PrintDocument1
+        printDialog.UseEXDialog = True
+        'Get the document
+        If DialogResult.OK = printDialog.ShowDialog() Then
+            PrintDocument1.DocumentName = "Test"
+            PrintDocument1.Print()
+        End If
+
+        'Note: In case you want to show the Print Preview Dialog instead of 
+        'Print Dialog then comment the above code And uncomment the following code
+
+        'Open the print preview dialog
+        'Dim objPPdialog As PrintPreviewDialog = New PrintPreviewDialog()
+        'objPPdialog.Document = PrintDocument1
+        'objPPdialog.ShowDialog()
+    End Sub
 End Class
