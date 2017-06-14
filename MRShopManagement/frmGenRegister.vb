@@ -123,11 +123,11 @@ Public Class frmGenRegister
             dr = cmd.ExecuteReader
             dr.Read()
             If dr.HasRows And Not dr.IsDBNull(0) Then
-                startDate = dr.GetDateTime(0)
-                endDate = dr.GetDateTime(1)
+                startDate = dr.GetDateTime(0).Date
+                endDate = dr.GetDateTime(1).Date
             End If
 
-            Sql = "SELECT * FROM Allotment WHERE Category = '" + Category + "'"
+            sql = "SELECT * FROM Allotment WHERE Category = '" + Category + "'"
             cmd = New OleDbCommand(Sql, connection)
             dr = cmd.ExecuteReader
             If dr.HasRows Then
@@ -148,17 +148,18 @@ Public Class frmGenRegister
                     End Select
                 End While
             End If
-
+            Console.WriteLine(DateTime.ParseExact("03/12/2017 23:59:59", "dd/MM/yyyy HH:mm:ss", Nothing))
             delvDate = startDate
-            While delvDate.Date <> endDate.AddDays(1).Date
+            While delvDate <> endDate.AddDays(1)
                 totalHead = 0
                 totalFamily = 0
                 totalRicePrice = 0
                 totalWhetPrice = 0
                 totalAttaPrice = 0
                 totalSugrPrice = 0
-                sql = "SELECT RCNo, CashMemoNo FROM Delivery WHERE Category = '" + Category + "' AND Delivery = #" + delvDate + "#"
-                cmd = New OleDbCommand(Sql, connection)
+                sql = "SELECT RCNo, CashMemoNo FROM Delivery WHERE Category = '" + Category + "' AND Delivery BETWEEN #" + DateTime.ParseExact(delvDate.ToShortDateString & " 00:00:00", "dd/MM/yyyy HH:mm:ss", Nothing) + "# AND #" + DateTime.ParseExact(delvDate.ToShortDateString & " 23:59:59", "dd/MM/yyyy HH:mm:ss", Nothing) + "# ORDER BY CashMemoNo ASC"
+                Console.WriteLine(sql)
+                cmd = New OleDbCommand(sql, connection)
                 dr = cmd.ExecuteReader
                 If dr.HasRows Then
                     While dr.Read()

@@ -129,8 +129,8 @@ Public Class frmUpdateAllotment
                 Select Case table
                     Case "Stock"
                         txtbxName = txtbxName & table
-                        sql = sql & " Scale = " & 
-            End Select
+                        sql = sql & " Scale = "
+                End Select
                 sql = "UPDATE " & table & " WHERE Category = '" & category & "'"
                 Try
                     connection.Open()
