@@ -11,6 +11,16 @@ Public Class frmGenRegister
     Private regStock As Integer = 0
     Private regSale As Integer = 1
 
+    Private strFormat As StringFormat       'Used to format the grid rows.
+    Private arrColumnLefts As New ArrayList()     'Used to save left coordinates of columns
+    Private arrColumnWidths As New ArrayList()    'Used to save column widths
+    Private iCellHeight As Integer = 0      'Used To Get/Set the datagridview cell height
+    Private iTotalWidth As Integer = 0      '
+    Private iRow As Integer = 0             'Used As counter
+    Private bFirstPage As Boolean = False   'Used To check whether we are printing first page
+    Private bNewPage As Boolean = False     'Used To check whether we are printing a New page
+    Private iHeaderHeight = 0               'Used for the header height
+
     Private Sub frmGenRegister_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         provider = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source ="
         dataFile = "|DataDirectory|\mrshop.mdb"
@@ -382,5 +392,29 @@ Public Class frmGenRegister
         'Dim objPPdialog As PrintPreviewDialog = New PrintPreviewDialog()
         'objPPdialog.Document = PrintDocument1
         'objPPdialog.ShowDialog()
+    End Sub
+
+    Private Sub PrintDocument1_BeginPrint(sender As Object, e As Printing.PrintEventArgs) Handles PrintDocument1.BeginPrint
+        Try
+            strFormat = New StringFormat()
+            strFormat.Alignment = StringAlignment.Near
+            strFormat.LineAlignment = StringAlignment.Center
+            strFormat.Trimming = StringTrimming.EllipsisCharacter
+
+            arrColumnLefts.Clear()
+            arrColumnWidths.Clear()
+            iCellHeight = 0
+            iCount = 0
+            bFirstPage = True
+            bNewPage = True
+
+            ' Calculating Total Widths
+            iTotalWidth = 0
+            For Each dgvGridCol As DataGridViewColumn In dataGridView1.Columns
+                iTotalWidth += dgvGridCol.Width
+            Next
+        Catch ex As Exception
+            MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
     End Sub
 End Class
