@@ -10,16 +10,17 @@ Public Class frmGenRegister
     Private regDate As String = ""
     Private regStock As Integer = 0
     Private regSale As Integer = 1
+    Private regName As String
 
-    Private strFormat As StringFormat       'Used to format the grid rows.
-    Private arrColumnLefts As New ArrayList()     'Used to save left coordinates of columns
-    Private arrColumnWidths As New ArrayList()    'Used to save column widths
-    Private iCellHeight As Integer = 0      'Used To Get/Set the datagridview cell height
-    Private iTotalWidth As Integer = 0      '
-    Private iRow As Integer = 0             'Used As counter
-    Private bFirstPage As Boolean = False   'Used To check whether we are printing first page
-    Private bNewPage As Boolean = False     'Used To check whether we are printing a New page
-    Private iHeaderHeight = 0               'Used for the header height
+    Private strFormat As StringFormat           'Used to format the grid rows.
+    Private arrColumnLefts As New ArrayList()   'Used to save left coordinates of columns
+    Private arrColumnWidths As New ArrayList()  'Used to save column widths
+    Private iCellHeight As Integer = 0          'Used To Get/Set the datagridview cell height
+    Private iTotalWidth As Integer = 0          '
+    Private iRow As Integer = 0                 'Used As counter
+    Private bFirstPage As Boolean = False       'Used To check whether we are printing first page
+    Private bNewPage As Boolean = False         'Used To check whether we are printing a New page
+    Private iHeaderHeight = 0                   'Used for the header height
 
     Private Sub frmGenRegister_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         provider = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source ="
@@ -50,6 +51,7 @@ Public Class frmGenRegister
     End Sub
 
     Private Sub bttnGenerate_Click(sender As Object, e As EventArgs) Handles bttnGenerate.Click
+        regName = cmboxCategory.SelectedItem.ToString & " " & cmboxRegisterType.SelectedItem.ToString & " " & "Register"
         If ValidateForm(sender) Then
             Select Case cmboxRegisterType.SelectedIndex
                 Case regStock
@@ -404,17 +406,102 @@ Public Class frmGenRegister
             arrColumnLefts.Clear()
             arrColumnWidths.Clear()
             iCellHeight = 0
-            iCount = 0
+            iRow = 0
             bFirstPage = True
             bNewPage = True
 
             ' Calculating Total Widths
             iTotalWidth = 0
-            For Each dgvGridCol As DataGridViewColumn In dataGridView1.Columns
+            For Each dgvGridCol As DataGridViewColumn In datagridRegister.Columns
                 iTotalWidth += dgvGridCol.Width
             Next
         Catch ex As Exception
             MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
+
+    Private Sub PrintDocument1_PrintPage(sender As Object, e As Printing.PrintPageEventArgs) Handles PrintDocument1.PrintPage
+
+        Try
+            'Set the left margin
+            Dim iLeftMargin As Integer = e.MarginBounds.Left
+            'Set the top margin
+            Dim iTopMargin As Integer = e.MarginBounds.Top
+            'Whether more pages have to print or not
+            Dim bMorePagesToPrint As Boolean = False
+            Dim iTmpWidth As Integer = 0
+
+            'For the first page to print set the cell width and header height
+            If bFirstPage Then
+                For Each GridCol As DataGridViewColumn In datagridRegister.Columns
+                    iTmpWidth = CInt(Math.Floor(CDbl(CDbl(GridCol.Width) / CDbl(iTotalWidth) * CDbl(iTotalWidth) * (CDbl(e.MarginBounds.Width) / CDbl(iTotalWidth)))))
+
+                    iHeaderHeight = CInt(e.Graphics.MeasureString(GridCol.HeaderText, GridCol.InheritedStyle.Font, iTmpWidth).Height) + 11
+
+                    ' Save width and height of headers
+                    arrColumnLefts.Add(iLeftMargin)
+                    arrColumnWidths.Add(iTmpWidth)
+                    iLeftMargin += iTmpWidth
+                Next
+            End If
+            'Loop till all the grid rows not get printed
+            While iRow <= datagridRegister.Rows.Count - 1
+                Dim GridRow As DataGridViewRow = datagridRegister.Rows(iRow)
+                'Set the cell height
+                iCellHeight = GridRow.Height + 5
+                Dim iCount As Integer = 0
+                'Check whether the current page settings allow more rows to print
+                If iTopMargin + iCellHeight >= e.MarginBounds.Height + e.MarginBounds.Top Then
+                    bNewPage = True
+                    bFirstPage = False
+                    bMorePagesToPrint = True
+                    Exit While
+                Else
+                    If bNewPage Then
+                        'Draw Header
+                        e.Graphics.DrawString(regName, New Font(datagridRegister.Font, FontStyle.Bold), Brushes.Black, e.MarginBounds.Left, e.MarginBounds.Top - e.Graphics.MeasureString(regName, New Font(datagridRegister.Font, FontStyle.Bold), e.MarginBounds.Width).Height - 13)
+
+                        Dim strDate As [String] = DateTime.Now.ToLongDateString() + " " + DateTime.Now.ToShortTimeString()
+                        'Draw Date
+                        e.Graphics.DrawString(strDate, New Font(datagridRegister.Font, FontStyle.Bold), Brushes.Black, e.MarginBounds.Left + (e.MarginBounds.Width - e.Graphics.MeasureString(strDate, New Font(datagridRegister.Font, FontStyle.Bold), e.MarginBounds.Width).Width), e.MarginBounds.Top - e.Graphics.MeasureString("Customer Summary", New Font(New Font(datagridRegister.Font, FontStyle.Bold), FontStyle.Bold), e.MarginBounds.Width).Height - 13)
+
+                        'Draw Columns                 
+                        iTopMargin = e.MarginBounds.Top
+                        For Each GridCol As DataGridViewColumn In datagridRegister.Columns
+                            e.Graphics.FillRectangle(New SolidBrush(Color.LightGray), New Rectangle(CInt(arrColumnLefts(iCount)), iTopMargin, CInt(arrColumnWidths(iCount)), iHeaderHeight))
+
+                            e.Graphics.DrawRectangle(Pens.Black, New Rectangle(CInt(arrColumnLefts(iCount)), iTopMargin, CInt(arrColumnWidths(iCount)), iHeaderHeight))
+
+                            e.Graphics.DrawString(GridCol.HeaderText, GridCol.InheritedStyle.Font, New SolidBrush(GridCol.InheritedStyle.ForeColor), New RectangleF(CInt(arrColumnLefts(iCount)), iTopMargin, CInt(arrColumnWidths(iCount)), iHeaderHeight), strFormat)
+                            iCount += 1
+                        Next
+                        bNewPage = False
+                        iTopMargin += iHeaderHeight
+                    End If
+                    iCount = 0
+                    'Draw Columns Contents                
+                    For Each Cel As DataGridViewCell In GridRow.Cells
+                        If Cel.Value IsNot Nothing Then
+                            e.Graphics.DrawString(Cel.Value.ToString(), Cel.InheritedStyle.Font, New SolidBrush(Cel.InheritedStyle.ForeColor), New RectangleF(CInt(arrColumnLefts(iCount)), CSng(iTopMargin), CInt(arrColumnWidths(iCount)), CSng(iCellHeight)), strFormat)
+                        End If
+                        'Drawing Cells Borders 
+                        e.Graphics.DrawRectangle(Pens.Black, New Rectangle(CInt(arrColumnLefts(iCount)), iTopMargin, CInt(arrColumnWidths(iCount)), iCellHeight))
+
+                        iCount += 1
+                    Next
+                End If
+                iRow += 1
+                iTopMargin += iCellHeight
+            End While
+
+            'If more lines exist, print another page.
+            If bMorePagesToPrint Then
+                e.HasMorePages = True
+            Else
+                e.HasMorePages = False
+            End If
+        Catch exc As Exception
+            MessageBox.Show(exc.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.[Error])
         End Try
     End Sub
 End Class
