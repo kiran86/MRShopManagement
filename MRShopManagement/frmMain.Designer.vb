@@ -330,6 +330,8 @@ Partial Class frmMain
         '
         'lstvwRcNos
         '
+        Me.lstvwRcNos.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lstvwRcNos.GridLines = True
         Me.lstvwRcNos.Location = New System.Drawing.Point(16, 306)
         Me.lstvwRcNos.Margin = New System.Windows.Forms.Padding(4)
@@ -341,6 +343,8 @@ Partial Class frmMain
         '
         'lstvwFamily
         '
+        Me.lstvwFamily.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lstvwFamily.GridLines = True
         Me.lstvwFamily.Location = New System.Drawing.Point(16, 122)
         Me.lstvwFamily.Margin = New System.Windows.Forms.Padding(4)
@@ -605,10 +609,11 @@ Partial Class frmMain
         '
         'lblSystemDateTime
         '
+        Me.lblSystemDateTime.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lblSystemDateTime.AutoSize = True
         Me.lblSystemDateTime.Font = New System.Drawing.Font("Courier New", 12.0!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblSystemDateTime.ForeColor = System.Drawing.Color.Blue
-        Me.lblSystemDateTime.Location = New System.Drawing.Point(796, 33)
+        Me.lblSystemDateTime.Location = New System.Drawing.Point(797, 31)
         Me.lblSystemDateTime.Name = "lblSystemDateTime"
         Me.lblSystemDateTime.Size = New System.Drawing.Size(199, 19)
         Me.lblSystemDateTime.TabIndex = 57

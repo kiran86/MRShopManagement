@@ -103,7 +103,7 @@ Partial Class frmGenRegister
         Me.datagridRegister.AllowUserToAddRows = False
         Me.datagridRegister.AllowUserToDeleteRows = False
         Me.datagridRegister.AllowUserToResizeRows = False
-        Me.datagridRegister.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.datagridRegister.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
         DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
         DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
         DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -140,13 +140,13 @@ Partial Class frmGenRegister
         'ExportToExcelToolStripMenuItem
         '
         Me.ExportToExcelToolStripMenuItem.Name = "ExportToExcelToolStripMenuItem"
-        Me.ExportToExcelToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.ExportToExcelToolStripMenuItem.Size = New System.Drawing.Size(150, 22)
         Me.ExportToExcelToolStripMenuItem.Text = "Export to Excel"
         '
         'PrintToolStripMenuItem
         '
         Me.PrintToolStripMenuItem.Name = "PrintToolStripMenuItem"
-        Me.PrintToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.PrintToolStripMenuItem.Size = New System.Drawing.Size(150, 22)
         Me.PrintToolStripMenuItem.Text = "Print"
         '
         'PrintDialog1

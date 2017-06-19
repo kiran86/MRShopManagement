@@ -485,8 +485,11 @@ Public Class frmGenRegister
                             e.Graphics.DrawString(Cel.Value.ToString(), Cel.InheritedStyle.Font, New SolidBrush(Cel.InheritedStyle.ForeColor), New RectangleF(CInt(arrColumnLefts(iCount)), CSng(iTopMargin), CInt(arrColumnWidths(iCount)), CSng(iCellHeight)), strFormat)
                         End If
                         'Drawing Cells Borders 
-                        e.Graphics.DrawRectangle(Pens.Black, New Rectangle(CInt(arrColumnLefts(iCount)), iTopMargin, CInt(arrColumnWidths(iCount)), iCellHeight))
-
+                        'Left
+                        e.Graphics.DrawLine(Pens.Black, CInt(arrColumnLefts(iCount)), iTopMargin, CInt(arrColumnLefts(iCount)), iTopMargin + iCellHeight)
+                        'Right
+                        e.Graphics.DrawLine(Pens.Black, CInt(arrColumnLefts(iCount)) + CInt(arrColumnWidths(iCount)), iTopMargin, CInt(arrColumnLefts(iCount)) + CInt(arrColumnWidths(iCount)), iTopMargin + iCellHeight)
+                        'e.Graphics.DrawRectangle(Pens.Black, New Rectangle(CInt(arrColumnLefts(iCount)), iTopMargin, CInt(arrColumnWidths(iCount)), iCellHeight))
                         iCount += 1
                     Next
                 End If
