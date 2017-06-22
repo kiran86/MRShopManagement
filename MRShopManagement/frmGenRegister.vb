@@ -489,6 +489,10 @@ Public Class frmGenRegister
                         e.Graphics.DrawLine(Pens.Black, CInt(arrColumnLefts(iCount)), iTopMargin, CInt(arrColumnLefts(iCount)), iTopMargin + iCellHeight)
                         'Right
                         e.Graphics.DrawLine(Pens.Black, CInt(arrColumnLefts(iCount)) + CInt(arrColumnWidths(iCount)), iTopMargin, CInt(arrColumnLefts(iCount)) + CInt(arrColumnWidths(iCount)), iTopMargin + iCellHeight)
+                        'Top
+                        If Cel.Value IsNot Nothing Then
+                            e.Graphics.DrawLine(Pens.Black, CInt(arrColumnLefts(iCount)), iTopMargin, CInt(arrColumnLefts(iCount)) + CInt(arrColumnWidths(iCount)), iTopMargin)
+                        End If
                         'e.Graphics.DrawRectangle(Pens.Black, New Rectangle(CInt(arrColumnLefts(iCount)), iTopMargin, CInt(arrColumnWidths(iCount)), iCellHeight))
                         iCount += 1
                     Next
