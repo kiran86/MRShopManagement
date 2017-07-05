@@ -108,6 +108,7 @@ Public Class frmGenRegister
 
         datagridRegister.Rows.Clear()
         datagridRegister.Columns.Clear()
+        Me.Cursor = Cursors.WaitCursor
 
         Select Case RegType
             Case regStock
@@ -169,7 +170,8 @@ Public Class frmGenRegister
                 totalWhetPrice = 0
                 totalAttaPrice = 0
                 totalSugrPrice = 0
-                sql = "SELECT RCNo, CashMemoNo FROM Delivery WHERE Category = '" + Category + "' AND Delivery BETWEEN #" + DateTime.ParseExact(delvDate.ToShortDateString & " 00:00:01", "dd/MM/yyyy HH:mm:ss", Nothing) + "# AND #" + DateTime.ParseExact(delvDate.ToShortDateString & " 23:59:59", "dd/MM/yyyy HH:mm:ss", Nothing) + "# ORDER BY CashMemoNo ASC"
+                'sql = "SELECT RCNo, CashMemoNo FROM Delivery WHERE Category = '" + Category + "' AND Delivery BETWEEN #" + DateTime.ParseExact(delvDate.ToShortDateString & " 00:00:01", "dd/MM/yyyy HH:mm:ss", Nothing) + "# AND #" + DateTime.ParseExact(delvDate.ToShortDateString & " 23:59:59", "dd/MM/yyyy HH:mm:ss", Nothing) + "# ORDER BY CashMemoNo ASC"
+                sql = "SELECT RCNo, CashMemoNo FROM Delivery WHERE Category = '" + Category + "' AND Delivery BETWEEN FORMAT(#" + DateTime.ParseExact(delvDate.ToShortDateString & " 00:00:01", "dd/MM/yyyy HH:mm:ss", Nothing) + "#, 'mm/dd/yyyy hh:nn:ss am/pm') AND FORMAT(#" + DateTime.ParseExact(delvDate.ToShortDateString & " 23:59:59", "dd/MM/yyyy HH:mm:ss", Nothing) + "#, 'mm/dd/yyyy hh:nn:ss am/pm') ORDER BY CashMemoNo ASC"
                 Console.WriteLine(sql)
                 cmd = New OleDbCommand(sql, connection)
                 dr = cmd.ExecuteReader
@@ -261,6 +263,7 @@ Public Class frmGenRegister
                 delvDate = delvDate.AddDays(1)
             End While
             connection.Close()
+            Me.Cursor = Cursors.Default
         Catch ex As Exception
             MsgBox("Fatal Error: " + ex.Message + "->" + ex.StackTrace)
         End Try
