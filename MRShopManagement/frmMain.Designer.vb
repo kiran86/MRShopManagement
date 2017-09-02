@@ -85,6 +85,9 @@ Partial Class frmMain
         Me.timerSystemDateTime = New System.Windows.Forms.Timer(Me.components)
         Me.lblCashMemoNo = New System.Windows.Forms.Label()
         Me.txtbxCashMemoNo = New System.Windows.Forms.TextBox()
+        Me.UpdateDatabaseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
         Me.MenuMRShopManagement.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -180,7 +183,7 @@ Partial Class frmMain
         '
         'SystemToolStripMenuItem
         '
-        Me.SystemToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.BackupToolStripMenuItem, Me.RestoreToolStripMenuItem, Me.AutoDeliveryToolStripMenuItem, Me.ClearDeliveryToolStripMenuItem})
+        Me.SystemToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.BackupToolStripMenuItem, Me.RestoreToolStripMenuItem, Me.ToolStripSeparator3, Me.UpdateDatabaseToolStripMenuItem, Me.ToolStripSeparator2, Me.AutoDeliveryToolStripMenuItem, Me.ClearDeliveryToolStripMenuItem})
         Me.SystemToolStripMenuItem.Name = "SystemToolStripMenuItem"
         Me.SystemToolStripMenuItem.Size = New System.Drawing.Size(57, 20)
         Me.SystemToolStripMenuItem.Text = "System"
@@ -188,25 +191,25 @@ Partial Class frmMain
         'BackupToolStripMenuItem
         '
         Me.BackupToolStripMenuItem.Name = "BackupToolStripMenuItem"
-        Me.BackupToolStripMenuItem.Size = New System.Drawing.Size(146, 22)
+        Me.BackupToolStripMenuItem.Size = New System.Drawing.Size(163, 22)
         Me.BackupToolStripMenuItem.Text = "Backup"
         '
         'RestoreToolStripMenuItem
         '
         Me.RestoreToolStripMenuItem.Name = "RestoreToolStripMenuItem"
-        Me.RestoreToolStripMenuItem.Size = New System.Drawing.Size(146, 22)
+        Me.RestoreToolStripMenuItem.Size = New System.Drawing.Size(163, 22)
         Me.RestoreToolStripMenuItem.Text = "Restore"
         '
         'AutoDeliveryToolStripMenuItem
         '
         Me.AutoDeliveryToolStripMenuItem.Name = "AutoDeliveryToolStripMenuItem"
-        Me.AutoDeliveryToolStripMenuItem.Size = New System.Drawing.Size(146, 22)
+        Me.AutoDeliveryToolStripMenuItem.Size = New System.Drawing.Size(163, 22)
         Me.AutoDeliveryToolStripMenuItem.Text = "Auto Delivery"
         '
         'ClearDeliveryToolStripMenuItem
         '
         Me.ClearDeliveryToolStripMenuItem.Name = "ClearDeliveryToolStripMenuItem"
-        Me.ClearDeliveryToolStripMenuItem.Size = New System.Drawing.Size(146, 22)
+        Me.ClearDeliveryToolStripMenuItem.Size = New System.Drawing.Size(163, 22)
         Me.ClearDeliveryToolStripMenuItem.Text = "Clear Delivery"
         '
         'lblName
@@ -641,6 +644,22 @@ Partial Class frmMain
         Me.txtbxCashMemoNo.Size = New System.Drawing.Size(132, 22)
         Me.txtbxCashMemoNo.TabIndex = 59
         '
+        'UpdateDatabaseToolStripMenuItem
+        '
+        Me.UpdateDatabaseToolStripMenuItem.Name = "UpdateDatabaseToolStripMenuItem"
+        Me.UpdateDatabaseToolStripMenuItem.Size = New System.Drawing.Size(163, 22)
+        Me.UpdateDatabaseToolStripMenuItem.Text = "Update Database"
+        '
+        'ToolStripSeparator2
+        '
+        Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
+        Me.ToolStripSeparator2.Size = New System.Drawing.Size(160, 6)
+        '
+        'ToolStripSeparator3
+        '
+        Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
+        Me.ToolStripSeparator3.Size = New System.Drawing.Size(160, 6)
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -766,4 +785,7 @@ Partial Class frmMain
     Friend WithEvents txtbxCashMemoNo As TextBox
     Friend WithEvents AutoDeliveryToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ClearDeliveryToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator3 As ToolStripSeparator
+    Friend WithEvents UpdateDatabaseToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator2 As ToolStripSeparator
 End Class
