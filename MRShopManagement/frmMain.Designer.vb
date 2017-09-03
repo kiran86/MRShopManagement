@@ -40,6 +40,9 @@ Partial Class frmMain
         Me.SystemToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.BackupToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.RestoreToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
+        Me.UpdateDatabaseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.AutoDeliveryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ClearDeliveryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.lblName = New System.Windows.Forms.Label()
@@ -85,9 +88,6 @@ Partial Class frmMain
         Me.timerSystemDateTime = New System.Windows.Forms.Timer(Me.components)
         Me.lblCashMemoNo = New System.Windows.Forms.Label()
         Me.txtbxCashMemoNo = New System.Windows.Forms.TextBox()
-        Me.UpdateDatabaseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
         Me.MenuMRShopManagement.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -199,6 +199,22 @@ Partial Class frmMain
         Me.RestoreToolStripMenuItem.Name = "RestoreToolStripMenuItem"
         Me.RestoreToolStripMenuItem.Size = New System.Drawing.Size(163, 22)
         Me.RestoreToolStripMenuItem.Text = "Restore"
+        '
+        'ToolStripSeparator3
+        '
+        Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
+        Me.ToolStripSeparator3.Size = New System.Drawing.Size(160, 6)
+        '
+        'UpdateDatabaseToolStripMenuItem
+        '
+        Me.UpdateDatabaseToolStripMenuItem.Name = "UpdateDatabaseToolStripMenuItem"
+        Me.UpdateDatabaseToolStripMenuItem.Size = New System.Drawing.Size(163, 22)
+        Me.UpdateDatabaseToolStripMenuItem.Text = "Update Database"
+        '
+        'ToolStripSeparator2
+        '
+        Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
+        Me.ToolStripSeparator2.Size = New System.Drawing.Size(160, 6)
         '
         'AutoDeliveryToolStripMenuItem
         '
@@ -643,22 +659,6 @@ Partial Class frmMain
         Me.txtbxCashMemoNo.ReadOnly = True
         Me.txtbxCashMemoNo.Size = New System.Drawing.Size(132, 22)
         Me.txtbxCashMemoNo.TabIndex = 59
-        '
-        'UpdateDatabaseToolStripMenuItem
-        '
-        Me.UpdateDatabaseToolStripMenuItem.Name = "UpdateDatabaseToolStripMenuItem"
-        Me.UpdateDatabaseToolStripMenuItem.Size = New System.Drawing.Size(163, 22)
-        Me.UpdateDatabaseToolStripMenuItem.Text = "Update Database"
-        '
-        'ToolStripSeparator2
-        '
-        Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
-        Me.ToolStripSeparator2.Size = New System.Drawing.Size(160, 6)
-        '
-        'ToolStripSeparator3
-        '
-        Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
-        Me.ToolStripSeparator3.Size = New System.Drawing.Size(160, 6)
         '
         'frmMain
         '

@@ -541,4 +541,9 @@ Public Class frmMain
             End Try
         End If
     End Sub
+
+    Private Sub UpdateDatabaseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles UpdateDatabaseToolStripMenuItem.Click
+        Me.Enabled = False
+        frmUpdateDB.Show()
+    End Sub
 End Class
