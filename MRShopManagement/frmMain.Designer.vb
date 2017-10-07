@@ -88,6 +88,9 @@ Partial Class frmMain
         Me.timerSystemDateTime = New System.Windows.Forms.Timer(Me.components)
         Me.lblCashMemoNo = New System.Windows.Forms.Label()
         Me.txtbxCashMemoNo = New System.Windows.Forms.TextBox()
+        Me.txtbxKOilPrice = New System.Windows.Forms.TextBox()
+        Me.txtbxKOil = New System.Windows.Forms.TextBox()
+        Me.lblKOil = New System.Windows.Forms.Label()
         Me.MenuMRShopManagement.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -351,6 +354,7 @@ Partial Class frmMain
         '
         Me.lstvwRcNos.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.lstvwRcNos.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lstvwRcNos.GridLines = True
         Me.lstvwRcNos.Location = New System.Drawing.Point(16, 306)
         Me.lstvwRcNos.Margin = New System.Windows.Forms.Padding(4)
@@ -364,6 +368,7 @@ Partial Class frmMain
         '
         Me.lstvwFamily.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.lstvwFamily.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lstvwFamily.GridLines = True
         Me.lstvwFamily.Location = New System.Drawing.Point(16, 122)
         Me.lstvwFamily.Margin = New System.Windows.Forms.Padding(4)
@@ -397,8 +402,8 @@ Partial Class frmMain
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(125, 457)
-        Me.Label1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label1.Location = New System.Drawing.Point(80, 457)
+        Me.Label1.Margin = New System.Windows.Forms.Padding(4, 0, 0, 0)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(39, 16)
         Me.Label1.TabIndex = 24
@@ -406,29 +411,29 @@ Partial Class frmMain
         '
         'txtbxRiceQty
         '
-        Me.txtbxRiceQty.Location = New System.Drawing.Point(172, 454)
-        Me.txtbxRiceQty.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtbxRiceQty.Location = New System.Drawing.Point(119, 454)
+        Me.txtbxRiceQty.Margin = New System.Windows.Forms.Padding(0)
         Me.txtbxRiceQty.Name = "txtbxRiceQty"
         Me.txtbxRiceQty.ReadOnly = True
         Me.txtbxRiceQty.Size = New System.Drawing.Size(61, 22)
         Me.txtbxRiceQty.TabIndex = 25
-        Me.txtbxRiceQty.Text = "Quantity"
+        Me.txtbxRiceQty.Text = "00.000KG"
         '
         'txtbxWhtQty
         '
-        Me.txtbxWhtQty.Location = New System.Drawing.Point(369, 454)
-        Me.txtbxWhtQty.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtbxWhtQty.Location = New System.Drawing.Point(282, 454)
+        Me.txtbxWhtQty.Margin = New System.Windows.Forms.Padding(0)
         Me.txtbxWhtQty.Name = "txtbxWhtQty"
         Me.txtbxWhtQty.ReadOnly = True
         Me.txtbxWhtQty.Size = New System.Drawing.Size(61, 22)
         Me.txtbxWhtQty.TabIndex = 28
-        Me.txtbxWhtQty.Text = "Quantity"
+        Me.txtbxWhtQty.Text = "00.000KG"
         '
         'lblWheat
         '
         Me.lblWheat.AutoSize = True
-        Me.lblWheat.Location = New System.Drawing.Point(311, 457)
-        Me.lblWheat.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblWheat.Location = New System.Drawing.Point(232, 457)
+        Me.lblWheat.Margin = New System.Windows.Forms.Padding(4, 0, 0, 0)
         Me.lblWheat.Name = "lblWheat"
         Me.lblWheat.Size = New System.Drawing.Size(50, 16)
         Me.lblWheat.TabIndex = 27
@@ -436,19 +441,19 @@ Partial Class frmMain
         '
         'txtbxSugar
         '
-        Me.txtbxSugar.Location = New System.Drawing.Point(741, 454)
-        Me.txtbxSugar.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtbxSugar.Location = New System.Drawing.Point(589, 454)
+        Me.txtbxSugar.Margin = New System.Windows.Forms.Padding(0)
         Me.txtbxSugar.Name = "txtbxSugar"
         Me.txtbxSugar.ReadOnly = True
         Me.txtbxSugar.Size = New System.Drawing.Size(61, 22)
         Me.txtbxSugar.TabIndex = 31
-        Me.txtbxSugar.Text = "Quantity"
+        Me.txtbxSugar.Text = "00.000KG"
         '
         'lblSugar
         '
         Me.lblSugar.AutoSize = True
-        Me.lblSugar.Location = New System.Drawing.Point(687, 457)
-        Me.lblSugar.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblSugar.Location = New System.Drawing.Point(542, 457)
+        Me.lblSugar.Margin = New System.Windows.Forms.Padding(4, 0, 0, 0)
         Me.lblSugar.Name = "lblSugar"
         Me.lblSugar.Size = New System.Drawing.Size(47, 16)
         Me.lblSugar.TabIndex = 30
@@ -468,8 +473,8 @@ Partial Class frmMain
         'lblHead
         '
         Me.lblHead.AutoSize = True
-        Me.lblHead.Location = New System.Drawing.Point(28, 457)
-        Me.lblHead.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblHead.Location = New System.Drawing.Point(9, 457)
+        Me.lblHead.Margin = New System.Windows.Forms.Padding(0)
         Me.lblHead.Name = "lblHead"
         Me.lblHead.Size = New System.Drawing.Size(45, 16)
         Me.lblHead.TabIndex = 36
@@ -477,12 +482,13 @@ Partial Class frmMain
         '
         'txtbxHead
         '
-        Me.txtbxHead.Location = New System.Drawing.Point(81, 454)
-        Me.txtbxHead.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtbxHead.Location = New System.Drawing.Point(54, 454)
+        Me.txtbxHead.Margin = New System.Windows.Forms.Padding(0)
         Me.txtbxHead.Name = "txtbxHead"
         Me.txtbxHead.ReadOnly = True
-        Me.txtbxHead.Size = New System.Drawing.Size(36, 22)
+        Me.txtbxHead.Size = New System.Drawing.Size(22, 22)
         Me.txtbxHead.TabIndex = 37
+        Me.txtbxHead.Text = "00"
         '
         'lblFHName
         '
@@ -546,40 +552,40 @@ Partial Class frmMain
         '
         'txtbxRicePrice
         '
-        Me.txtbxRicePrice.Location = New System.Drawing.Point(242, 454)
-        Me.txtbxRicePrice.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtbxRicePrice.Location = New System.Drawing.Point(180, 454)
+        Me.txtbxRicePrice.Margin = New System.Windows.Forms.Padding(0)
         Me.txtbxRicePrice.Name = "txtbxRicePrice"
         Me.txtbxRicePrice.ReadOnly = True
-        Me.txtbxRicePrice.Size = New System.Drawing.Size(61, 22)
+        Me.txtbxRicePrice.Size = New System.Drawing.Size(48, 22)
         Me.txtbxRicePrice.TabIndex = 48
-        Me.txtbxRicePrice.Text = "Price"
+        Me.txtbxRicePrice.Text = "₹000.00"
         '
         'txtbxWhtPrice
         '
-        Me.txtbxWhtPrice.Location = New System.Drawing.Point(438, 454)
-        Me.txtbxWhtPrice.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtbxWhtPrice.Location = New System.Drawing.Point(343, 454)
+        Me.txtbxWhtPrice.Margin = New System.Windows.Forms.Padding(0)
         Me.txtbxWhtPrice.Name = "txtbxWhtPrice"
         Me.txtbxWhtPrice.ReadOnly = True
-        Me.txtbxWhtPrice.Size = New System.Drawing.Size(61, 22)
+        Me.txtbxWhtPrice.Size = New System.Drawing.Size(48, 22)
         Me.txtbxWhtPrice.TabIndex = 49
-        Me.txtbxWhtPrice.Text = "Price"
+        Me.txtbxWhtPrice.Text = "₹00.00"
         '
         'txtbxSugarPrice
         '
-        Me.txtbxSugarPrice.Location = New System.Drawing.Point(810, 454)
-        Me.txtbxSugarPrice.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtbxSugarPrice.Location = New System.Drawing.Point(650, 454)
+        Me.txtbxSugarPrice.Margin = New System.Windows.Forms.Padding(0)
         Me.txtbxSugarPrice.Name = "txtbxSugarPrice"
         Me.txtbxSugarPrice.ReadOnly = True
-        Me.txtbxSugarPrice.Size = New System.Drawing.Size(61, 22)
+        Me.txtbxSugarPrice.Size = New System.Drawing.Size(48, 22)
         Me.txtbxSugarPrice.TabIndex = 50
-        Me.txtbxSugarPrice.Text = "Price"
+        Me.txtbxSugarPrice.Text = "₹00.00"
         '
         'lblTotal
         '
         Me.lblTotal.AutoSize = True
         Me.lblTotal.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblTotal.Location = New System.Drawing.Point(879, 457)
-        Me.lblTotal.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblTotal.Location = New System.Drawing.Point(887, 457)
+        Me.lblTotal.Margin = New System.Windows.Forms.Padding(4, 0, 0, 0)
         Me.lblTotal.Name = "lblTotal"
         Me.lblTotal.Size = New System.Drawing.Size(48, 16)
         Me.lblTotal.TabIndex = 51
@@ -589,38 +595,38 @@ Partial Class frmMain
         '
         Me.txtbxTotal.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtbxTotal.Location = New System.Drawing.Point(935, 454)
-        Me.txtbxTotal.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtbxTotal.Margin = New System.Windows.Forms.Padding(0)
         Me.txtbxTotal.Name = "txtbxTotal"
         Me.txtbxTotal.ReadOnly = True
-        Me.txtbxTotal.Size = New System.Drawing.Size(60, 22)
+        Me.txtbxTotal.Size = New System.Drawing.Size(61, 22)
         Me.txtbxTotal.TabIndex = 52
-        Me.txtbxTotal.Text = "Price"
+        Me.txtbxTotal.Text = "₹000.00"
         '
         'txtbxAttaPrice
         '
-        Me.txtbxAttaPrice.Location = New System.Drawing.Point(618, 454)
-        Me.txtbxAttaPrice.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtbxAttaPrice.Location = New System.Drawing.Point(490, 454)
+        Me.txtbxAttaPrice.Margin = New System.Windows.Forms.Padding(0)
         Me.txtbxAttaPrice.Name = "txtbxAttaPrice"
         Me.txtbxAttaPrice.ReadOnly = True
-        Me.txtbxAttaPrice.Size = New System.Drawing.Size(61, 22)
+        Me.txtbxAttaPrice.Size = New System.Drawing.Size(48, 22)
         Me.txtbxAttaPrice.TabIndex = 56
-        Me.txtbxAttaPrice.Text = "Price"
+        Me.txtbxAttaPrice.Text = "₹00.00"
         '
         'txtbxAttaQty
         '
-        Me.txtbxAttaQty.Location = New System.Drawing.Point(549, 454)
-        Me.txtbxAttaQty.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtbxAttaQty.Location = New System.Drawing.Point(429, 454)
+        Me.txtbxAttaQty.Margin = New System.Windows.Forms.Padding(0)
         Me.txtbxAttaQty.Name = "txtbxAttaQty"
         Me.txtbxAttaQty.ReadOnly = True
         Me.txtbxAttaQty.Size = New System.Drawing.Size(61, 22)
         Me.txtbxAttaQty.TabIndex = 55
-        Me.txtbxAttaQty.Text = "Quantity"
+        Me.txtbxAttaQty.Text = "00.000KG"
         '
         'lblAtta
         '
         Me.lblAtta.AutoSize = True
-        Me.lblAtta.Location = New System.Drawing.Point(507, 457)
-        Me.lblAtta.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblAtta.Location = New System.Drawing.Point(395, 457)
+        Me.lblAtta.Margin = New System.Windows.Forms.Padding(4, 0, 0, 0)
         Me.lblAtta.Name = "lblAtta"
         Me.lblAtta.Size = New System.Drawing.Size(34, 16)
         Me.lblAtta.TabIndex = 54
@@ -660,12 +666,45 @@ Partial Class frmMain
         Me.txtbxCashMemoNo.Size = New System.Drawing.Size(132, 22)
         Me.txtbxCashMemoNo.TabIndex = 59
         '
+        'txtbxKOilPrice
+        '
+        Me.txtbxKOilPrice.Location = New System.Drawing.Point(804, 454)
+        Me.txtbxKOilPrice.Margin = New System.Windows.Forms.Padding(0)
+        Me.txtbxKOilPrice.Name = "txtbxKOilPrice"
+        Me.txtbxKOilPrice.ReadOnly = True
+        Me.txtbxKOilPrice.Size = New System.Drawing.Size(48, 22)
+        Me.txtbxKOilPrice.TabIndex = 62
+        Me.txtbxKOilPrice.Text = "₹00.00"
+        '
+        'txtbxKOil
+        '
+        Me.txtbxKOil.Location = New System.Drawing.Point(743, 454)
+        Me.txtbxKOil.Margin = New System.Windows.Forms.Padding(0)
+        Me.txtbxKOil.Name = "txtbxKOil"
+        Me.txtbxKOil.ReadOnly = True
+        Me.txtbxKOil.Size = New System.Drawing.Size(61, 22)
+        Me.txtbxKOil.TabIndex = 61
+        Me.txtbxKOil.Text = "00.000KG"
+        '
+        'lblKOil
+        '
+        Me.lblKOil.AutoSize = True
+        Me.lblKOil.Location = New System.Drawing.Point(702, 457)
+        Me.lblKOil.Margin = New System.Windows.Forms.Padding(4, 0, 0, 0)
+        Me.lblKOil.Name = "lblKOil"
+        Me.lblKOil.Size = New System.Drawing.Size(41, 16)
+        Me.lblKOil.TabIndex = 60
+        Me.lblKOil.Text = "K. Oil:"
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(1008, 522)
+        Me.Controls.Add(Me.txtbxKOilPrice)
+        Me.Controls.Add(Me.txtbxKOil)
+        Me.Controls.Add(Me.lblKOil)
         Me.Controls.Add(Me.txtbxCashMemoNo)
         Me.Controls.Add(Me.lblCashMemoNo)
         Me.Controls.Add(Me.lblSystemDateTime)
@@ -788,4 +827,7 @@ Partial Class frmMain
     Friend WithEvents ToolStripSeparator3 As ToolStripSeparator
     Friend WithEvents UpdateDatabaseToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator2 As ToolStripSeparator
+    Friend WithEvents txtbxKOilPrice As TextBox
+    Friend WithEvents txtbxKOil As TextBox
+    Friend WithEvents lblKOil As Label
 End Class

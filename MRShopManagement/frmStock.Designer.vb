@@ -39,6 +39,9 @@ Partial Class frmStock
         Me.txtbxAtta = New System.Windows.Forms.TextBox()
         Me.lblAtta = New System.Windows.Forms.Label()
         Me.bttnReset = New System.Windows.Forms.Button()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.txtbxKOil = New System.Windows.Forms.TextBox()
+        Me.lblKOil = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'lblCategory
@@ -204,11 +207,42 @@ Partial Class frmStock
         Me.bttnReset.Text = "Reset"
         Me.bttnReset.UseVisualStyleBackColor = True
         '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Location = New System.Drawing.Point(331, 228)
+        Me.Label4.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(25, 18)
+        Me.Label4.TabIndex = 19
+        Me.Label4.Text = "Ltr"
+        '
+        'txtbxKOil
+        '
+        Me.txtbxKOil.Location = New System.Drawing.Point(172, 223)
+        Me.txtbxKOil.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtbxKOil.Name = "txtbxKOil"
+        Me.txtbxKOil.Size = New System.Drawing.Size(148, 24)
+        Me.txtbxKOil.TabIndex = 18
+        '
+        'lblKOil
+        '
+        Me.lblKOil.AutoSize = True
+        Me.lblKOil.Location = New System.Drawing.Point(103, 228)
+        Me.lblKOil.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblKOil.Name = "lblKOil"
+        Me.lblKOil.Size = New System.Drawing.Size(48, 18)
+        Me.lblKOil.TabIndex = 17
+        Me.lblKOil.Text = "K. Oil:"
+        '
         'frmStock
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 18.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(426, 361)
+        Me.Controls.Add(Me.Label4)
+        Me.Controls.Add(Me.txtbxKOil)
+        Me.Controls.Add(Me.lblKOil)
         Me.Controls.Add(Me.bttnReset)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.txtbxAtta)
@@ -253,4 +287,7 @@ Partial Class frmStock
     Friend WithEvents txtbxAtta As TextBox
     Friend WithEvents lblAtta As Label
     Friend WithEvents bttnReset As Button
+    Friend WithEvents Label4 As Label
+    Friend WithEvents txtbxKOil As TextBox
+    Friend WithEvents lblKOil As Label
 End Class

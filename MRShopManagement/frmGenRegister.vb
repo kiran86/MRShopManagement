@@ -95,16 +95,19 @@ Public Class frmGenRegister
         Dim totalWhetPrice As Double = 0.0
         Dim totalAttaPrice As Double = 0.0
         Dim totalSugrPrice As Double = 0.0
+        Dim totalKOilPrice As Double = 0.0
 
         Dim riceScale As Double
         Dim whetScale As Double
         Dim attaScale As Double
         Dim sugrScale As Double
+        Dim koilScale As Double
 
         Dim riceUnit As String
         Dim whetUnit As String
         Dim attaUnit As String
         Dim sugrUnit As String
+        Dim koilUnit As String
 
         datagridRegister.Rows.Clear()
         datagridRegister.Columns.Clear()
@@ -125,6 +128,7 @@ Public Class frmGenRegister
                     .Columns.Add("whtQty", "Wheat")
                     .Columns.Add("attaQty", "Atta")
                     .Columns.Add("sugarQty", "Sugar")
+                    .Columns.Add("koilQty", "K. Oil")
                 End With
         End Select
 
@@ -158,10 +162,13 @@ Public Class frmGenRegister
                         Case 4
                             sugrScale = dr.GetDouble(2)
                             sugrUnit = dr.GetString(3)
+                        Case 5
+                            koilScale = dr.GetDouble(2)
+                            koilUnit = dr.GetString(3)
                     End Select
                 End While
             End If
-            Console.WriteLine(endDate.ToLongDateString)
+            'Console.WriteLine(endDate.ToLongDateString)
             delvDate = startDate
             While delvDate <> endDate.AddDays(1)
                 totalHead = 0
@@ -170,9 +177,10 @@ Public Class frmGenRegister
                 totalWhetPrice = 0
                 totalAttaPrice = 0
                 totalSugrPrice = 0
+                totalKOilPrice = 0
                 'sql = "SELECT RCNo, CashMemoNo FROM Delivery WHERE Category = '" + Category + "' AND Delivery BETWEEN #" + DateTime.ParseExact(delvDate.ToShortDateString & " 00:00:01", "dd/MM/yyyy HH:mm:ss", Nothing) + "# AND #" + DateTime.ParseExact(delvDate.ToShortDateString & " 23:59:59", "dd/MM/yyyy HH:mm:ss", Nothing) + "# ORDER BY CashMemoNo ASC"
                 sql = "SELECT RCNo, CashMemoNo FROM Delivery WHERE Category = '" + Category + "' AND Delivery BETWEEN FORMAT(#" + DateTime.ParseExact(delvDate.ToShortDateString & " 00:00:01", "dd/MM/yyyy HH:mm:ss", Nothing) + "#, 'mm/dd/yyyy hh:nn:ss am/pm') AND FORMAT(#" + DateTime.ParseExact(delvDate.ToShortDateString & " 23:59:59", "dd/MM/yyyy HH:mm:ss", Nothing) + "#, 'mm/dd/yyyy hh:nn:ss am/pm') ORDER BY CashMemoNo ASC"
-                Console.WriteLine(sql)
+                'Console.WriteLine(sql)
                 cmd = New OleDbCommand(sql, connection)
                 dr = cmd.ExecuteReader
                 If dr.HasRows Then
@@ -209,6 +217,7 @@ Public Class frmGenRegister
                                 .Cells(7).Value = Format(whetScale, "###0.000")
                                 .Cells(8).Value = Format(attaScale, "###0.000")
                                 .Cells(9).Value = Format(sugrScale, "###0.000")
+                                .Cells(10).Value = Format(koilScale, "###0.000")
                             Else
                                 If riceUnit = "Head" Then
                                     .Cells(6).Value = Format(riceScale, "###0.000")
@@ -221,6 +230,9 @@ Public Class frmGenRegister
                                 End If
                                 If sugrUnit = "Head" Then
                                     .Cells(9).Value = Format(sugrScale, "###0.000")
+                                End If
+                                If koilUnit = "Head" Then
+                                    .Cells(10).Value = Format(koilScale, "###0.000")
                                 End If
                             End If
                         End With
@@ -249,12 +261,16 @@ Public Class frmGenRegister
                                 If Not r.Cells(9).Value = Nothing Then
                                     totalSugrPrice = totalSugrPrice + Double.Parse(r.Cells(9).Value)
                                 End If
+                                If Not r.Cells(10).Value = Nothing Then
+                                    totalKOilPrice = totalKOilPrice + Double.Parse(r.Cells(10).Value)
+                                End If
                             End If
                         Next
                         .Cells(6).Value = Format(totalRicePrice, "###0.000")
                         .Cells(7).Value = Format(totalWhetPrice, "###0.000")
                         .Cells(8).Value = Format(totalAttaPrice, "###0.000")
                         .Cells(9).Value = Format(totalSugrPrice, "###0.000")
+                        .Cells(10).Value = Format(totalKOilPrice, "###0.000")
                     End With
                     Dim style As DataGridViewCellStyle = New DataGridViewCellStyle
                     style.Font = New Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold)

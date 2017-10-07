@@ -42,6 +42,10 @@ Partial Class frmAllotment
         Me.cmboxUnitWheat = New System.Windows.Forms.ComboBox()
         Me.cmboxUnitAtta = New System.Windows.Forms.ComboBox()
         Me.cmboxUnitSugar = New System.Windows.Forms.ComboBox()
+        Me.cmboxUnitKoil = New System.Windows.Forms.ComboBox()
+        Me.lblKOilUnit = New System.Windows.Forms.Label()
+        Me.txtbxKOil = New System.Windows.Forms.TextBox()
+        Me.lblKOil = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'lblCategory
@@ -233,11 +237,52 @@ Partial Class frmAllotment
         Me.cmboxUnitSugar.Size = New System.Drawing.Size(121, 26)
         Me.cmboxUnitSugar.TabIndex = 19
         '
+        'cmboxUnitKoil
+        '
+        Me.cmboxUnitKoil.FormattingEnabled = True
+        Me.cmboxUnitKoil.Items.AddRange(New Object() {"Head", "Family"})
+        Me.cmboxUnitKoil.Location = New System.Drawing.Point(288, 223)
+        Me.cmboxUnitKoil.Name = "cmboxUnitKoil"
+        Me.cmboxUnitKoil.Size = New System.Drawing.Size(121, 26)
+        Me.cmboxUnitKoil.TabIndex = 23
+        '
+        'lblKOilUnit
+        '
+        Me.lblKOilUnit.AutoSize = True
+        Me.lblKOilUnit.Location = New System.Drawing.Point(243, 228)
+        Me.lblKOilUnit.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblKOilUnit.Name = "lblKOilUnit"
+        Me.lblKOilUnit.Size = New System.Drawing.Size(33, 18)
+        Me.lblKOilUnit.TabIndex = 22
+        Me.lblKOilUnit.Text = "Ltr /"
+        '
+        'txtbxKOil
+        '
+        Me.txtbxKOil.Location = New System.Drawing.Point(84, 223)
+        Me.txtbxKOil.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtbxKOil.Name = "txtbxKOil"
+        Me.txtbxKOil.Size = New System.Drawing.Size(148, 24)
+        Me.txtbxKOil.TabIndex = 21
+        '
+        'lblKOil
+        '
+        Me.lblKOil.AutoSize = True
+        Me.lblKOil.Location = New System.Drawing.Point(25, 226)
+        Me.lblKOil.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblKOil.Name = "lblKOil"
+        Me.lblKOil.Size = New System.Drawing.Size(44, 18)
+        Me.lblKOil.TabIndex = 20
+        Me.lblKOil.Text = "K. Oil"
+        '
         'frmAllotment
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 18.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(426, 361)
+        Me.Controls.Add(Me.cmboxUnitKoil)
+        Me.Controls.Add(Me.lblKOilUnit)
+        Me.Controls.Add(Me.txtbxKOil)
+        Me.Controls.Add(Me.lblKOil)
         Me.Controls.Add(Me.cmboxUnitSugar)
         Me.Controls.Add(Me.cmboxUnitAtta)
         Me.Controls.Add(Me.cmboxUnitWheat)
@@ -288,4 +333,8 @@ Partial Class frmAllotment
     Friend WithEvents cmboxUnitWheat As ComboBox
     Friend WithEvents cmboxUnitAtta As ComboBox
     Friend WithEvents cmboxUnitSugar As ComboBox
+    Friend WithEvents cmboxUnitKoil As ComboBox
+    Friend WithEvents lblKOilUnit As Label
+    Friend WithEvents txtbxKOil As TextBox
+    Friend WithEvents lblKOil As Label
 End Class

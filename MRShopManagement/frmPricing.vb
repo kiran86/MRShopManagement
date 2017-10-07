@@ -13,11 +13,12 @@ Public Class frmPricing
         dataFile = "|DataDirectory|\mrshop.mdb"
         connString = provider & dataFile
         connection.ConnectionString = connString
-        ReDim TextBoxArray(4)
+        ReDim TextBoxArray(5)
         TextBoxArray(0) = txtbxRice
         TextBoxArray(1) = txtbxWheat
         TextBoxArray(2) = txtbxAtta
         TextBoxArray(3) = txtbxSugar
+        TextBoxArray(4) = txtbxKOil
     End Sub
 
     Private Sub frmPricing_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
@@ -49,6 +50,7 @@ Public Class frmPricing
             txtbxWheat.Text = ""
             txtbxAtta.Text = ""
             txtbxSugar.Text = ""
+            txtbxKOil.Text = ""
             MsgBox("No matching data found", MsgBoxStyle.OkOnly, "Error")
         Else
             While dr.Read
@@ -64,6 +66,9 @@ Public Class frmPricing
                 If Integer.Parse(dr("ProductID").ToString) = 4 Then
                     txtbxSugar.Text = String.Format("{0:0.00}", dr("Price"))
                 End If
+                If Integer.Parse(dr("ProductID").ToString) = 5 Then
+                    txtbxKOil.Text = String.Format("{0:0.00}", dr("Price"))
+                End If
             End While
         End If
         connection.Close()
@@ -74,14 +79,14 @@ Public Class frmPricing
         Dim sql As String
         Dim cmd As OleDbCommand
         Dim i As Integer
-        For i = 0 To 3
+        For i = 0 To 4
             sql = "UPDATE Pricing SET Price = " + TextBoxArray(i).Text + " WHERE Category = '" + category + "' AND ProductID = " + (i + 1).ToString
             cmd = New OleDbCommand(sql, connection)
             If cmd.ExecuteNonQuery() < 0 Then
                 Exit For
             End If
         Next
-        If i <> 4 Then
+        If i <> 5 Then
             MessageBox.Show("Some Error Occurred!")
         Else
             MessageBox.Show("Prices Updated!")

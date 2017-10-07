@@ -17,7 +17,10 @@ Public Class frmMain
     Dim totalAttaPrice = 0.0
     Dim totalSugar = 0.0
     Dim totalSugarPrice = 0.0
+    Dim totalKOil = 0.0
+    Dim totalKOilPrice = 0.0
     Dim totalPrice = 0.0
+
 
     Private Sub frmMain_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Dim DeliveryDate As String
@@ -71,6 +74,8 @@ Public Class frmMain
         totalAttaPrice = 0.0
         totalSugar = 0.0
         totalSugarPrice = 0.0
+        totalKOil = 0.0
+        totalKoilPrice = 0.0
         totalPrice = 0.0
         If Not txtbxCardNo.Text.Equals("") And IsNumeric(txtbxCardNo.Text) Then
             LoadData()
@@ -163,6 +168,8 @@ Public Class frmMain
                     .Columns.Add("Price", 80, HorizontalAlignment.Left)
                     .Columns.Add("Sugar", 80, HorizontalAlignment.Left)
                     .Columns.Add("Price", 80, HorizontalAlignment.Left)
+                    .Columns.Add("K. Oil", 80, HorizontalAlignment.Left)
+                    .Columns.Add("Price", 80, HorizontalAlignment.Left)
                 End With
 
                 While dr.Read
@@ -234,7 +241,11 @@ Public Class frmMain
         Dim cmd As OleDbCommand
         connection.Open()
         'If Not category.Equals("AAY") Or row = 1 Then
-        For i As Integer = 1 To 4
+        For i As Integer = 1 To 5
+            Dim massUnit As String = " KG"
+            If i = 5 Then
+                massUnit = " Ltr"
+            End If
             sql = "SELECT Scale, Unit FROM Allotment WHERE ProductID = " & i & " And Category = '" & category & "'"
             cmd = New OleDbCommand(sql, connection)
             dr = cmd.ExecuteReader
@@ -247,7 +258,7 @@ Public Class frmMain
                 unit = ""
             End If
             If Not unit.Equals("Family") Or row = 1 Then
-                lstvwRcNos.Items(row - 1).SubItems.Add(Format(qty, "###0.000") & " KG")
+                lstvwRcNos.Items(row - 1).SubItems.Add(Format(qty, "###0.000") & massUnit)
 
                 sql = "SELECT Price FROM Pricing WHERE ProductID = " & i & " AND Category = '" & category & "'"
                 cmd = New OleDbCommand(sql, connection)
@@ -273,8 +284,11 @@ Public Class frmMain
                     Case 4
                         totalSugar = totalSugar + qty
                         totalSugarPrice = totalSugarPrice + (qty * price)
+                    Case 5
+                        totalKOil = totalKOil + qty
+                        totalKOilPrice = totalKOilPrice + (qty * price)
                 End Select
-                totalPrice = totalRicePrice + totalWheatPrice + totalAttaPrice + totalSugarPrice
+                totalPrice = totalRicePrice + totalWheatPrice + totalAttaPrice + totalSugarPrice + totalKOilPrice
             Else
                 lstvwRcNos.Items(row - 1).SubItems.Add("--")
                 lstvwRcNos.Items(row - 1).SubItems.Add("--")
@@ -346,7 +360,18 @@ Public Class frmMain
             End Try
             totalSugar = totalSugar - qty
             totalSugarPrice = totalSugarPrice - (price * qty)
-            totalPrice = totalRicePrice + totalWheatPrice + totalAttaPrice + totalSugarPrice
+
+            Try
+                qty = Double.Parse(Split(lstvwRcNos.SelectedItems.Item(0).SubItems(11).Text)(0))
+                price = Double.Parse(Split(lstvwRcNos.SelectedItems.Item(0).SubItems(12).Text)(1))
+            Catch ex As ArgumentOutOfRangeException
+                qty = 0
+                price = 0
+            End Try
+            totalKOil = totalKOil - qty
+            totalKOilPrice = totalKOilPrice - (price * qty)
+
+            totalPrice = totalRicePrice + totalWheatPrice + totalAttaPrice + totalSugarPrice + totalKOilPrice
 
             lstvwRcNos.SelectedItems.Item(0).Remove()
             If Not txtbxCategory.Text.Equals("AAY") Then
@@ -397,6 +422,8 @@ Public Class frmMain
             totalSugar = 0.0
             totalSugarPrice = 0.0
             totalPrice = 0.0
+            totalKOil = 0.0
+            totalKOilPrice = 0.0
             If Not txtbxCategory.Text.Equals("AAY") Then
                 totalHead = Integer.Parse(lstvwRcNos.Items.Count.ToString)
             End If
@@ -416,14 +443,16 @@ Public Class frmMain
         Else
             txtbxHead.Text = 1
         End If
-        txtbxRiceQty.Text = Format(totalRice, "###0.00") & "KG"
+        txtbxRiceQty.Text = Format(totalRice, "###0.000") & "KG"
         txtbxRicePrice.Text = "₹" & Format(totalRicePrice, "##0.00")
-        txtbxWhtQty.Text = Format(totalWheat, "###0.00") & "KG"
+        txtbxWhtQty.Text = Format(totalWheat, "###0.000") & "KG"
         txtbxWhtPrice.Text = "₹" & Format(totalWheatPrice, "##0.00")
-        txtbxAttaQty.Text = Format(totalAtta, "###0.00") & "KG"
+        txtbxAttaQty.Text = Format(totalAtta, "###0.000") & "KG"
         txtbxAttaPrice.Text = "₹" & Format(totalAttaPrice, "##0.00")
-        txtbxSugar.Text = Format(totalSugar, "###0.00") & "KG"
+        txtbxSugar.Text = Format(totalSugar, "###0.000") & "KG"
         txtbxSugarPrice.Text = "₹" & Format(totalSugarPrice, "##0.00")
+        txtbxKOil.Text = Format(totalKOil, "###0.00") & "Ltr"
+        txtbxKOilPrice.Text = "₹" & Format(totalKOilPrice, "##0.00")
         txtbxTotal.Text = "₹" & Format(totalPrice, "##0.00")
     End Sub
 
