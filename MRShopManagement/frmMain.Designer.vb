@@ -91,6 +91,7 @@ Partial Class frmMain
         Me.txtbxKOilPrice = New System.Windows.Forms.TextBox()
         Me.txtbxKOil = New System.Windows.Forms.TextBox()
         Me.lblKOil = New System.Windows.Forms.Label()
+        Me.UpdateAllotmentToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuMRShopManagement.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -142,7 +143,7 @@ Partial Class frmMain
         '
         'FoodSupplyToolStripMenuItem
         '
-        Me.FoodSupplyToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.StockToolStripMenuItem, Me.AllotmentToolStripMenuItem, Me.PricingToolStripMenuItem})
+        Me.FoodSupplyToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.StockToolStripMenuItem, Me.AllotmentToolStripMenuItem, Me.PricingToolStripMenuItem, Me.UpdateAllotmentToolStripMenuItem})
         Me.FoodSupplyToolStripMenuItem.Name = "FoodSupplyToolStripMenuItem"
         Me.FoodSupplyToolStripMenuItem.Size = New System.Drawing.Size(85, 20)
         Me.FoodSupplyToolStripMenuItem.Text = "Food Supply"
@@ -150,19 +151,19 @@ Partial Class frmMain
         'StockToolStripMenuItem
         '
         Me.StockToolStripMenuItem.Name = "StockToolStripMenuItem"
-        Me.StockToolStripMenuItem.Size = New System.Drawing.Size(127, 22)
+        Me.StockToolStripMenuItem.Size = New System.Drawing.Size(168, 22)
         Me.StockToolStripMenuItem.Text = "Stock"
         '
         'AllotmentToolStripMenuItem
         '
         Me.AllotmentToolStripMenuItem.Name = "AllotmentToolStripMenuItem"
-        Me.AllotmentToolStripMenuItem.Size = New System.Drawing.Size(127, 22)
+        Me.AllotmentToolStripMenuItem.Size = New System.Drawing.Size(168, 22)
         Me.AllotmentToolStripMenuItem.Text = "Allotment"
         '
         'PricingToolStripMenuItem
         '
         Me.PricingToolStripMenuItem.Name = "PricingToolStripMenuItem"
-        Me.PricingToolStripMenuItem.Size = New System.Drawing.Size(127, 22)
+        Me.PricingToolStripMenuItem.Size = New System.Drawing.Size(168, 22)
         Me.PricingToolStripMenuItem.Text = "Pricing"
         '
         'menuRegister
@@ -696,6 +697,12 @@ Partial Class frmMain
         Me.lblKOil.TabIndex = 60
         Me.lblKOil.Text = "K. Oil:"
         '
+        'UpdateAllotmentToolStripMenuItem
+        '
+        Me.UpdateAllotmentToolStripMenuItem.Name = "UpdateAllotmentToolStripMenuItem"
+        Me.UpdateAllotmentToolStripMenuItem.Size = New System.Drawing.Size(168, 22)
+        Me.UpdateAllotmentToolStripMenuItem.Text = "Update Allotment"
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -830,4 +837,5 @@ Partial Class frmMain
     Friend WithEvents txtbxKOilPrice As TextBox
     Friend WithEvents txtbxKOil As TextBox
     Friend WithEvents lblKOil As Label
+    Friend WithEvents UpdateAllotmentToolStripMenuItem As ToolStripMenuItem
 End Class

@@ -1,4 +1,5 @@
 ﻿Imports System.Data.OleDb
+Imports System.Globalization
 
 Public Class frmGenRegister
     Dim provider As String
@@ -168,7 +169,11 @@ Public Class frmGenRegister
                     End Select
                 End While
             End If
-            'Console.WriteLine(endDate.ToLongDateString)
+            Console.WriteLine(startDate.ToOADate)
+
+            Dim myCulture As CultureInfo = CultureInfo.CurrentCulture
+            Console.WriteLine(DateTime.ParseExact(startDate.ToShortDateString, "d", myCulture))
+
             delvDate = startDate
             While delvDate <> endDate.AddDays(1)
                 totalHead = 0
@@ -178,8 +183,9 @@ Public Class frmGenRegister
                 totalAttaPrice = 0
                 totalSugrPrice = 0
                 totalKOilPrice = 0
+
                 'sql = "SELECT RCNo, CashMemoNo FROM Delivery WHERE Category = '" + Category + "' AND Delivery BETWEEN #" + DateTime.ParseExact(delvDate.ToShortDateString & " 00:00:01", "dd/MM/yyyy HH:mm:ss", Nothing) + "# AND #" + DateTime.ParseExact(delvDate.ToShortDateString & " 23:59:59", "dd/MM/yyyy HH:mm:ss", Nothing) + "# ORDER BY CashMemoNo ASC"
-                sql = "SELECT RCNo, CashMemoNo FROM Delivery WHERE Category = '" + Category + "' AND Delivery BETWEEN FORMAT(#" + DateTime.ParseExact(delvDate.ToShortDateString & " 00:00:01", "dd/MM/yyyy HH:mm:ss", Nothing) + "#, 'mm/dd/yyyy hh:nn:ss am/pm') AND FORMAT(#" + DateTime.ParseExact(delvDate.ToShortDateString & " 23:59:59", "dd/MM/yyyy HH:mm:ss", Nothing) + "#, 'mm/dd/yyyy hh:nn:ss am/pm') ORDER BY CashMemoNo ASC"
+                sql = "SELECT RCNo, CashMemoNo FROM Delivery WHERE Category = '" + Category + "' AND Delivery BETWEEN FORMAT(#" + DateTime.ParseExact(delvDate.ToShortDateString & " 00:00:01", "dd/MM/yyyy HH:mm:ss", myCulture) + "#, 'mm/dd/yyyy hh:nn:ss am/pm') AND FORMAT(#" + DateTime.ParseExact(delvDate.ToShortDateString & " 23:59:59", "dd/MM/yyyy HH:mm:ss", myCulture) + "#, 'mm/dd/yyyy hh:nn:ss am/pm') ORDER BY CashMemoNo ASC"
                 'Console.WriteLine(sql)
                 cmd = New OleDbCommand(sql, connection)
                 dr = cmd.ExecuteReader

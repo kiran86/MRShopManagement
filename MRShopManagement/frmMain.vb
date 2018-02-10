@@ -575,4 +575,9 @@ Public Class frmMain
         Me.Enabled = False
         frmUpdateDB.Show()
     End Sub
+
+    Private Sub UpdateAllotmentToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles UpdateAllotmentToolStripMenuItem.Click
+        Me.Hide()
+        frmUpdateAllotment.Show()
+    End Sub
 End Class

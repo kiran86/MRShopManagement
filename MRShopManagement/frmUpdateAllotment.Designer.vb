@@ -58,6 +58,11 @@ Partial Class frmUpdateAllotment
         Me.rdobtnSPHH = New System.Windows.Forms.RadioButton()
         Me.rdobtnPHH = New System.Windows.Forms.RadioButton()
         Me.rdobtnAAY = New System.Windows.Forms.RadioButton()
+        Me.chkbxKOil = New System.Windows.Forms.CheckBox()
+        Me.txtbxKOilStock = New System.Windows.Forms.TextBox()
+        Me.txtbxKOilAllotment = New System.Windows.Forms.TextBox()
+        Me.txtbxKOilPricing = New System.Windows.Forms.TextBox()
+        Me.cmbxKOilUnit = New System.Windows.Forms.ComboBox()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.grpbxCategory.SuspendLayout()
         Me.SuspendLayout()
@@ -74,6 +79,11 @@ Partial Class frmUpdateAllotment
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.TableLayoutPanel1.Controls.Add(Me.cmbxKOilUnit, 4, 5)
+        Me.TableLayoutPanel1.Controls.Add(Me.txtbxKOilPricing, 3, 5)
+        Me.TableLayoutPanel1.Controls.Add(Me.txtbxKOilAllotment, 2, 5)
+        Me.TableLayoutPanel1.Controls.Add(Me.txtbxKOilStock, 1, 5)
+        Me.TableLayoutPanel1.Controls.Add(Me.chkbxKOil, 0, 5)
         Me.TableLayoutPanel1.Controls.Add(Me.lnklblClear, 6, 3)
         Me.TableLayoutPanel1.Controls.Add(Me.lblAction, 6, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.cmbxSugarUnit, 5, 4)
@@ -108,13 +118,14 @@ Partial Class frmUpdateAllotment
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 0)
         Me.TableLayoutPanel1.Margin = New System.Windows.Forms.Padding(0)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
-        Me.TableLayoutPanel1.RowCount = 5
+        Me.TableLayoutPanel1.RowCount = 6
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30.0!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(679, 175)
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30.0!))
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(679, 199)
         Me.TableLayoutPanel1.TabIndex = 0
         '
         'lnklblClear
@@ -125,7 +136,7 @@ Partial Class frmUpdateAllotment
         Me.lnklblClear.Margin = New System.Windows.Forms.Padding(0)
         Me.lnklblClear.Name = "lnklblClear"
         Me.TableLayoutPanel1.SetRowSpan(Me.lnklblClear, 2)
-        Me.lnklblClear.Size = New System.Drawing.Size(64, 70)
+        Me.lnklblClear.Size = New System.Drawing.Size(64, 63)
         Me.lnklblClear.TabIndex = 41
         Me.lnklblClear.TabStop = True
         Me.lnklblClear.Text = "Clear"
@@ -187,7 +198,7 @@ Partial Class frmUpdateAllotment
         Me.chkbxSugar.Dock = System.Windows.Forms.DockStyle.Fill
         Me.chkbxSugar.Location = New System.Drawing.Point(87, 138)
         Me.chkbxSugar.Name = "chkbxSugar"
-        Me.chkbxSugar.Size = New System.Drawing.Size(66, 31)
+        Me.chkbxSugar.Size = New System.Drawing.Size(66, 24)
         Me.chkbxSugar.TabIndex = 34
         Me.chkbxSugar.Text = "Sugar"
         Me.chkbxSugar.UseVisualStyleBackColor = True
@@ -443,8 +454,8 @@ Partial Class frmUpdateAllotment
         Me.grpbxCategory.Margin = New System.Windows.Forms.Padding(0)
         Me.grpbxCategory.Name = "grpbxCategory"
         Me.grpbxCategory.Padding = New System.Windows.Forms.Padding(0)
-        Me.TableLayoutPanel1.SetRowSpan(Me.grpbxCategory, 4)
-        Me.grpbxCategory.Size = New System.Drawing.Size(78, 136)
+        Me.TableLayoutPanel1.SetRowSpan(Me.grpbxCategory, 5)
+        Me.grpbxCategory.Size = New System.Drawing.Size(78, 162)
         Me.grpbxCategory.TabIndex = 42
         Me.grpbxCategory.TabStop = False
         '
@@ -503,12 +514,61 @@ Partial Class frmUpdateAllotment
         Me.rdobtnAAY.Text = "AAY"
         Me.rdobtnAAY.UseVisualStyleBackColor = True
         '
+        'chkbxKOil
+        '
+        Me.chkbxKOil.AutoSize = True
+        Me.chkbxKOil.Checked = True
+        Me.chkbxKOil.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.chkbxKOil.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.chkbxKOil.Location = New System.Drawing.Point(87, 171)
+        Me.chkbxKOil.Name = "chkbxKOil"
+        Me.chkbxKOil.Size = New System.Drawing.Size(66, 24)
+        Me.chkbxKOil.TabIndex = 43
+        Me.chkbxKOil.Text = "K. Oil"
+        Me.chkbxKOil.UseVisualStyleBackColor = True
+        '
+        'txtbxKOilStock
+        '
+        Me.txtbxKOilStock.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.txtbxKOilStock.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtbxKOilStock.Location = New System.Drawing.Point(162, 171)
+        Me.txtbxKOilStock.Name = "txtbxKOilStock"
+        Me.txtbxKOilStock.Size = New System.Drawing.Size(100, 24)
+        Me.txtbxKOilStock.TabIndex = 44
+        '
+        'txtbxKOilAllotment
+        '
+        Me.txtbxKOilAllotment.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.txtbxKOilAllotment.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtbxKOilAllotment.Location = New System.Drawing.Point(271, 171)
+        Me.txtbxKOilAllotment.Name = "txtbxKOilAllotment"
+        Me.txtbxKOilAllotment.Size = New System.Drawing.Size(100, 24)
+        Me.txtbxKOilAllotment.TabIndex = 45
+        '
+        'txtbxKOilPricing
+        '
+        Me.txtbxKOilPricing.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.txtbxKOilPricing.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtbxKOilPricing.Location = New System.Drawing.Point(380, 171)
+        Me.txtbxKOilPricing.Name = "txtbxKOilPricing"
+        Me.txtbxKOilPricing.Size = New System.Drawing.Size(100, 24)
+        Me.txtbxKOilPricing.TabIndex = 46
+        '
+        'cmbxKOilUnit
+        '
+        Me.cmbxKOilUnit.FormattingEnabled = True
+        Me.cmbxKOilUnit.Items.AddRange(New Object() {"Head", "Family"})
+        Me.cmbxKOilUnit.Location = New System.Drawing.Point(489, 171)
+        Me.cmbxKOilUnit.Name = "cmbxKOilUnit"
+        Me.cmbxKOilUnit.Size = New System.Drawing.Size(117, 24)
+        Me.cmbxKOilUnit.TabIndex = 47
+        '
         'frmUpdateAllotment
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
         Me.AutoSize = True
         Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ClientSize = New System.Drawing.Size(679, 175)
+        Me.ClientSize = New System.Drawing.Size(679, 199)
         Me.Controls.Add(Me.TableLayoutPanel1)
         Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Margin = New System.Windows.Forms.Padding(4)
@@ -560,4 +620,9 @@ Partial Class frmUpdateAllotment
     Friend WithEvents rdobtnSPHH As RadioButton
     Friend WithEvents rdobtnPHH As RadioButton
     Friend WithEvents rdobtnAAY As RadioButton
+    Friend WithEvents cmbxKOilUnit As ComboBox
+    Friend WithEvents txtbxKOilPricing As TextBox
+    Friend WithEvents txtbxKOilAllotment As TextBox
+    Friend WithEvents txtbxKOilStock As TextBox
+    Friend WithEvents chkbxKOil As CheckBox
 End Class
