@@ -19,7 +19,7 @@ Public Class frmUpdateAllotment
         frmMain.Show()
     End Sub
 
-    Private Sub TextBox_TextChanged(sender As Object, e As EventArgs) Handles txtbxRiceStock.TextChanged, txtbxWhtStock.TextChanged, txtbxAttaStock.TextChanged, txtbxWhtPricing.TextChanged, txtbxWhtAllotment.TextChanged, txtbxSugarStock.TextChanged, txtbxSugarPricing.TextChanged, txtbxSugarAllotment.TextChanged, txtbxRicePricing.TextChanged, txtbxRiceAllotment.TextChanged, txtbxAttaPricing.TextChanged, txtbxAttaAllotment.TextChanged, txtbxKOilStock.TextChanged, txtbxKOilPricing.TextChanged, txtbxKOilAllotment.TextChanged
+    Private Sub TextBox_Validating(sender As Object, e As EventArgs) Handles txtbxRiceStock.Validating, txtbxWhtStock.Validating, txtbxAttaStock.Validating, txtbxWhtPricing.Validating, txtbxWhtAllotment.Validating, txtbxSugarStock.Validating, txtbxSugarPricing.Validating, txtbxSugarAllotment.Validating, txtbxRicePricing.Validating, txtbxRiceAllotment.Validating, txtbxAttaPricing.Validating, txtbxAttaAllotment.Validating, txtbxKOilStock.Validating, txtbxKOilPricing.Validating, txtbxKOilAllotment.Validating
         Dim txtbxControl As TextBox = CType(sender, TextBox)
         If txtbxControl.Name.Contains("Pricing") Then
             txtbxControl.Text = String.Format("{0:n2}", Double.Parse(txtbxControl.Text))
@@ -93,7 +93,14 @@ Public Class frmUpdateAllotment
         End If
         txtbxName = txtbxName & table
         txtbxControl = Me.Controls.Find(txtbxName, True)(0)
-        txtbxControl.Text = dr.GetDouble(2)
+
+        If txtbxControl.Name.Contains("Pricing") Then
+            txtbxControl.Text = String.Format("{0:n2}", dr.GetDouble(2))
+        Else
+            txtbxControl.Text = String.Format("{0:n3}", dr.GetDouble(2))
+        End If
+
+        'txtbxControl.Text = dr.GetDouble(2)
         If table Is "Allotment" Then
             cmbxName = cmbxName & "Unit"
             cmbxControl = Me.Controls.Find(cmbxName, True)(0)
