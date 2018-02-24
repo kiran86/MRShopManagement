@@ -4,6 +4,7 @@ Public Class frmUpdateAllotment
     Dim provider As String
     Dim dataFile As String
     Dim connString As String
+    Dim category As String
     Public connection As OleDbConnection = New OleDbConnection
 
     Private Sub frmUpdateAllotment_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -30,7 +31,8 @@ Public Class frmUpdateAllotment
 
     Private Sub RadioButton_SelectionChange(sender As Object, e As EventArgs) Handles rdobtnAAY.CheckedChanged, rdobtnPHH.CheckedChanged, rdobtnSPHH.CheckedChanged, rdobtnRKSYI.CheckedChanged, rdobtnRKSYII.CheckedChanged
         Dim rdobtnCategory As RadioButton = CType(sender, RadioButton)
-        LoadAllotmentData(rdobtnCategory.Text)
+        category = rdobtnCategory.Text
+        LoadAllotmentData(category)
     End Sub
 
     Private Sub LoadAllotmentData(category As String)
@@ -87,9 +89,11 @@ Public Class frmUpdateAllotment
                 cmbxName = cmbxName & "KOil"
                 chkbxName = chkbxName & "KOil"
         End Select
-        If table IsNot "Stock" And dr.GetDouble(2) = 0.0 Then
+        If dr.GetDouble(2) = 0.0 Then
             chkbxControl = Me.Controls.Find(chkbxName, True)(0)
-            chkbxControl.Checked = False
+            If chkbxControl.Checked = True Then
+                chkbxControl.Checked = False
+            End If
         End If
         txtbxName = txtbxName & table
         txtbxControl = Me.Controls.Find(txtbxName, True)(0)
@@ -108,49 +112,94 @@ Public Class frmUpdateAllotment
         End If
     End Sub
 
-    Private Sub lnklblClear_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lnklblClear.LinkClicked
-        For Each control As Control In TableLayoutPanel1.Controls
-            If TypeOf control Is TextBox Then
-                control.Text = 0.0
-            ElseIf TypeOf control Is CheckBox Then
-                CType(control, CheckBox).Checked = False
-            ElseIf TypeOf control Is ComboBox Then
-                CType(control, ComboBox).SelectedIndex = 0
-            End If
-        Next
-    End Sub
-
     Private Sub lnklblUpdate_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lnklblUpdate.LinkClicked
-
+        UpdateAllotmentData(category)
     End Sub
 
     Private Sub UpdateAllotmentData(category As String)
         Dim sql As String
-        Dim updates As String
         Dim cmd As OleDbCommand
-        Dim dr As OleDbDataReader
 
-        Dim txtbxName As String = "txtbx"
+        Dim txtbxName As String
         Dim txtbxControl As TextBox
-        Dim cmbxName As String = "cmbx"
+        Dim cmbxName As String
         Dim cmbxControl As ComboBox
-        For productID As Integer = 1 To 4
-            For Each table As String In {"Stock", "Allotment", "Pricing"}
+
+        Dim count, check As Integer
+
+        count = 0
+        check = 0
+
+        For Each table As String In {"Stock", "Allotment", "Pricing"}
+
+            For productID As Integer = 1 To 5
+
                 sql = "UPDATE " & table & " SET "
+                txtbxName = "txtbx"
+                cmbxName = "cmbx"
+
+                Select Case productID
+                    Case 1
+                        If chkbxRice.Checked = False Then
+                            Continue For
+                        End If
+                        txtbxName = txtbxName & "Rice"
+                        cmbxName = cmbxName & "Rice"
+                    Case 2
+                        If chkbxWht.Checked = False Then
+                            Continue For
+                        End If
+                        txtbxName = txtbxName & "Wht"
+                        cmbxName = cmbxName & "Wht"
+                    Case 3
+                        If chkbxAtta.Checked = False Then
+                            Continue For
+                        End If
+                        txtbxName = txtbxName & "Atta"
+                        cmbxName = cmbxName & "Atta"
+                    Case 4
+                        If chkbxSugar.Checked = False Then
+                            Continue For
+                        End If
+                        txtbxName = txtbxName & "Sugar"
+                        cmbxName = cmbxName & "Sugar"
+                    Case 5
+                        If chkbxKOil.Checked = False Then
+                            Continue For
+                        End If
+                        txtbxName = txtbxName & "KOil"
+                        cmbxName = cmbxName & "KOil"
+                End Select
+
+                cmbxName = cmbxName & "Unit"
+                cmbxControl = Me.Controls.Find(cmbxName, True)(0)
+
                 Select Case table
                     Case "Stock"
                         txtbxName = txtbxName & table
-                        sql = sql & " Scale = "
+                        txtbxControl = Me.Controls.Find(txtbxName, True)(0)
+                        sql = sql & "Scale = " & txtbxControl.Text & " WHERE Category = '" & category & "' AND ProductID = " & productID
+                    Case "Allotment"
+                        txtbxName = txtbxName & table
+                        txtbxControl = Me.Controls.Find(txtbxName, True)(0)
+                        sql = sql & "Scale = " & txtbxControl.Text & ", Unit = '" & cmbxControl.SelectedItem & "' WHERE Category = '" & category & "' AND ProductID = " & productID
+                    Case "Pricing"
+                        txtbxName = txtbxName & table
+                        txtbxControl = Me.Controls.Find(txtbxName, True)(0)
+                        sql = sql & "Price = " & txtbxControl.Text & " WHERE Category = '" & category & "' AND ProductID = " & productID
                 End Select
-                sql = "UPDATE " & table & " WHERE Category = '" & category & "'"
+
+                count = count + 1
+
+                'Console.WriteLine(sql)
+
                 Try
                     connection.Open()
                     cmd = New OleDbCommand(sql, connection)
-                    dr = cmd.ExecuteReader
-                    If dr.HasRows Then
-                        While dr.Read
-                            UpdateControls(table, dr)
-                        End While
+                    If cmd.ExecuteNonQuery() < 0 Then
+                        Console.WriteLine("Error in: " & sql)
+                    Else
+                        check = check + 1
                     End If
                 Catch ex As Exception
                     Console.WriteLine(ex.StackTrace)
@@ -161,5 +210,14 @@ Public Class frmUpdateAllotment
                 End Try
             Next
         Next
+        If count = check Then
+            MsgBox("Allotment updated for the week.")
+        Else
+            MsgBox("Allotment update unseccessful. Please try again...")
+        End If
+    End Sub
+
+    Private Sub lnklblCancel_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lnklblCancel.LinkClicked
+        Me.Close()
     End Sub
 End Class

@@ -23,7 +23,12 @@ Partial Class frmUpdateAllotment
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
-        Me.lnklblClear = New System.Windows.Forms.LinkLabel()
+        Me.cmbxKOilUnit = New System.Windows.Forms.ComboBox()
+        Me.txtbxKOilPricing = New System.Windows.Forms.TextBox()
+        Me.txtbxKOilAllotment = New System.Windows.Forms.TextBox()
+        Me.txtbxKOilStock = New System.Windows.Forms.TextBox()
+        Me.chkbxKOil = New System.Windows.Forms.CheckBox()
+        Me.lnklblCancel = New System.Windows.Forms.LinkLabel()
         Me.lblAction = New System.Windows.Forms.Label()
         Me.cmbxSugarUnit = New System.Windows.Forms.ComboBox()
         Me.txtbxSugarPricing = New System.Windows.Forms.TextBox()
@@ -58,11 +63,6 @@ Partial Class frmUpdateAllotment
         Me.rdobtnSPHH = New System.Windows.Forms.RadioButton()
         Me.rdobtnPHH = New System.Windows.Forms.RadioButton()
         Me.rdobtnAAY = New System.Windows.Forms.RadioButton()
-        Me.chkbxKOil = New System.Windows.Forms.CheckBox()
-        Me.txtbxKOilStock = New System.Windows.Forms.TextBox()
-        Me.txtbxKOilAllotment = New System.Windows.Forms.TextBox()
-        Me.txtbxKOilPricing = New System.Windows.Forms.TextBox()
-        Me.cmbxKOilUnit = New System.Windows.Forms.ComboBox()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.grpbxCategory.SuspendLayout()
         Me.SuspendLayout()
@@ -84,7 +84,7 @@ Partial Class frmUpdateAllotment
         Me.TableLayoutPanel1.Controls.Add(Me.txtbxKOilAllotment, 2, 5)
         Me.TableLayoutPanel1.Controls.Add(Me.txtbxKOilStock, 1, 5)
         Me.TableLayoutPanel1.Controls.Add(Me.chkbxKOil, 0, 5)
-        Me.TableLayoutPanel1.Controls.Add(Me.lnklblClear, 6, 3)
+        Me.TableLayoutPanel1.Controls.Add(Me.lnklblCancel, 6, 3)
         Me.TableLayoutPanel1.Controls.Add(Me.lblAction, 6, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.cmbxSugarUnit, 5, 4)
         Me.TableLayoutPanel1.Controls.Add(Me.txtbxSugarPricing, 4, 4)
@@ -128,19 +128,68 @@ Partial Class frmUpdateAllotment
         Me.TableLayoutPanel1.Size = New System.Drawing.Size(679, 199)
         Me.TableLayoutPanel1.TabIndex = 0
         '
-        'lnklblClear
+        'cmbxKOilUnit
         '
-        Me.lnklblClear.AutoSize = True
-        Me.lnklblClear.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.lnklblClear.Location = New System.Drawing.Point(612, 102)
-        Me.lnklblClear.Margin = New System.Windows.Forms.Padding(0)
-        Me.lnklblClear.Name = "lnklblClear"
-        Me.TableLayoutPanel1.SetRowSpan(Me.lnklblClear, 2)
-        Me.lnklblClear.Size = New System.Drawing.Size(64, 63)
-        Me.lnklblClear.TabIndex = 41
-        Me.lnklblClear.TabStop = True
-        Me.lnklblClear.Text = "Clear"
-        Me.lnklblClear.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.cmbxKOilUnit.FormattingEnabled = True
+        Me.cmbxKOilUnit.Items.AddRange(New Object() {"Head", "Family"})
+        Me.cmbxKOilUnit.Location = New System.Drawing.Point(489, 171)
+        Me.cmbxKOilUnit.Name = "cmbxKOilUnit"
+        Me.cmbxKOilUnit.Size = New System.Drawing.Size(117, 24)
+        Me.cmbxKOilUnit.TabIndex = 47
+        '
+        'txtbxKOilPricing
+        '
+        Me.txtbxKOilPricing.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.txtbxKOilPricing.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtbxKOilPricing.Location = New System.Drawing.Point(380, 171)
+        Me.txtbxKOilPricing.Name = "txtbxKOilPricing"
+        Me.txtbxKOilPricing.Size = New System.Drawing.Size(100, 24)
+        Me.txtbxKOilPricing.TabIndex = 46
+        '
+        'txtbxKOilAllotment
+        '
+        Me.txtbxKOilAllotment.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.txtbxKOilAllotment.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtbxKOilAllotment.Location = New System.Drawing.Point(271, 171)
+        Me.txtbxKOilAllotment.Name = "txtbxKOilAllotment"
+        Me.txtbxKOilAllotment.Size = New System.Drawing.Size(100, 24)
+        Me.txtbxKOilAllotment.TabIndex = 45
+        '
+        'txtbxKOilStock
+        '
+        Me.txtbxKOilStock.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.txtbxKOilStock.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtbxKOilStock.Location = New System.Drawing.Point(162, 171)
+        Me.txtbxKOilStock.Name = "txtbxKOilStock"
+        Me.txtbxKOilStock.Size = New System.Drawing.Size(100, 24)
+        Me.txtbxKOilStock.TabIndex = 44
+        '
+        'chkbxKOil
+        '
+        Me.chkbxKOil.AutoSize = True
+        Me.chkbxKOil.Checked = True
+        Me.chkbxKOil.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.chkbxKOil.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.chkbxKOil.Location = New System.Drawing.Point(87, 171)
+        Me.chkbxKOil.Name = "chkbxKOil"
+        Me.chkbxKOil.Size = New System.Drawing.Size(66, 24)
+        Me.chkbxKOil.TabIndex = 43
+        Me.chkbxKOil.Text = "K. Oil"
+        Me.chkbxKOil.UseVisualStyleBackColor = True
+        '
+        'lnklblCancel
+        '
+        Me.lnklblCancel.AutoSize = True
+        Me.lnklblCancel.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.lnklblCancel.Location = New System.Drawing.Point(612, 102)
+        Me.lnklblCancel.Margin = New System.Windows.Forms.Padding(0)
+        Me.lnklblCancel.Name = "lnklblCancel"
+        Me.TableLayoutPanel1.SetRowSpan(Me.lnklblCancel, 2)
+        Me.lnklblCancel.Size = New System.Drawing.Size(64, 63)
+        Me.lnklblCancel.TabIndex = 41
+        Me.lnklblCancel.TabStop = True
+        Me.lnklblCancel.Text = "Cancel"
+        Me.lnklblCancel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'lblAction
         '
@@ -514,55 +563,6 @@ Partial Class frmUpdateAllotment
         Me.rdobtnAAY.Text = "AAY"
         Me.rdobtnAAY.UseVisualStyleBackColor = True
         '
-        'chkbxKOil
-        '
-        Me.chkbxKOil.AutoSize = True
-        Me.chkbxKOil.Checked = True
-        Me.chkbxKOil.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.chkbxKOil.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.chkbxKOil.Location = New System.Drawing.Point(87, 171)
-        Me.chkbxKOil.Name = "chkbxKOil"
-        Me.chkbxKOil.Size = New System.Drawing.Size(66, 24)
-        Me.chkbxKOil.TabIndex = 43
-        Me.chkbxKOil.Text = "K. Oil"
-        Me.chkbxKOil.UseVisualStyleBackColor = True
-        '
-        'txtbxKOilStock
-        '
-        Me.txtbxKOilStock.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtbxKOilStock.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbxKOilStock.Location = New System.Drawing.Point(162, 171)
-        Me.txtbxKOilStock.Name = "txtbxKOilStock"
-        Me.txtbxKOilStock.Size = New System.Drawing.Size(100, 24)
-        Me.txtbxKOilStock.TabIndex = 44
-        '
-        'txtbxKOilAllotment
-        '
-        Me.txtbxKOilAllotment.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtbxKOilAllotment.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbxKOilAllotment.Location = New System.Drawing.Point(271, 171)
-        Me.txtbxKOilAllotment.Name = "txtbxKOilAllotment"
-        Me.txtbxKOilAllotment.Size = New System.Drawing.Size(100, 24)
-        Me.txtbxKOilAllotment.TabIndex = 45
-        '
-        'txtbxKOilPricing
-        '
-        Me.txtbxKOilPricing.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtbxKOilPricing.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbxKOilPricing.Location = New System.Drawing.Point(380, 171)
-        Me.txtbxKOilPricing.Name = "txtbxKOilPricing"
-        Me.txtbxKOilPricing.Size = New System.Drawing.Size(100, 24)
-        Me.txtbxKOilPricing.TabIndex = 46
-        '
-        'cmbxKOilUnit
-        '
-        Me.cmbxKOilUnit.FormattingEnabled = True
-        Me.cmbxKOilUnit.Items.AddRange(New Object() {"Head", "Family"})
-        Me.cmbxKOilUnit.Location = New System.Drawing.Point(489, 171)
-        Me.cmbxKOilUnit.Name = "cmbxKOilUnit"
-        Me.cmbxKOilUnit.Size = New System.Drawing.Size(117, 24)
-        Me.cmbxKOilUnit.TabIndex = 47
-        '
         'frmUpdateAllotment
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
@@ -611,7 +611,7 @@ Partial Class frmUpdateAllotment
     Friend WithEvents txtbxSugarPricing As TextBox
     Friend WithEvents txtbxSugarAllotment As TextBox
     Friend WithEvents txtbxSugarStock As TextBox
-    Friend WithEvents lnklblClear As LinkLabel
+    Friend WithEvents lnklblCancel As LinkLabel
     Friend WithEvents lblAction As Label
     Friend WithEvents lnklblUpdate As LinkLabel
     Friend WithEvents grpbxCategory As GroupBox
