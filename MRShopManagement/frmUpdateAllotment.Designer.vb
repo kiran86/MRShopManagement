@@ -79,41 +79,42 @@ Partial Class frmUpdateAllotment
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
-        Me.TableLayoutPanel1.Controls.Add(Me.cmbxKOilUnit, 4, 5)
-        Me.TableLayoutPanel1.Controls.Add(Me.txtbxKOilPricing, 3, 5)
-        Me.TableLayoutPanel1.Controls.Add(Me.txtbxKOilAllotment, 2, 5)
-        Me.TableLayoutPanel1.Controls.Add(Me.txtbxKOilStock, 1, 5)
-        Me.TableLayoutPanel1.Controls.Add(Me.chkbxKOil, 0, 5)
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+        Me.TableLayoutPanel1.Controls.Add(Me.cmbxKOilUnit, 5, 5)
+        Me.TableLayoutPanel1.Controls.Add(Me.txtbxKOilPricing, 4, 5)
+        Me.TableLayoutPanel1.Controls.Add(Me.txtbxKOilAllotment, 3, 5)
+        Me.TableLayoutPanel1.Controls.Add(Me.txtbxKOilStock, 0, 5)
+        Me.TableLayoutPanel1.Controls.Add(Me.chkbxKOil, 1, 5)
         Me.TableLayoutPanel1.Controls.Add(Me.lnklblCancel, 6, 3)
         Me.TableLayoutPanel1.Controls.Add(Me.lblAction, 6, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.cmbxSugarUnit, 5, 4)
         Me.TableLayoutPanel1.Controls.Add(Me.txtbxSugarPricing, 4, 4)
         Me.TableLayoutPanel1.Controls.Add(Me.txtbxSugarAllotment, 3, 4)
-        Me.TableLayoutPanel1.Controls.Add(Me.txtbxSugarStock, 2, 4)
-        Me.TableLayoutPanel1.Controls.Add(Me.chkbxSugar, 1, 4)
+        Me.TableLayoutPanel1.Controls.Add(Me.txtbxSugarStock, 0, 4)
+        Me.TableLayoutPanel1.Controls.Add(Me.chkbxSugar, 2, 4)
         Me.TableLayoutPanel1.Controls.Add(Me.cmbxAttaUnit, 5, 3)
         Me.TableLayoutPanel1.Controls.Add(Me.txtbxAttaPricing, 4, 3)
         Me.TableLayoutPanel1.Controls.Add(Me.txtbxAttaAllotment, 3, 3)
-        Me.TableLayoutPanel1.Controls.Add(Me.chkbxAtta, 1, 3)
-        Me.TableLayoutPanel1.Controls.Add(Me.chkbxWht, 1, 2)
-        Me.TableLayoutPanel1.Controls.Add(Me.txtbxAttaStock, 2, 3)
+        Me.TableLayoutPanel1.Controls.Add(Me.chkbxAtta, 2, 3)
+        Me.TableLayoutPanel1.Controls.Add(Me.chkbxWht, 2, 2)
+        Me.TableLayoutPanel1.Controls.Add(Me.txtbxAttaStock, 0, 3)
         Me.TableLayoutPanel1.Controls.Add(Me.cmbxWhtUnit, 5, 2)
         Me.TableLayoutPanel1.Controls.Add(Me.txtbxWhtPricing, 4, 2)
         Me.TableLayoutPanel1.Controls.Add(Me.txtbxWhtAllotment, 3, 2)
-        Me.TableLayoutPanel1.Controls.Add(Me.txtbxWhtStock, 2, 2)
-        Me.TableLayoutPanel1.Controls.Add(Me.lblProducts, 1, 0)
-        Me.TableLayoutPanel1.Controls.Add(Me.lblCategory, 0, 0)
-        Me.TableLayoutPanel1.Controls.Add(Me.lblRiceStock, 2, 0)
+        Me.TableLayoutPanel1.Controls.Add(Me.txtbxWhtStock, 0, 2)
+        Me.TableLayoutPanel1.Controls.Add(Me.lblProducts, 2, 0)
+        Me.TableLayoutPanel1.Controls.Add(Me.lblCategory, 1, 0)
+        Me.TableLayoutPanel1.Controls.Add(Me.lblRiceStock, 0, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.lblRiceAllotment, 3, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.lblRicePrice, 4, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.lblRiceUnit, 5, 0)
-        Me.TableLayoutPanel1.Controls.Add(Me.txtbxRiceStock, 2, 1)
+        Me.TableLayoutPanel1.Controls.Add(Me.txtbxRiceStock, 0, 1)
         Me.TableLayoutPanel1.Controls.Add(Me.txtbxRiceAllotment, 3, 1)
         Me.TableLayoutPanel1.Controls.Add(Me.txtbxRicePricing, 4, 1)
         Me.TableLayoutPanel1.Controls.Add(Me.cmbxRiceUnit, 5, 1)
-        Me.TableLayoutPanel1.Controls.Add(Me.chkbxRice, 1, 1)
+        Me.TableLayoutPanel1.Controls.Add(Me.chkbxRice, 2, 1)
         Me.TableLayoutPanel1.Controls.Add(Me.lnklblUpdate, 6, 1)
-        Me.TableLayoutPanel1.Controls.Add(Me.grpbxCategory, 0, 1)
+        Me.TableLayoutPanel1.Controls.Add(Me.grpbxCategory, 1, 1)
         Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 0)
         Me.TableLayoutPanel1.Margin = New System.Windows.Forms.Padding(0)
@@ -132,7 +133,7 @@ Partial Class frmUpdateAllotment
         '
         Me.cmbxKOilUnit.FormattingEnabled = True
         Me.cmbxKOilUnit.Items.AddRange(New Object() {"Head", "Family"})
-        Me.cmbxKOilUnit.Location = New System.Drawing.Point(489, 171)
+        Me.cmbxKOilUnit.Location = New System.Drawing.Point(492, 171)
         Me.cmbxKOilUnit.Name = "cmbxKOilUnit"
         Me.cmbxKOilUnit.Size = New System.Drawing.Size(117, 24)
         Me.cmbxKOilUnit.TabIndex = 47
@@ -141,7 +142,7 @@ Partial Class frmUpdateAllotment
         '
         Me.txtbxKOilPricing.Dock = System.Windows.Forms.DockStyle.Fill
         Me.txtbxKOilPricing.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbxKOilPricing.Location = New System.Drawing.Point(380, 171)
+        Me.txtbxKOilPricing.Location = New System.Drawing.Point(383, 171)
         Me.txtbxKOilPricing.Name = "txtbxKOilPricing"
         Me.txtbxKOilPricing.Size = New System.Drawing.Size(100, 24)
         Me.txtbxKOilPricing.TabIndex = 46
@@ -150,7 +151,7 @@ Partial Class frmUpdateAllotment
         '
         Me.txtbxKOilAllotment.Dock = System.Windows.Forms.DockStyle.Fill
         Me.txtbxKOilAllotment.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbxKOilAllotment.Location = New System.Drawing.Point(271, 171)
+        Me.txtbxKOilAllotment.Location = New System.Drawing.Point(274, 171)
         Me.txtbxKOilAllotment.Name = "txtbxKOilAllotment"
         Me.txtbxKOilAllotment.Size = New System.Drawing.Size(100, 24)
         Me.txtbxKOilAllotment.TabIndex = 45
@@ -159,7 +160,7 @@ Partial Class frmUpdateAllotment
         '
         Me.txtbxKOilStock.Dock = System.Windows.Forms.DockStyle.Fill
         Me.txtbxKOilStock.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbxKOilStock.Location = New System.Drawing.Point(162, 171)
+        Me.txtbxKOilStock.Location = New System.Drawing.Point(6, 171)
         Me.txtbxKOilStock.Name = "txtbxKOilStock"
         Me.txtbxKOilStock.Size = New System.Drawing.Size(100, 24)
         Me.txtbxKOilStock.TabIndex = 44
@@ -170,9 +171,9 @@ Partial Class frmUpdateAllotment
         Me.chkbxKOil.Checked = True
         Me.chkbxKOil.CheckState = System.Windows.Forms.CheckState.Checked
         Me.chkbxKOil.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.chkbxKOil.Location = New System.Drawing.Point(87, 171)
+        Me.chkbxKOil.Location = New System.Drawing.Point(196, 171)
         Me.chkbxKOil.Name = "chkbxKOil"
-        Me.chkbxKOil.Size = New System.Drawing.Size(66, 24)
+        Me.chkbxKOil.Size = New System.Drawing.Size(69, 24)
         Me.chkbxKOil.TabIndex = 43
         Me.chkbxKOil.Text = "K. Oil"
         Me.chkbxKOil.UseVisualStyleBackColor = True
@@ -181,11 +182,11 @@ Partial Class frmUpdateAllotment
         '
         Me.lnklblCancel.AutoSize = True
         Me.lnklblCancel.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.lnklblCancel.Location = New System.Drawing.Point(612, 102)
+        Me.lnklblCancel.Location = New System.Drawing.Point(615, 102)
         Me.lnklblCancel.Margin = New System.Windows.Forms.Padding(0)
         Me.lnklblCancel.Name = "lnklblCancel"
         Me.TableLayoutPanel1.SetRowSpan(Me.lnklblCancel, 2)
-        Me.lnklblCancel.Size = New System.Drawing.Size(64, 63)
+        Me.lnklblCancel.Size = New System.Drawing.Size(61, 63)
         Me.lnklblCancel.TabIndex = 41
         Me.lnklblCancel.TabStop = True
         Me.lnklblCancel.Text = "Cancel"
@@ -195,10 +196,11 @@ Partial Class frmUpdateAllotment
         '
         Me.lblAction.AutoSize = True
         Me.lblAction.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.lblAction.Location = New System.Drawing.Point(615, 6)
+        Me.lblAction.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblAction.Location = New System.Drawing.Point(618, 6)
         Me.lblAction.Margin = New System.Windows.Forms.Padding(3)
         Me.lblAction.Name = "lblAction"
-        Me.lblAction.Size = New System.Drawing.Size(58, 24)
+        Me.lblAction.Size = New System.Drawing.Size(55, 24)
         Me.lblAction.TabIndex = 39
         Me.lblAction.Text = "Action"
         Me.lblAction.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -207,7 +209,7 @@ Partial Class frmUpdateAllotment
         '
         Me.cmbxSugarUnit.FormattingEnabled = True
         Me.cmbxSugarUnit.Items.AddRange(New Object() {"Head", "Family"})
-        Me.cmbxSugarUnit.Location = New System.Drawing.Point(489, 138)
+        Me.cmbxSugarUnit.Location = New System.Drawing.Point(492, 138)
         Me.cmbxSugarUnit.Name = "cmbxSugarUnit"
         Me.cmbxSugarUnit.Size = New System.Drawing.Size(117, 24)
         Me.cmbxSugarUnit.TabIndex = 38
@@ -216,7 +218,7 @@ Partial Class frmUpdateAllotment
         '
         Me.txtbxSugarPricing.Dock = System.Windows.Forms.DockStyle.Fill
         Me.txtbxSugarPricing.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbxSugarPricing.Location = New System.Drawing.Point(380, 138)
+        Me.txtbxSugarPricing.Location = New System.Drawing.Point(383, 138)
         Me.txtbxSugarPricing.Name = "txtbxSugarPricing"
         Me.txtbxSugarPricing.Size = New System.Drawing.Size(100, 24)
         Me.txtbxSugarPricing.TabIndex = 37
@@ -225,7 +227,7 @@ Partial Class frmUpdateAllotment
         '
         Me.txtbxSugarAllotment.Dock = System.Windows.Forms.DockStyle.Fill
         Me.txtbxSugarAllotment.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbxSugarAllotment.Location = New System.Drawing.Point(271, 138)
+        Me.txtbxSugarAllotment.Location = New System.Drawing.Point(274, 138)
         Me.txtbxSugarAllotment.Name = "txtbxSugarAllotment"
         Me.txtbxSugarAllotment.Size = New System.Drawing.Size(100, 24)
         Me.txtbxSugarAllotment.TabIndex = 36
@@ -234,7 +236,7 @@ Partial Class frmUpdateAllotment
         '
         Me.txtbxSugarStock.Dock = System.Windows.Forms.DockStyle.Fill
         Me.txtbxSugarStock.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbxSugarStock.Location = New System.Drawing.Point(162, 138)
+        Me.txtbxSugarStock.Location = New System.Drawing.Point(6, 138)
         Me.txtbxSugarStock.Name = "txtbxSugarStock"
         Me.txtbxSugarStock.Size = New System.Drawing.Size(100, 24)
         Me.txtbxSugarStock.TabIndex = 35
@@ -245,9 +247,9 @@ Partial Class frmUpdateAllotment
         Me.chkbxSugar.Checked = True
         Me.chkbxSugar.CheckState = System.Windows.Forms.CheckState.Checked
         Me.chkbxSugar.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.chkbxSugar.Location = New System.Drawing.Point(87, 138)
+        Me.chkbxSugar.Location = New System.Drawing.Point(196, 138)
         Me.chkbxSugar.Name = "chkbxSugar"
-        Me.chkbxSugar.Size = New System.Drawing.Size(66, 24)
+        Me.chkbxSugar.Size = New System.Drawing.Size(69, 24)
         Me.chkbxSugar.TabIndex = 34
         Me.chkbxSugar.Text = "Sugar"
         Me.chkbxSugar.UseVisualStyleBackColor = True
@@ -256,7 +258,7 @@ Partial Class frmUpdateAllotment
         '
         Me.cmbxAttaUnit.FormattingEnabled = True
         Me.cmbxAttaUnit.Items.AddRange(New Object() {"Head", "Family"})
-        Me.cmbxAttaUnit.Location = New System.Drawing.Point(489, 105)
+        Me.cmbxAttaUnit.Location = New System.Drawing.Point(492, 105)
         Me.cmbxAttaUnit.Name = "cmbxAttaUnit"
         Me.cmbxAttaUnit.Size = New System.Drawing.Size(117, 24)
         Me.cmbxAttaUnit.TabIndex = 33
@@ -265,7 +267,7 @@ Partial Class frmUpdateAllotment
         '
         Me.txtbxAttaPricing.Dock = System.Windows.Forms.DockStyle.Fill
         Me.txtbxAttaPricing.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbxAttaPricing.Location = New System.Drawing.Point(380, 105)
+        Me.txtbxAttaPricing.Location = New System.Drawing.Point(383, 105)
         Me.txtbxAttaPricing.Name = "txtbxAttaPricing"
         Me.txtbxAttaPricing.Size = New System.Drawing.Size(100, 24)
         Me.txtbxAttaPricing.TabIndex = 32
@@ -274,7 +276,7 @@ Partial Class frmUpdateAllotment
         '
         Me.txtbxAttaAllotment.Dock = System.Windows.Forms.DockStyle.Fill
         Me.txtbxAttaAllotment.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbxAttaAllotment.Location = New System.Drawing.Point(271, 105)
+        Me.txtbxAttaAllotment.Location = New System.Drawing.Point(274, 105)
         Me.txtbxAttaAllotment.Name = "txtbxAttaAllotment"
         Me.txtbxAttaAllotment.Size = New System.Drawing.Size(100, 24)
         Me.txtbxAttaAllotment.TabIndex = 31
@@ -285,9 +287,9 @@ Partial Class frmUpdateAllotment
         Me.chkbxAtta.Checked = True
         Me.chkbxAtta.CheckState = System.Windows.Forms.CheckState.Checked
         Me.chkbxAtta.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.chkbxAtta.Location = New System.Drawing.Point(87, 105)
+        Me.chkbxAtta.Location = New System.Drawing.Point(196, 105)
         Me.chkbxAtta.Name = "chkbxAtta"
-        Me.chkbxAtta.Size = New System.Drawing.Size(66, 24)
+        Me.chkbxAtta.Size = New System.Drawing.Size(69, 24)
         Me.chkbxAtta.TabIndex = 30
         Me.chkbxAtta.Text = "Atta"
         Me.chkbxAtta.UseVisualStyleBackColor = True
@@ -298,9 +300,9 @@ Partial Class frmUpdateAllotment
         Me.chkbxWht.Checked = True
         Me.chkbxWht.CheckState = System.Windows.Forms.CheckState.Checked
         Me.chkbxWht.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.chkbxWht.Location = New System.Drawing.Point(87, 72)
+        Me.chkbxWht.Location = New System.Drawing.Point(196, 72)
         Me.chkbxWht.Name = "chkbxWht"
-        Me.chkbxWht.Size = New System.Drawing.Size(66, 24)
+        Me.chkbxWht.Size = New System.Drawing.Size(69, 24)
         Me.chkbxWht.TabIndex = 29
         Me.chkbxWht.Text = "Wheat"
         Me.chkbxWht.UseVisualStyleBackColor = True
@@ -309,7 +311,7 @@ Partial Class frmUpdateAllotment
         '
         Me.txtbxAttaStock.Dock = System.Windows.Forms.DockStyle.Fill
         Me.txtbxAttaStock.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbxAttaStock.Location = New System.Drawing.Point(162, 105)
+        Me.txtbxAttaStock.Location = New System.Drawing.Point(6, 105)
         Me.txtbxAttaStock.Name = "txtbxAttaStock"
         Me.txtbxAttaStock.Size = New System.Drawing.Size(100, 24)
         Me.txtbxAttaStock.TabIndex = 27
@@ -318,7 +320,7 @@ Partial Class frmUpdateAllotment
         '
         Me.cmbxWhtUnit.FormattingEnabled = True
         Me.cmbxWhtUnit.Items.AddRange(New Object() {"Head", "Family"})
-        Me.cmbxWhtUnit.Location = New System.Drawing.Point(489, 72)
+        Me.cmbxWhtUnit.Location = New System.Drawing.Point(492, 72)
         Me.cmbxWhtUnit.Name = "cmbxWhtUnit"
         Me.cmbxWhtUnit.Size = New System.Drawing.Size(117, 24)
         Me.cmbxWhtUnit.TabIndex = 24
@@ -327,7 +329,7 @@ Partial Class frmUpdateAllotment
         '
         Me.txtbxWhtPricing.Dock = System.Windows.Forms.DockStyle.Fill
         Me.txtbxWhtPricing.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbxWhtPricing.Location = New System.Drawing.Point(380, 72)
+        Me.txtbxWhtPricing.Location = New System.Drawing.Point(383, 72)
         Me.txtbxWhtPricing.Name = "txtbxWhtPricing"
         Me.txtbxWhtPricing.Size = New System.Drawing.Size(100, 24)
         Me.txtbxWhtPricing.TabIndex = 23
@@ -336,7 +338,7 @@ Partial Class frmUpdateAllotment
         '
         Me.txtbxWhtAllotment.Dock = System.Windows.Forms.DockStyle.Fill
         Me.txtbxWhtAllotment.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbxWhtAllotment.Location = New System.Drawing.Point(271, 72)
+        Me.txtbxWhtAllotment.Location = New System.Drawing.Point(274, 72)
         Me.txtbxWhtAllotment.Name = "txtbxWhtAllotment"
         Me.txtbxWhtAllotment.Size = New System.Drawing.Size(100, 24)
         Me.txtbxWhtAllotment.TabIndex = 22
@@ -345,7 +347,7 @@ Partial Class frmUpdateAllotment
         '
         Me.txtbxWhtStock.Dock = System.Windows.Forms.DockStyle.Fill
         Me.txtbxWhtStock.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbxWhtStock.Location = New System.Drawing.Point(162, 72)
+        Me.txtbxWhtStock.Location = New System.Drawing.Point(6, 72)
         Me.txtbxWhtStock.Name = "txtbxWhtStock"
         Me.txtbxWhtStock.Size = New System.Drawing.Size(100, 24)
         Me.txtbxWhtStock.TabIndex = 21
@@ -354,10 +356,11 @@ Partial Class frmUpdateAllotment
         '
         Me.lblProducts.AutoSize = True
         Me.lblProducts.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.lblProducts.Location = New System.Drawing.Point(87, 6)
+        Me.lblProducts.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblProducts.Location = New System.Drawing.Point(196, 6)
         Me.lblProducts.Margin = New System.Windows.Forms.Padding(3)
         Me.lblProducts.Name = "lblProducts"
-        Me.lblProducts.Size = New System.Drawing.Size(66, 24)
+        Me.lblProducts.Size = New System.Drawing.Size(69, 24)
         Me.lblProducts.TabIndex = 20
         Me.lblProducts.Text = "Products"
         Me.lblProducts.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -366,7 +369,8 @@ Partial Class frmUpdateAllotment
         '
         Me.lblCategory.AutoSize = True
         Me.lblCategory.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.lblCategory.Location = New System.Drawing.Point(6, 6)
+        Me.lblCategory.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblCategory.Location = New System.Drawing.Point(115, 6)
         Me.lblCategory.Margin = New System.Windows.Forms.Padding(3)
         Me.lblCategory.Name = "lblCategory"
         Me.lblCategory.Size = New System.Drawing.Size(72, 24)
@@ -378,7 +382,8 @@ Partial Class frmUpdateAllotment
         '
         Me.lblRiceStock.AutoSize = True
         Me.lblRiceStock.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.lblRiceStock.Location = New System.Drawing.Point(162, 6)
+        Me.lblRiceStock.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblRiceStock.Location = New System.Drawing.Point(6, 6)
         Me.lblRiceStock.Margin = New System.Windows.Forms.Padding(3)
         Me.lblRiceStock.Name = "lblRiceStock"
         Me.lblRiceStock.Size = New System.Drawing.Size(100, 24)
@@ -390,7 +395,8 @@ Partial Class frmUpdateAllotment
         '
         Me.lblRiceAllotment.AutoSize = True
         Me.lblRiceAllotment.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.lblRiceAllotment.Location = New System.Drawing.Point(271, 6)
+        Me.lblRiceAllotment.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblRiceAllotment.Location = New System.Drawing.Point(274, 6)
         Me.lblRiceAllotment.Margin = New System.Windows.Forms.Padding(3)
         Me.lblRiceAllotment.Name = "lblRiceAllotment"
         Me.lblRiceAllotment.Size = New System.Drawing.Size(100, 24)
@@ -402,7 +408,8 @@ Partial Class frmUpdateAllotment
         '
         Me.lblRicePrice.AutoSize = True
         Me.lblRicePrice.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.lblRicePrice.Location = New System.Drawing.Point(380, 6)
+        Me.lblRicePrice.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblRicePrice.Location = New System.Drawing.Point(383, 6)
         Me.lblRicePrice.Margin = New System.Windows.Forms.Padding(3)
         Me.lblRicePrice.Name = "lblRicePrice"
         Me.lblRicePrice.Size = New System.Drawing.Size(100, 24)
@@ -414,7 +421,8 @@ Partial Class frmUpdateAllotment
         '
         Me.lblRiceUnit.AutoSize = True
         Me.lblRiceUnit.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.lblRiceUnit.Location = New System.Drawing.Point(489, 6)
+        Me.lblRiceUnit.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblRiceUnit.Location = New System.Drawing.Point(492, 6)
         Me.lblRiceUnit.Margin = New System.Windows.Forms.Padding(3)
         Me.lblRiceUnit.Name = "lblRiceUnit"
         Me.lblRiceUnit.Size = New System.Drawing.Size(117, 24)
@@ -428,7 +436,7 @@ Partial Class frmUpdateAllotment
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtbxRiceStock.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbxRiceStock.Location = New System.Drawing.Point(162, 39)
+        Me.txtbxRiceStock.Location = New System.Drawing.Point(6, 39)
         Me.txtbxRiceStock.Name = "txtbxRiceStock"
         Me.txtbxRiceStock.Size = New System.Drawing.Size(100, 24)
         Me.txtbxRiceStock.TabIndex = 7
@@ -437,7 +445,7 @@ Partial Class frmUpdateAllotment
         '
         Me.txtbxRiceAllotment.Dock = System.Windows.Forms.DockStyle.Fill
         Me.txtbxRiceAllotment.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbxRiceAllotment.Location = New System.Drawing.Point(271, 39)
+        Me.txtbxRiceAllotment.Location = New System.Drawing.Point(274, 39)
         Me.txtbxRiceAllotment.Name = "txtbxRiceAllotment"
         Me.txtbxRiceAllotment.Size = New System.Drawing.Size(100, 24)
         Me.txtbxRiceAllotment.TabIndex = 8
@@ -446,7 +454,7 @@ Partial Class frmUpdateAllotment
         '
         Me.txtbxRicePricing.Dock = System.Windows.Forms.DockStyle.Fill
         Me.txtbxRicePricing.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbxRicePricing.Location = New System.Drawing.Point(380, 39)
+        Me.txtbxRicePricing.Location = New System.Drawing.Point(383, 39)
         Me.txtbxRicePricing.Name = "txtbxRicePricing"
         Me.txtbxRicePricing.Size = New System.Drawing.Size(100, 24)
         Me.txtbxRicePricing.TabIndex = 9
@@ -455,7 +463,7 @@ Partial Class frmUpdateAllotment
         '
         Me.cmbxRiceUnit.FormattingEnabled = True
         Me.cmbxRiceUnit.Items.AddRange(New Object() {"Head", "Family"})
-        Me.cmbxRiceUnit.Location = New System.Drawing.Point(489, 39)
+        Me.cmbxRiceUnit.Location = New System.Drawing.Point(492, 39)
         Me.cmbxRiceUnit.Name = "cmbxRiceUnit"
         Me.cmbxRiceUnit.Size = New System.Drawing.Size(117, 24)
         Me.cmbxRiceUnit.TabIndex = 10
@@ -466,9 +474,9 @@ Partial Class frmUpdateAllotment
         Me.chkbxRice.Checked = True
         Me.chkbxRice.CheckState = System.Windows.Forms.CheckState.Checked
         Me.chkbxRice.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.chkbxRice.Location = New System.Drawing.Point(87, 39)
+        Me.chkbxRice.Location = New System.Drawing.Point(196, 39)
         Me.chkbxRice.Name = "chkbxRice"
-        Me.chkbxRice.Size = New System.Drawing.Size(66, 24)
+        Me.chkbxRice.Size = New System.Drawing.Size(69, 24)
         Me.chkbxRice.TabIndex = 28
         Me.chkbxRice.Text = "Rice"
         Me.chkbxRice.UseVisualStyleBackColor = True
@@ -477,11 +485,11 @@ Partial Class frmUpdateAllotment
         '
         Me.lnklblUpdate.AutoSize = True
         Me.lnklblUpdate.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.lnklblUpdate.Location = New System.Drawing.Point(612, 36)
+        Me.lnklblUpdate.Location = New System.Drawing.Point(615, 36)
         Me.lnklblUpdate.Margin = New System.Windows.Forms.Padding(0)
         Me.lnklblUpdate.Name = "lnklblUpdate"
         Me.TableLayoutPanel1.SetRowSpan(Me.lnklblUpdate, 2)
-        Me.lnklblUpdate.Size = New System.Drawing.Size(64, 63)
+        Me.lnklblUpdate.Size = New System.Drawing.Size(61, 63)
         Me.lnklblUpdate.TabIndex = 40
         Me.lnklblUpdate.TabStop = True
         Me.lnklblUpdate.Text = "Update"
@@ -499,7 +507,7 @@ Partial Class frmUpdateAllotment
         Me.grpbxCategory.Controls.Add(Me.rdobtnSPHH)
         Me.grpbxCategory.Controls.Add(Me.rdobtnPHH)
         Me.grpbxCategory.Controls.Add(Me.rdobtnAAY)
-        Me.grpbxCategory.Location = New System.Drawing.Point(3, 36)
+        Me.grpbxCategory.Location = New System.Drawing.Point(112, 36)
         Me.grpbxCategory.Margin = New System.Windows.Forms.Padding(0)
         Me.grpbxCategory.Name = "grpbxCategory"
         Me.grpbxCategory.Padding = New System.Windows.Forms.Padding(0)

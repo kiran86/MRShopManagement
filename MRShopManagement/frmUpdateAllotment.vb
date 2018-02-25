@@ -40,7 +40,12 @@ Public Class frmUpdateAllotment
         Dim cmd As OleDbCommand
         Dim dr As OleDbDataReader
         For Each table As String In {"Stock", "Allotment", "Pricing"}
-            sql = "SELECT * FROM " & table & " WHERE Category = '" & category & "'"
+            If table = "Stock" Then
+                sql = "SELECT * FROM " & table
+            Else
+                sql = "SELECT * FROM " & table & " WHERE Category = '" & category & "'"
+            End If
+
             Try
                 connection.Open()
                 cmd = New OleDbCommand(sql, connection)
@@ -67,6 +72,7 @@ Public Class frmUpdateAllotment
         Dim txtbxControl As TextBox
         Dim cmbxControl As ComboBox
         Dim chkbxControl As CheckBox
+
         Select Case Integer.Parse(dr("ProductID").ToString)
             Case 1
                 txtbxName = txtbxName & "Rice"
@@ -89,6 +95,7 @@ Public Class frmUpdateAllotment
                 cmbxName = cmbxName & "KOil"
                 chkbxName = chkbxName & "KOil"
         End Select
+
         If dr.GetDouble(2) = 0.0 Then
             chkbxControl = Me.Controls.Find(chkbxName, True)(0)
             If chkbxControl.Checked = True Then
@@ -100,6 +107,8 @@ Public Class frmUpdateAllotment
 
         If txtbxControl.Name.Contains("Pricing") Then
             txtbxControl.Text = String.Format("{0:n2}", dr.GetDouble(2))
+        ElseIf txtbxControl.Name.Contains("Stock") Then
+            txtbxControl.Text = String.Format("{0:n2}", dr.GetDouble(1))
         Else
             txtbxControl.Text = String.Format("{0:n3}", dr.GetDouble(2))
         End If
