@@ -96,12 +96,12 @@ Public Class frmUpdateAllotment
                 chkbxName = chkbxName & "KOil"
         End Select
 
-        If dr.GetDouble(2) = 0.0 Then
-            chkbxControl = Me.Controls.Find(chkbxName, True)(0)
-            If chkbxControl.Checked = True Then
-                chkbxControl.Checked = False
-            End If
-        End If
+        'If dr.GetDouble(2) = 0.0 Then
+        '    chkbxControl = Me.Controls.Find(chkbxName, True)(0)
+        '    If chkbxControl.Checked = True Then
+        '        chkbxControl.Checked = False
+        '    End If
+        'End If
         txtbxName = txtbxName & table
         txtbxControl = Me.Controls.Find(txtbxName, True)(0)
 
@@ -187,7 +187,7 @@ Public Class frmUpdateAllotment
                     Case "Stock"
                         txtbxName = txtbxName & table
                         txtbxControl = Me.Controls.Find(txtbxName, True)(0)
-                        sql = sql & "Scale = " & txtbxControl.Text & " WHERE Category = '" & category & "' AND ProductID = " & productID
+                        sql = sql & "Scale = " & txtbxControl.Text & " WHERE ProductID = " & productID
                     Case "Allotment"
                         txtbxName = txtbxName & table
                         txtbxControl = Me.Controls.Find(txtbxName, True)(0)
@@ -220,7 +220,7 @@ Public Class frmUpdateAllotment
             Next
         Next
         If count = check Then
-            MsgBox("Allotment updated for the week.")
+            MsgBox("Allotment updated for " + category)
         Else
             MsgBox("Allotment update unseccessful. Please try again...")
         End If
@@ -228,5 +228,9 @@ Public Class frmUpdateAllotment
 
     Private Sub lnklblCancel_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lnklblCancel.LinkClicked
         Me.Close()
+    End Sub
+
+    Private Sub txtbxWhtPricing_TextChanged(sender As Object, e As EventArgs) Handles txtbxWhtPricing.TextChanged
+
     End Sub
 End Class
