@@ -7,6 +7,8 @@
     Public Function GetTagContents(ByVal Source As String, ByVal startTag As String, ByVal endTag As String) As String
         Dim StringFound As String
         Dim Index As Integer = Source.IndexOf(startTag) + startTag.Length
+        Console.Write("Here: ")
+        Console.WriteLine(Source)
         StringFound = Source.Substring(Index, Source.IndexOf(endTag, Index) - Index)
         Return StringFound
     End Function

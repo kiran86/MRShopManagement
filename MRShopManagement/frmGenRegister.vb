@@ -88,6 +88,11 @@ Public Class frmGenRegister
         Dim endDate As Date
         Dim delvDate As Date
 
+        Dim scale As Double = 0.0
+        Dim unit As String
+        Dim criteria As String
+        Dim noUnit As Integer
+
         Dim noHead As Integer = 1
         Dim totalHead As Integer = 0
         Dim totalFamily As Integer = 0
@@ -144,7 +149,7 @@ Public Class frmGenRegister
                         startDate = dr.GetDateTime(0).Date
                         endDate = dr.GetDateTime(1).Date
                     End If
-
+                    Dim myCulture As CultureInfo = CultureInfo.CurrentCulture
                     delvDate = startDate
                     While delvDate <> endDate.AddDays(1)
                         For Each catg As String In {"AAY", "PHH", "SPHH", "RKSY-I", "RKSY-II"}
@@ -175,11 +180,23 @@ Public Class frmGenRegister
                                 row.Cells(4).Value = Format(0, "###0.000")
                                 row.Cells(5).Value = datagridRegister(3, rowID).Value
 
-                                sql = "SELECT SUM FROM Stock WHERE Category = '" & catg & "' AND ProductID = " & product
+                                sql = "SELECT Scale, Unit FROM Allotment WHERE ProductID = " & product & " AND Category = '" & catg & "'"
                                 cmd = New OleDbCommand(sql, connection)
                                 dr = cmd.ExecuteReader
                                 dr.Read()
-                                row.Cells(3).Value = Format(dr.GetDouble(0), "###0.000")
+                                scale = dr.GetDouble(0)
+                                unit = dr.GetString(1)
+                                If unit Is "Head" Then
+                                    criteria = "RCNo"
+                                Else
+                                    criteria = "CashMemoNo"
+                                End If
+                                sql = "SELECT COUNT(" & criteria & ") FROM Delivery WHERE Category = '" + catg + "' AND Delivery BETWEEN FORMAT(#" + DateTime.ParseExact(delvDate.ToShortDateString & " 00:00:01", "dd/MM/yyyy HH:mm:ss", myCulture) + "#, 'mm/dd/yyyy hh:nn:ss am/pm') AND FORMAT(#" + DateTime.ParseExact(delvDate.ToShortDateString & " 23:59:59", "dd/MM/yyyy HH:mm:ss", myCulture) + "#, 'mm/dd/yyyy hh:nn:ss am/pm')"
+                                cmd = New OleDbCommand(sql, connection)
+                                dr = cmd.ExecuteReader
+                                dr.Read()
+                                noUnit = dr.GetInt32(0)
+                                row.Cells(6).Value = Format(noUnit * scale, "###0.000")
                             Next
                         Next
                         delvDate = delvDate.AddDays(1)

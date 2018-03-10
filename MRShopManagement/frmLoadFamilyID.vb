@@ -22,9 +22,7 @@ Public Class frmLoadFamilyID
         If connection.State = ConnectionState.Open Then
             connection.Close()
         End If
-        Me.Visible = False
-        Me.Dispose()
-        frmMain.Enabled = True
+        frmMain.Show()
     End Sub
 
     Private Sub bttnLoad_Click(sender As Object, e As EventArgs) Handles bttnLoad.Click
@@ -93,6 +91,7 @@ Public Class frmLoadFamilyID
                         End If
                     Catch exception As Exception
                         txtbxStatus.AppendText("Failed " + exception.Message + Environment.NewLine)
+                        Console.WriteLine(exception.StackTrace)
                     End Try
                 End While
             End If

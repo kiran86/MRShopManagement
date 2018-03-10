@@ -520,7 +520,7 @@ Public Class frmMain
     End Sub
 
     Private Sub LoadDataToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles LoadDataToolStripMenuItem.Click
-        Me.Enabled = False
+        Me.Hide()
         frmLoadFamilyID.Show()
     End Sub
 
