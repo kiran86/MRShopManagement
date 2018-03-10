@@ -284,7 +284,6 @@ Public Class frmGenRegister
                         totalSugrPrice = 0
                         totalKOilPrice = 0
 
-                        'sql = "SELECT RCNo, CashMemoNo FROM Delivery WHERE Category = '" + Category + "' AND Delivery BETWEEN #" + DateTime.ParseExact(delvDate.ToShortDateString & " 00:00:01", "dd/MM/yyyy HH:mm:ss", Nothing) + "# AND #" + DateTime.ParseExact(delvDate.ToShortDateString & " 23:59:59", "dd/MM/yyyy HH:mm:ss", Nothing) + "# ORDER BY CashMemoNo ASC"
                         sql = "SELECT RCNo, CashMemoNo FROM Delivery WHERE Category = '" + Category + "' AND Delivery BETWEEN FORMAT(#" + DateTime.ParseExact(delvDate.ToShortDateString & " 00:00:01", "dd/MM/yyyy HH:mm:ss", myCulture) + "#, 'mm/dd/yyyy hh:nn:ss am/pm') AND FORMAT(#" + DateTime.ParseExact(delvDate.ToShortDateString & " 23:59:59", "dd/MM/yyyy HH:mm:ss", myCulture) + "#, 'mm/dd/yyyy hh:nn:ss am/pm') ORDER BY CashMemoNo ASC"
                         'Console.WriteLine(sql)
                         cmd = New OleDbCommand(sql, connection)
