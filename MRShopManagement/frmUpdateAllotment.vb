@@ -32,6 +32,13 @@ Public Class frmUpdateAllotment
     Private Sub RadioButton_SelectionChange(sender As Object, e As EventArgs) Handles rdobtnAAY.CheckedChanged, rdobtnPHH.CheckedChanged, rdobtnSPHH.CheckedChanged, rdobtnRKSYI.CheckedChanged, rdobtnRKSYII.CheckedChanged
         Dim rdobtnCategory As RadioButton = CType(sender, RadioButton)
         category = rdobtnCategory.Text
+
+        chkbxRice.Checked = True
+        chkbxWht.Checked = True
+        chkbxAtta.Checked = True
+        chkbxSugar.Checked = True
+        chkbxKOil.Checked = True
+
         LoadAllotmentData(category)
     End Sub
 
@@ -40,11 +47,8 @@ Public Class frmUpdateAllotment
         Dim cmd As OleDbCommand
         Dim dr As OleDbDataReader
         For Each table As String In {"Stock", "Allotment", "Pricing"}
-            If table = "Stock" Then
-                sql = "SELECT * FROM " & table
-            Else
-                sql = "SELECT * FROM " & table & " WHERE Category = '" & category & "'"
-            End If
+
+            sql = "SELECT * FROM " & table & " WHERE Category = '" & category & "'"
 
             Try
                 connection.Open()
@@ -96,24 +100,21 @@ Public Class frmUpdateAllotment
                 chkbxName = chkbxName & "KOil"
         End Select
 
-        'If dr.GetDouble(2) = 0.0 Then
-        '    chkbxControl = Me.Controls.Find(chkbxName, True)(0)
-        '    If chkbxControl.Checked = True Then
-        '        chkbxControl.Checked = False
-        '    End If
-        'End If
+        If dr.GetDouble(2) = 0.0 Then
+            chkbxControl = Me.Controls.Find(chkbxName, True)(0)
+            If chkbxControl.Checked = True Then
+                chkbxControl.Checked = False
+            End If
+        End If
         txtbxName = txtbxName & table
         txtbxControl = Me.Controls.Find(txtbxName, True)(0)
 
         If txtbxControl.Name.Contains("Pricing") Then
             txtbxControl.Text = String.Format("{0:n2}", dr.GetDouble(2))
-        ElseIf txtbxControl.Name.Contains("Stock") Then
-            txtbxControl.Text = String.Format("{0:n2}", dr.GetDouble(1))
         Else
             txtbxControl.Text = String.Format("{0:n3}", dr.GetDouble(2))
         End If
 
-        'txtbxControl.Text = dr.GetDouble(2)
         If table Is "Allotment" Then
             cmbxName = cmbxName & "Unit"
             cmbxControl = Me.Controls.Find(cmbxName, True)(0)
@@ -187,7 +188,7 @@ Public Class frmUpdateAllotment
                     Case "Stock"
                         txtbxName = txtbxName & table
                         txtbxControl = Me.Controls.Find(txtbxName, True)(0)
-                        sql = sql & "Scale = " & txtbxControl.Text & " WHERE ProductID = " & productID
+                        sql = sql & "Received = " & txtbxControl.Text & " WHERE Category = '" & category & "' AND ProductID = " & productID
                     Case "Allotment"
                         txtbxName = txtbxName & table
                         txtbxControl = Me.Controls.Find(txtbxName, True)(0)

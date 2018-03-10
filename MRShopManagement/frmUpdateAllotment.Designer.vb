@@ -101,8 +101,8 @@ Partial Class frmUpdateAllotment
         Me.TableLayoutPanel1.Controls.Add(Me.txtbxWhtAllotment, 2, 3)
         Me.TableLayoutPanel1.Controls.Add(Me.txtbxWhtStock, 1, 3)
         Me.TableLayoutPanel1.Controls.Add(Me.lblProducts, 0, 0)
-        Me.TableLayoutPanel1.Controls.Add(Me.lblCategory, 2, 0)
-        Me.TableLayoutPanel1.Controls.Add(Me.lblRiceStock, 1, 0)
+        Me.TableLayoutPanel1.Controls.Add(Me.lblCategory, 1, 0)
+        Me.TableLayoutPanel1.Controls.Add(Me.lblRiceStock, 1, 1)
         Me.TableLayoutPanel1.Controls.Add(Me.lblRiceAllotment, 2, 1)
         Me.TableLayoutPanel1.Controls.Add(Me.lblRicePrice, 3, 1)
         Me.TableLayoutPanel1.Controls.Add(Me.lblRiceUnit, 4, 1)
@@ -112,7 +112,7 @@ Partial Class frmUpdateAllotment
         Me.TableLayoutPanel1.Controls.Add(Me.cmbxRiceUnit, 4, 2)
         Me.TableLayoutPanel1.Controls.Add(Me.chkbxRice, 0, 2)
         Me.TableLayoutPanel1.Controls.Add(Me.lnklblUpdate, 5, 2)
-        Me.TableLayoutPanel1.Controls.Add(Me.grpbxCategory, 3, 0)
+        Me.TableLayoutPanel1.Controls.Add(Me.grpbxCategory, 2, 0)
         Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 0)
         Me.TableLayoutPanel1.Margin = New System.Windows.Forms.Padding(0)
@@ -125,16 +125,14 @@ Partial Class frmUpdateAllotment
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30.0!))
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(679, 246)
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(604, 246)
         Me.TableLayoutPanel1.TabIndex = 0
         '
         'cmbxKOilUnit
         '
         Me.cmbxKOilUnit.FormattingEnabled = True
         Me.cmbxKOilUnit.Items.AddRange(New Object() {"Head", "Family"})
-        Me.cmbxKOilUnit.Location = New System.Drawing.Point(408, 214)
+        Me.cmbxKOilUnit.Location = New System.Drawing.Point(414, 214)
         Me.cmbxKOilUnit.Name = "cmbxKOilUnit"
         Me.cmbxKOilUnit.Size = New System.Drawing.Size(117, 24)
         Me.cmbxKOilUnit.TabIndex = 47
@@ -143,7 +141,7 @@ Partial Class frmUpdateAllotment
         '
         Me.txtbxKOilPricing.Dock = System.Windows.Forms.DockStyle.Fill
         Me.txtbxKOilPricing.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbxKOilPricing.Location = New System.Drawing.Point(299, 214)
+        Me.txtbxKOilPricing.Location = New System.Drawing.Point(305, 214)
         Me.txtbxKOilPricing.Name = "txtbxKOilPricing"
         Me.txtbxKOilPricing.Size = New System.Drawing.Size(100, 24)
         Me.txtbxKOilPricing.TabIndex = 46
@@ -154,7 +152,7 @@ Partial Class frmUpdateAllotment
         Me.txtbxKOilAllotment.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtbxKOilAllotment.Location = New System.Drawing.Point(190, 214)
         Me.txtbxKOilAllotment.Name = "txtbxKOilAllotment"
-        Me.txtbxKOilAllotment.Size = New System.Drawing.Size(100, 24)
+        Me.txtbxKOilAllotment.Size = New System.Drawing.Size(106, 24)
         Me.txtbxKOilAllotment.TabIndex = 45
         '
         'txtbxKOilStock
@@ -183,11 +181,11 @@ Partial Class frmUpdateAllotment
         '
         Me.lnklblCancel.AutoSize = True
         Me.lnklblCancel.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.lnklblCancel.Location = New System.Drawing.Point(531, 145)
+        Me.lnklblCancel.Location = New System.Drawing.Point(537, 145)
         Me.lnklblCancel.Margin = New System.Windows.Forms.Padding(0)
         Me.lnklblCancel.Name = "lnklblCancel"
         Me.TableLayoutPanel1.SetRowSpan(Me.lnklblCancel, 2)
-        Me.lnklblCancel.Size = New System.Drawing.Size(145, 63)
+        Me.lnklblCancel.Size = New System.Drawing.Size(64, 63)
         Me.lnklblCancel.TabIndex = 41
         Me.lnklblCancel.TabStop = True
         Me.lnklblCancel.Text = "Cancel"
@@ -198,10 +196,10 @@ Partial Class frmUpdateAllotment
         Me.lblAction.AutoSize = True
         Me.lblAction.Dock = System.Windows.Forms.DockStyle.Fill
         Me.lblAction.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblAction.Location = New System.Drawing.Point(534, 49)
+        Me.lblAction.Location = New System.Drawing.Point(540, 49)
         Me.lblAction.Margin = New System.Windows.Forms.Padding(3)
         Me.lblAction.Name = "lblAction"
-        Me.lblAction.Size = New System.Drawing.Size(139, 24)
+        Me.lblAction.Size = New System.Drawing.Size(58, 24)
         Me.lblAction.TabIndex = 39
         Me.lblAction.Text = "Action"
         Me.lblAction.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -210,7 +208,7 @@ Partial Class frmUpdateAllotment
         '
         Me.cmbxSugarUnit.FormattingEnabled = True
         Me.cmbxSugarUnit.Items.AddRange(New Object() {"Head", "Family"})
-        Me.cmbxSugarUnit.Location = New System.Drawing.Point(408, 181)
+        Me.cmbxSugarUnit.Location = New System.Drawing.Point(414, 181)
         Me.cmbxSugarUnit.Name = "cmbxSugarUnit"
         Me.cmbxSugarUnit.Size = New System.Drawing.Size(117, 24)
         Me.cmbxSugarUnit.TabIndex = 38
@@ -219,7 +217,7 @@ Partial Class frmUpdateAllotment
         '
         Me.txtbxSugarPricing.Dock = System.Windows.Forms.DockStyle.Fill
         Me.txtbxSugarPricing.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbxSugarPricing.Location = New System.Drawing.Point(299, 181)
+        Me.txtbxSugarPricing.Location = New System.Drawing.Point(305, 181)
         Me.txtbxSugarPricing.Name = "txtbxSugarPricing"
         Me.txtbxSugarPricing.Size = New System.Drawing.Size(100, 24)
         Me.txtbxSugarPricing.TabIndex = 37
@@ -230,7 +228,7 @@ Partial Class frmUpdateAllotment
         Me.txtbxSugarAllotment.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtbxSugarAllotment.Location = New System.Drawing.Point(190, 181)
         Me.txtbxSugarAllotment.Name = "txtbxSugarAllotment"
-        Me.txtbxSugarAllotment.Size = New System.Drawing.Size(100, 24)
+        Me.txtbxSugarAllotment.Size = New System.Drawing.Size(106, 24)
         Me.txtbxSugarAllotment.TabIndex = 36
         '
         'txtbxSugarStock
@@ -259,7 +257,7 @@ Partial Class frmUpdateAllotment
         '
         Me.cmbxAttaUnit.FormattingEnabled = True
         Me.cmbxAttaUnit.Items.AddRange(New Object() {"Head", "Family"})
-        Me.cmbxAttaUnit.Location = New System.Drawing.Point(408, 148)
+        Me.cmbxAttaUnit.Location = New System.Drawing.Point(414, 148)
         Me.cmbxAttaUnit.Name = "cmbxAttaUnit"
         Me.cmbxAttaUnit.Size = New System.Drawing.Size(117, 24)
         Me.cmbxAttaUnit.TabIndex = 33
@@ -268,7 +266,7 @@ Partial Class frmUpdateAllotment
         '
         Me.txtbxAttaPricing.Dock = System.Windows.Forms.DockStyle.Fill
         Me.txtbxAttaPricing.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbxAttaPricing.Location = New System.Drawing.Point(299, 148)
+        Me.txtbxAttaPricing.Location = New System.Drawing.Point(305, 148)
         Me.txtbxAttaPricing.Name = "txtbxAttaPricing"
         Me.txtbxAttaPricing.Size = New System.Drawing.Size(100, 24)
         Me.txtbxAttaPricing.TabIndex = 32
@@ -279,7 +277,7 @@ Partial Class frmUpdateAllotment
         Me.txtbxAttaAllotment.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtbxAttaAllotment.Location = New System.Drawing.Point(190, 148)
         Me.txtbxAttaAllotment.Name = "txtbxAttaAllotment"
-        Me.txtbxAttaAllotment.Size = New System.Drawing.Size(100, 24)
+        Me.txtbxAttaAllotment.Size = New System.Drawing.Size(106, 24)
         Me.txtbxAttaAllotment.TabIndex = 31
         '
         'chkbxAtta
@@ -321,7 +319,7 @@ Partial Class frmUpdateAllotment
         '
         Me.cmbxWhtUnit.FormattingEnabled = True
         Me.cmbxWhtUnit.Items.AddRange(New Object() {"Head", "Family"})
-        Me.cmbxWhtUnit.Location = New System.Drawing.Point(408, 115)
+        Me.cmbxWhtUnit.Location = New System.Drawing.Point(414, 115)
         Me.cmbxWhtUnit.Name = "cmbxWhtUnit"
         Me.cmbxWhtUnit.Size = New System.Drawing.Size(117, 24)
         Me.cmbxWhtUnit.TabIndex = 24
@@ -330,7 +328,7 @@ Partial Class frmUpdateAllotment
         '
         Me.txtbxWhtPricing.Dock = System.Windows.Forms.DockStyle.Fill
         Me.txtbxWhtPricing.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbxWhtPricing.Location = New System.Drawing.Point(299, 115)
+        Me.txtbxWhtPricing.Location = New System.Drawing.Point(305, 115)
         Me.txtbxWhtPricing.Name = "txtbxWhtPricing"
         Me.txtbxWhtPricing.Size = New System.Drawing.Size(100, 24)
         Me.txtbxWhtPricing.TabIndex = 23
@@ -341,7 +339,7 @@ Partial Class frmUpdateAllotment
         Me.txtbxWhtAllotment.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtbxWhtAllotment.Location = New System.Drawing.Point(190, 115)
         Me.txtbxWhtAllotment.Name = "txtbxWhtAllotment"
-        Me.txtbxWhtAllotment.Size = New System.Drawing.Size(100, 24)
+        Me.txtbxWhtAllotment.Size = New System.Drawing.Size(106, 24)
         Me.txtbxWhtAllotment.TabIndex = 22
         '
         'txtbxWhtStock
@@ -372,7 +370,7 @@ Partial Class frmUpdateAllotment
         Me.lblCategory.AutoSize = True
         Me.lblCategory.Dock = System.Windows.Forms.DockStyle.Fill
         Me.lblCategory.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblCategory.Location = New System.Drawing.Point(190, 6)
+        Me.lblCategory.Location = New System.Drawing.Point(81, 6)
         Me.lblCategory.Margin = New System.Windows.Forms.Padding(3)
         Me.lblCategory.Name = "lblCategory"
         Me.lblCategory.Size = New System.Drawing.Size(100, 34)
@@ -385,13 +383,12 @@ Partial Class frmUpdateAllotment
         Me.lblRiceStock.AutoSize = True
         Me.lblRiceStock.Dock = System.Windows.Forms.DockStyle.Fill
         Me.lblRiceStock.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblRiceStock.Location = New System.Drawing.Point(78, 3)
+        Me.lblRiceStock.Location = New System.Drawing.Point(78, 46)
         Me.lblRiceStock.Margin = New System.Windows.Forms.Padding(0)
         Me.lblRiceStock.Name = "lblRiceStock"
-        Me.TableLayoutPanel1.SetRowSpan(Me.lblRiceStock, 2)
-        Me.lblRiceStock.Size = New System.Drawing.Size(106, 73)
+        Me.lblRiceStock.Size = New System.Drawing.Size(106, 30)
         Me.lblRiceStock.TabIndex = 2
-        Me.lblRiceStock.Text = "Stock"
+        Me.lblRiceStock.Text = "Stock (KG)"
         Me.lblRiceStock.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'lblRiceAllotment
@@ -402,9 +399,9 @@ Partial Class frmUpdateAllotment
         Me.lblRiceAllotment.Location = New System.Drawing.Point(190, 49)
         Me.lblRiceAllotment.Margin = New System.Windows.Forms.Padding(3)
         Me.lblRiceAllotment.Name = "lblRiceAllotment"
-        Me.lblRiceAllotment.Size = New System.Drawing.Size(100, 24)
+        Me.lblRiceAllotment.Size = New System.Drawing.Size(106, 24)
         Me.lblRiceAllotment.TabIndex = 3
-        Me.lblRiceAllotment.Text = "Allotment"
+        Me.lblRiceAllotment.Text = "Allotment (KG)"
         Me.lblRiceAllotment.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'lblRicePrice
@@ -412,12 +409,12 @@ Partial Class frmUpdateAllotment
         Me.lblRicePrice.AutoSize = True
         Me.lblRicePrice.Dock = System.Windows.Forms.DockStyle.Fill
         Me.lblRicePrice.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblRicePrice.Location = New System.Drawing.Point(299, 49)
+        Me.lblRicePrice.Location = New System.Drawing.Point(305, 49)
         Me.lblRicePrice.Margin = New System.Windows.Forms.Padding(3)
         Me.lblRicePrice.Name = "lblRicePrice"
         Me.lblRicePrice.Size = New System.Drawing.Size(100, 24)
         Me.lblRicePrice.TabIndex = 4
-        Me.lblRicePrice.Text = "Price"
+        Me.lblRicePrice.Text = "Price (Rs.)"
         Me.lblRicePrice.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'lblRiceUnit
@@ -425,7 +422,7 @@ Partial Class frmUpdateAllotment
         Me.lblRiceUnit.AutoSize = True
         Me.lblRiceUnit.Dock = System.Windows.Forms.DockStyle.Fill
         Me.lblRiceUnit.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblRiceUnit.Location = New System.Drawing.Point(408, 49)
+        Me.lblRiceUnit.Location = New System.Drawing.Point(414, 49)
         Me.lblRiceUnit.Margin = New System.Windows.Forms.Padding(3)
         Me.lblRiceUnit.Name = "lblRiceUnit"
         Me.lblRiceUnit.Size = New System.Drawing.Size(117, 24)
@@ -450,14 +447,14 @@ Partial Class frmUpdateAllotment
         Me.txtbxRiceAllotment.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtbxRiceAllotment.Location = New System.Drawing.Point(190, 82)
         Me.txtbxRiceAllotment.Name = "txtbxRiceAllotment"
-        Me.txtbxRiceAllotment.Size = New System.Drawing.Size(100, 24)
+        Me.txtbxRiceAllotment.Size = New System.Drawing.Size(106, 24)
         Me.txtbxRiceAllotment.TabIndex = 8
         '
         'txtbxRicePricing
         '
         Me.txtbxRicePricing.Dock = System.Windows.Forms.DockStyle.Fill
         Me.txtbxRicePricing.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbxRicePricing.Location = New System.Drawing.Point(299, 82)
+        Me.txtbxRicePricing.Location = New System.Drawing.Point(305, 82)
         Me.txtbxRicePricing.Name = "txtbxRicePricing"
         Me.txtbxRicePricing.Size = New System.Drawing.Size(100, 24)
         Me.txtbxRicePricing.TabIndex = 9
@@ -466,7 +463,7 @@ Partial Class frmUpdateAllotment
         '
         Me.cmbxRiceUnit.FormattingEnabled = True
         Me.cmbxRiceUnit.Items.AddRange(New Object() {"Head", "Family"})
-        Me.cmbxRiceUnit.Location = New System.Drawing.Point(408, 82)
+        Me.cmbxRiceUnit.Location = New System.Drawing.Point(414, 82)
         Me.cmbxRiceUnit.Name = "cmbxRiceUnit"
         Me.cmbxRiceUnit.Size = New System.Drawing.Size(117, 24)
         Me.cmbxRiceUnit.TabIndex = 10
@@ -488,11 +485,11 @@ Partial Class frmUpdateAllotment
         '
         Me.lnklblUpdate.AutoSize = True
         Me.lnklblUpdate.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.lnklblUpdate.Location = New System.Drawing.Point(531, 79)
+        Me.lnklblUpdate.Location = New System.Drawing.Point(537, 79)
         Me.lnklblUpdate.Margin = New System.Windows.Forms.Padding(0)
         Me.lnklblUpdate.Name = "lnklblUpdate"
         Me.TableLayoutPanel1.SetRowSpan(Me.lnklblUpdate, 2)
-        Me.lnklblUpdate.Size = New System.Drawing.Size(145, 63)
+        Me.lnklblUpdate.Size = New System.Drawing.Size(64, 63)
         Me.lnklblUpdate.TabIndex = 40
         Me.lnklblUpdate.TabStop = True
         Me.lnklblUpdate.Text = "Update"
@@ -505,18 +502,18 @@ Partial Class frmUpdateAllotment
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.grpbxCategory.AutoSize = True
         Me.grpbxCategory.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.TableLayoutPanel1.SetColumnSpan(Me.grpbxCategory, 3)
+        Me.TableLayoutPanel1.SetColumnSpan(Me.grpbxCategory, 4)
         Me.grpbxCategory.Controls.Add(Me.rdobtnRKSYII)
         Me.grpbxCategory.Controls.Add(Me.rdobtnRKSYI)
         Me.grpbxCategory.Controls.Add(Me.rdobtnSPHH)
         Me.grpbxCategory.Controls.Add(Me.rdobtnPHH)
         Me.grpbxCategory.Controls.Add(Me.rdobtnAAY)
         Me.grpbxCategory.ImeMode = System.Windows.Forms.ImeMode.[On]
-        Me.grpbxCategory.Location = New System.Drawing.Point(296, 3)
+        Me.grpbxCategory.Location = New System.Drawing.Point(187, 3)
         Me.grpbxCategory.Margin = New System.Windows.Forms.Padding(0)
         Me.grpbxCategory.Name = "grpbxCategory"
         Me.grpbxCategory.Padding = New System.Windows.Forms.Padding(0)
-        Me.grpbxCategory.Size = New System.Drawing.Size(380, 40)
+        Me.grpbxCategory.Size = New System.Drawing.Size(414, 40)
         Me.grpbxCategory.TabIndex = 42
         Me.grpbxCategory.TabStop = False
         '
@@ -580,7 +577,7 @@ Partial Class frmUpdateAllotment
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
         Me.AutoSize = True
         Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ClientSize = New System.Drawing.Size(679, 246)
+        Me.ClientSize = New System.Drawing.Size(604, 246)
         Me.Controls.Add(Me.TableLayoutPanel1)
         Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Margin = New System.Windows.Forms.Padding(4)

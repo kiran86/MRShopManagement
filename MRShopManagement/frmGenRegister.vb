@@ -52,7 +52,7 @@ Public Class frmGenRegister
     End Sub
 
     Private Sub bttnGenerate_Click(sender As Object, e As EventArgs) Handles bttnGenerate.Click
-        regName = cmboxCategory.SelectedItem.ToString & " " & cmboxRegisterType.SelectedItem.ToString & " " & "Register"
+        'regName = IIf(cmboxCategory.SelectedIndex < 0, "", cmboxCategory.SelectedItem.ToString) & " " & cmboxRegisterType.SelectedItem.ToString & " " & "Register"
         If ValidateForm(sender) Then
             Select Case cmboxRegisterType.SelectedIndex
                 Case regStock
@@ -98,6 +98,12 @@ Public Class frmGenRegister
         Dim totalSugrPrice As Double = 0.0
         Dim totalKOilPrice As Double = 0.0
 
+        Dim riceStock As Double
+        Dim whetStock As Double
+        Dim attaStock As Double
+        Dim sugrStock As Double
+        Dim koilStock As Double
+
         Dim riceScale As Double
         Dim whetScale As Double
         Dim attaScale As Double
@@ -113,9 +119,82 @@ Public Class frmGenRegister
         datagridRegister.Rows.Clear()
         datagridRegister.Columns.Clear()
         Me.Cursor = Cursors.WaitCursor
-
+        Console.WriteLine(RegType)
         Select Case RegType
             Case regStock
+                With datagridRegister
+                    .Columns.Add("delvDate", "Date")
+                    .Columns.Add("rcCategory", "Category")
+                    .Columns.Add("rcProduct", "Product")
+                    .Columns.Add("stockOB", "Openning Balance")
+                    .Columns.Add("stockReceived", "Received")
+                    .Columns.Add("stockTotal", "Total")
+                    .Columns.Add("stockSold", "Sold")
+                    .Columns.Add("stockLoss", "Handling Loss")
+                    .Columns.Add("stockClosing", "Closing Balance")
+                End With
+                Try
+                    connection.Open()
+
+                    sql = "SELECT MIN(Delivery), MAX(Delivery) FROM Delivery"
+                    cmd = New OleDbCommand(sql, connection)
+                    dr = cmd.ExecuteReader
+                    dr.Read()
+                    If dr.HasRows And Not dr.IsDBNull(0) Then
+                        startDate = dr.GetDateTime(0).Date
+                        endDate = dr.GetDateTime(1).Date
+                    End If
+
+                    delvDate = startDate
+                    While delvDate <> endDate.AddDays(1)
+                        For Each catg As String In {"AAY", "PHH", "SPHH", "RKSY-I", "RKSY-II"}
+                            For product As Integer = 1 To 5
+                                rowID = datagridRegister.Rows.Add
+                                row = datagridRegister.Rows(rowID)
+                                With row
+                                    .Cells(0).Value = delvDate.ToShortDateString
+                                    .Cells(1).Value = catg
+                                End With
+
+                                sql = "SELECT Name FROM Products WHERE ProductID=" & product
+                                cmd = New OleDbCommand(sql, connection)
+                                dr = cmd.ExecuteReader
+                                dr.Read()
+                                row.Cells(2).Value = dr(0).ToString
+
+                                If delvDate = startDate Then
+                                    sql = "SELECT Received FROM Stock WHERE Category = '" & catg & "' AND ProductID = " & product
+                                    cmd = New OleDbCommand(sql, connection)
+                                    dr = cmd.ExecuteReader
+                                    dr.Read()
+                                    row.Cells(3).Value = Format(dr.GetDouble(0), "###0.000")
+                                Else
+                                    row.Cells(3).Value = datagridRegister(8, rowID - 25).Value
+                                End If
+
+                                row.Cells(4).Value = Format(0, "###0.000")
+                                row.Cells(5).Value = datagridRegister(3, rowID).Value
+
+                                sql = "SELECT SUM FROM Stock WHERE Category = '" & catg & "' AND ProductID = " & product
+                                cmd = New OleDbCommand(sql, connection)
+                                dr = cmd.ExecuteReader
+                                dr.Read()
+                                row.Cells(3).Value = Format(dr.GetDouble(0), "###0.000")
+                            Next
+                        Next
+                        delvDate = delvDate.AddDays(1)
+                        rowID = datagridRegister.Rows.Add()
+                        row = datagridRegister.Rows(rowID)
+                        For i As Integer = 0 To 8
+                            row.Cells(i).Value = " "
+                        Next
+                    End While
+                    Me.Cursor = Cursors.Default
+                Catch ex As Exception
+                    MsgBox("Fatal Error: " + ex.Message + "->" + ex.StackTrace)
+                Finally
+                    connection.Close()
+                End Try
 
             Case regSale
                 With datagridRegister
@@ -131,164 +210,166 @@ Public Class frmGenRegister
                     .Columns.Add("sugarQty", "Sugar")
                     .Columns.Add("koilQty", "K. Oil")
                 End With
+
+                Try
+                    connection.Open()
+
+                    sql = "SELECT MIN(Delivery), MAX(Delivery) FROM Delivery WHERE Category = '" + Category + "'"
+                    cmd = New OleDbCommand(sql, connection)
+                    dr = cmd.ExecuteReader
+                    dr.Read()
+                    If dr.HasRows And Not dr.IsDBNull(0) Then
+                        startDate = dr.GetDateTime(0).Date
+                        endDate = dr.GetDateTime(1).Date
+                    End If
+
+                    sql = "SELECT * FROM Allotment WHERE Category = '" + Category + "'"
+                    cmd = New OleDbCommand(sql, connection)
+                    dr = cmd.ExecuteReader
+                    If dr.HasRows Then
+                        While dr.Read
+                            Select Case Integer.Parse(dr(0).ToString)
+                                Case 1
+                                    riceScale = dr.GetDouble(2)
+                                    riceUnit = dr.GetString(3)
+                                Case 2
+                                    whetScale = dr.GetDouble(2)
+                                    whetUnit = dr.GetString(3)
+                                Case 3
+                                    attaScale = dr.GetDouble(2)
+                                    attaUnit = dr.GetString(3)
+                                Case 4
+                                    sugrScale = dr.GetDouble(2)
+                                    sugrUnit = dr.GetString(3)
+                                Case 5
+                                    koilScale = dr.GetDouble(2)
+                                    koilUnit = dr.GetString(3)
+                            End Select
+                        End While
+                    End If
+                    'Console.WriteLine(startDate.ToOADate)
+
+                    Dim myCulture As CultureInfo = CultureInfo.CurrentCulture
+                    'Console.WriteLine(DateTime.ParseExact(startDate.ToShortDateString, "d", myCulture))
+
+                    delvDate = startDate
+                    While delvDate <> endDate.AddDays(1)
+                        totalHead = 0
+                        totalFamily = 0
+                        totalRicePrice = 0
+                        totalWhetPrice = 0
+                        totalAttaPrice = 0
+                        totalSugrPrice = 0
+                        totalKOilPrice = 0
+
+                        'sql = "SELECT RCNo, CashMemoNo FROM Delivery WHERE Category = '" + Category + "' AND Delivery BETWEEN #" + DateTime.ParseExact(delvDate.ToShortDateString & " 00:00:01", "dd/MM/yyyy HH:mm:ss", Nothing) + "# AND #" + DateTime.ParseExact(delvDate.ToShortDateString & " 23:59:59", "dd/MM/yyyy HH:mm:ss", Nothing) + "# ORDER BY CashMemoNo ASC"
+                        sql = "SELECT RCNo, CashMemoNo FROM Delivery WHERE Category = '" + Category + "' AND Delivery BETWEEN FORMAT(#" + DateTime.ParseExact(delvDate.ToShortDateString & " 00:00:01", "dd/MM/yyyy HH:mm:ss", myCulture) + "#, 'mm/dd/yyyy hh:nn:ss am/pm') AND FORMAT(#" + DateTime.ParseExact(delvDate.ToShortDateString & " 23:59:59", "dd/MM/yyyy HH:mm:ss", myCulture) + "#, 'mm/dd/yyyy hh:nn:ss am/pm') ORDER BY CashMemoNo ASC"
+                        'Console.WriteLine(sql)
+                        cmd = New OleDbCommand(sql, connection)
+                        dr = cmd.ExecuteReader
+                        If dr.HasRows Then
+                            While dr.Read()
+                                rowID = datagridRegister.Rows.Add
+                                totalHead = totalHead + 1
+                                row = datagridRegister.Rows(rowID)
+                                With row
+                                    .Cells(0).Value = delvDate.ToShortDateString
+                                    .Cells(1).Value = dr(0).ToString
+                                    If rowID = 0 Then
+                                        parentRowID = rowID
+                                        totalFamily = totalFamily + 1
+                                        .Cells(2).Value = dr(1).ToString
+                                        .Cells(4).Value = 1
+                                        .Cells(5).Value = noHead
+                                    ElseIf dr.GetInt32(1) = datagridRegister.Rows(parentRowID).Cells(2).Value Then
+                                        '.Cells(2).Value = 
+                                        '.Cells(4).Value =
+                                        '.Cells(5).Value = 
+                                        noHead = noHead + 1
+                                        datagridRegister.Rows(parentRowID).Cells(5).Value = noHead
+                                    Else
+                                        parentRowID = rowID
+                                        totalFamily = totalFamily + 1
+                                        noHead = 1
+                                        .Cells(2).Value = dr(1).ToString
+                                        .Cells(4).Value = 1
+                                        .Cells(5).Value = noHead
+                                    End If
+                                    .Cells(3).Value = Category
+                                    If parentRowID = rowID Then
+                                        .Cells(6).Value = Format(riceScale, "###0.000")
+                                        .Cells(7).Value = Format(whetScale, "###0.000")
+                                        .Cells(8).Value = Format(attaScale, "###0.000")
+                                        .Cells(9).Value = Format(sugrScale, "###0.000")
+                                        .Cells(10).Value = Format(koilScale, "###0.000")
+                                    Else
+                                        If riceUnit = "Head" Then
+                                            .Cells(6).Value = Format(riceScale, "###0.000")
+                                        End If
+                                        If whetUnit = "Head" Then
+                                            .Cells(7).Value = Format(whetScale, "###0.000")
+                                        End If
+                                        If attaUnit = "Head" Then
+                                            .Cells(8).Value = Format(attaScale, "###0.000")
+                                        End If
+                                        If sugrUnit = "Head" Then
+                                            .Cells(9).Value = Format(sugrScale, "###0.000")
+                                        End If
+                                        If koilUnit = "Head" Then
+                                            .Cells(10).Value = Format(koilScale, "###0.000")
+                                        End If
+                                    End If
+                                End With
+                            End While
+
+                            rowID = datagridRegister.Rows.Add
+                            row = datagridRegister.Rows(rowID)
+                            With row
+                                .Cells(0).Value = delvDate.ToShortDateString
+                                .Cells(1).Value = "Total"
+                                .Cells(2).Value = "-"
+                                .Cells(3).Value = Category
+                                .Cells(4).Value = totalFamily
+                                .Cells(5).Value = totalHead
+                                For Each r As DataGridViewRow In datagridRegister.Rows
+                                    If r.Cells(0).Value = .Cells(0).Value And Not r.Index = rowID Then
+                                        If Not r.Cells(6).Value = Nothing Then
+                                            totalRicePrice = totalRicePrice + Double.Parse(r.Cells(6).Value)
+                                        End If
+                                        If Not r.Cells(7).Value = Nothing Then
+                                            totalWhetPrice = totalWhetPrice + Double.Parse(r.Cells(7).Value)
+                                        End If
+                                        If Not r.Cells(8).Value = Nothing Then
+                                            totalAttaPrice = totalAttaPrice + Double.Parse(r.Cells(8).Value)
+                                        End If
+                                        If Not r.Cells(9).Value = Nothing Then
+                                            totalSugrPrice = totalSugrPrice + Double.Parse(r.Cells(9).Value)
+                                        End If
+                                        If Not r.Cells(10).Value = Nothing Then
+                                            totalKOilPrice = totalKOilPrice + Double.Parse(r.Cells(10).Value)
+                                        End If
+                                    End If
+                                Next
+                                .Cells(6).Value = Format(totalRicePrice, "###0.000")
+                                .Cells(7).Value = Format(totalWhetPrice, "###0.000")
+                                .Cells(8).Value = Format(totalAttaPrice, "###0.000")
+                                .Cells(9).Value = Format(totalSugrPrice, "###0.000")
+                                .Cells(10).Value = Format(totalKOilPrice, "###0.000")
+                            End With
+                            Dim style As DataGridViewCellStyle = New DataGridViewCellStyle
+                            style.Font = New Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold)
+                            row.DefaultCellStyle = style
+                        End If
+                        delvDate = delvDate.AddDays(1)
+                    End While
+                    connection.Close()
+                    Me.Cursor = Cursors.Default
+                Catch ex As Exception
+                    MsgBox("Fatal Error: " + ex.Message + "->" + ex.StackTrace)
+                End Try
         End Select
 
-        Try
-            connection.Open()
 
-            sql = "SELECT MIN(Delivery), MAX(Delivery) FROM Delivery WHERE Category = '" + Category + "'"
-            cmd = New OleDbCommand(Sql, connection)
-            dr = cmd.ExecuteReader
-            dr.Read()
-            If dr.HasRows And Not dr.IsDBNull(0) Then
-                startDate = dr.GetDateTime(0).Date
-                endDate = dr.GetDateTime(1).Date
-            End If
-
-            sql = "SELECT * FROM Allotment WHERE Category = '" + Category + "'"
-            cmd = New OleDbCommand(Sql, connection)
-            dr = cmd.ExecuteReader
-            If dr.HasRows Then
-                While dr.Read
-                    Select Case Integer.Parse(dr(0).ToString)
-                        Case 1
-                            riceScale = dr.GetDouble(2)
-                            riceUnit = dr.GetString(3)
-                        Case 2
-                            whetScale = dr.GetDouble(2)
-                            whetUnit = dr.GetString(3)
-                        Case 3
-                            attaScale = dr.GetDouble(2)
-                            attaUnit = dr.GetString(3)
-                        Case 4
-                            sugrScale = dr.GetDouble(2)
-                            sugrUnit = dr.GetString(3)
-                        Case 5
-                            koilScale = dr.GetDouble(2)
-                            koilUnit = dr.GetString(3)
-                    End Select
-                End While
-            End If
-            Console.WriteLine(startDate.ToOADate)
-
-            Dim myCulture As CultureInfo = CultureInfo.CurrentCulture
-            Console.WriteLine(DateTime.ParseExact(startDate.ToShortDateString, "d", myCulture))
-
-            delvDate = startDate
-            While delvDate <> endDate.AddDays(1)
-                totalHead = 0
-                totalFamily = 0
-                totalRicePrice = 0
-                totalWhetPrice = 0
-                totalAttaPrice = 0
-                totalSugrPrice = 0
-                totalKOilPrice = 0
-
-                'sql = "SELECT RCNo, CashMemoNo FROM Delivery WHERE Category = '" + Category + "' AND Delivery BETWEEN #" + DateTime.ParseExact(delvDate.ToShortDateString & " 00:00:01", "dd/MM/yyyy HH:mm:ss", Nothing) + "# AND #" + DateTime.ParseExact(delvDate.ToShortDateString & " 23:59:59", "dd/MM/yyyy HH:mm:ss", Nothing) + "# ORDER BY CashMemoNo ASC"
-                sql = "SELECT RCNo, CashMemoNo FROM Delivery WHERE Category = '" + Category + "' AND Delivery BETWEEN FORMAT(#" + DateTime.ParseExact(delvDate.ToShortDateString & " 00:00:01", "dd/MM/yyyy HH:mm:ss", myCulture) + "#, 'mm/dd/yyyy hh:nn:ss am/pm') AND FORMAT(#" + DateTime.ParseExact(delvDate.ToShortDateString & " 23:59:59", "dd/MM/yyyy HH:mm:ss", myCulture) + "#, 'mm/dd/yyyy hh:nn:ss am/pm') ORDER BY CashMemoNo ASC"
-                'Console.WriteLine(sql)
-                cmd = New OleDbCommand(sql, connection)
-                dr = cmd.ExecuteReader
-                If dr.HasRows Then
-                    While dr.Read()
-                        rowID = datagridRegister.Rows.Add
-                        totalHead = totalHead + 1
-                        row = datagridRegister.Rows(rowID)
-                        With row
-                            .Cells(0).Value = delvDate.ToShortDateString
-                            .Cells(1).Value = dr(0).ToString
-                            If rowID = 0 Then
-                                parentRowID = rowID
-                                totalFamily = totalFamily + 1
-                                .Cells(2).Value = dr(1).ToString
-                                .Cells(4).Value = 1
-                                .Cells(5).Value = noHead
-                            ElseIf dr.GetInt32(1) = datagridRegister.Rows(parentRowID).Cells(2).Value Then
-                                '.Cells(2).Value = 
-                                '.Cells(4).Value =
-                                '.Cells(5).Value = 
-                                noHead = noHead + 1
-                                datagridRegister.Rows(parentRowID).Cells(5).Value = noHead
-                            Else
-                                parentRowID = rowID
-                                totalFamily = totalFamily + 1
-                                noHead = 1
-                                .Cells(2).Value = dr(1).ToString
-                                .Cells(4).Value = 1
-                                .Cells(5).Value = noHead
-                            End If
-                            .Cells(3).Value = Category
-                            If parentRowID = rowID Then
-                                .Cells(6).Value = Format(riceScale, "###0.000")
-                                .Cells(7).Value = Format(whetScale, "###0.000")
-                                .Cells(8).Value = Format(attaScale, "###0.000")
-                                .Cells(9).Value = Format(sugrScale, "###0.000")
-                                .Cells(10).Value = Format(koilScale, "###0.000")
-                            Else
-                                If riceUnit = "Head" Then
-                                    .Cells(6).Value = Format(riceScale, "###0.000")
-                                End If
-                                If whetUnit = "Head" Then
-                                    .Cells(7).Value = Format(whetScale, "###0.000")
-                                End If
-                                If attaUnit = "Head" Then
-                                    .Cells(8).Value = Format(attaScale, "###0.000")
-                                End If
-                                If sugrUnit = "Head" Then
-                                    .Cells(9).Value = Format(sugrScale, "###0.000")
-                                End If
-                                If koilUnit = "Head" Then
-                                    .Cells(10).Value = Format(koilScale, "###0.000")
-                                End If
-                            End If
-                        End With
-                    End While
-
-                    rowID = datagridRegister.Rows.Add
-                    row = datagridRegister.Rows(rowID)
-                    With row
-                        .Cells(0).Value = delvDate.ToShortDateString
-                        .Cells(1).Value = "Total"
-                        .Cells(2).Value = "-"
-                        .Cells(3).Value = Category
-                        .Cells(4).Value = totalFamily
-                        .Cells(5).Value = totalHead
-                        For Each r As DataGridViewRow In datagridRegister.Rows
-                            If r.Cells(0).Value = .Cells(0).Value And Not r.Index = rowID Then
-                                If Not r.Cells(6).Value = Nothing Then
-                                    totalRicePrice = totalRicePrice + Double.Parse(r.Cells(6).Value)
-                                End If
-                                If Not r.Cells(7).Value = Nothing Then
-                                    totalWhetPrice = totalWhetPrice + Double.Parse(r.Cells(7).Value)
-                                End If
-                                If Not r.Cells(8).Value = Nothing Then
-                                    totalAttaPrice = totalAttaPrice + Double.Parse(r.Cells(8).Value)
-                                End If
-                                If Not r.Cells(9).Value = Nothing Then
-                                    totalSugrPrice = totalSugrPrice + Double.Parse(r.Cells(9).Value)
-                                End If
-                                If Not r.Cells(10).Value = Nothing Then
-                                    totalKOilPrice = totalKOilPrice + Double.Parse(r.Cells(10).Value)
-                                End If
-                            End If
-                        Next
-                        .Cells(6).Value = Format(totalRicePrice, "###0.000")
-                        .Cells(7).Value = Format(totalWhetPrice, "###0.000")
-                        .Cells(8).Value = Format(totalAttaPrice, "###0.000")
-                        .Cells(9).Value = Format(totalSugrPrice, "###0.000")
-                        .Cells(10).Value = Format(totalKOilPrice, "###0.000")
-                    End With
-                    Dim style As DataGridViewCellStyle = New DataGridViewCellStyle
-                    style.Font = New Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold)
-                    row.DefaultCellStyle = style
-                End If
-                delvDate = delvDate.AddDays(1)
-            End While
-            connection.Close()
-            Me.Cursor = Cursors.Default
-        Catch ex As Exception
-            MsgBox("Fatal Error: " + ex.Message + "->" + ex.StackTrace)
-        End Try
     End Sub
 
     Private Sub datagridRegister_CellPainting(sender As Object, e As DataGridViewCellPaintingEventArgs) Handles datagridRegister.CellPainting
