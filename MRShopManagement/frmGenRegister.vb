@@ -174,11 +174,12 @@ Public Class frmGenRegister
                                     dr.Read()
                                     row.Cells(3).Value = Format(dr.GetDouble(0), "###0.000")
                                 Else
-                                    row.Cells(3).Value = datagridRegister(8, rowID - 25).Value
+                                    row.Cells(3).Value = datagridRegister(8, rowID - 26).Value
                                 End If
 
                                 row.Cells(4).Value = Format(0, "###0.000")
-                                row.Cells(5).Value = datagridRegister(3, rowID).Value
+                                'Total Stock = Opening Balance + Received Stock
+                                row.Cells(5).Value = Format(Double.Parse(datagridRegister(3, rowID).Value) + Double.Parse(datagridRegister(4, rowID).Value), "###0.000")
 
                                 sql = "SELECT Scale, Unit FROM Allotment WHERE ProductID = " & product & " AND Category = '" & catg & "'"
                                 cmd = New OleDbCommand(sql, connection)
@@ -186,17 +187,21 @@ Public Class frmGenRegister
                                 dr.Read()
                                 scale = dr.GetDouble(0)
                                 unit = dr.GetString(1)
-                                If unit Is "Head" Then
+                                If unit = "Head" Then
                                     criteria = "RCNo"
                                 Else
                                     criteria = "CashMemoNo"
                                 End If
-                                sql = "SELECT COUNT(" & criteria & ") FROM Delivery WHERE Category = '" + catg + "' AND Delivery BETWEEN FORMAT(#" + DateTime.ParseExact(delvDate.ToShortDateString & " 00:00:01", "dd/MM/yyyy HH:mm:ss", myCulture) + "#, 'mm/dd/yyyy hh:nn:ss am/pm') AND FORMAT(#" + DateTime.ParseExact(delvDate.ToShortDateString & " 23:59:59", "dd/MM/yyyy HH:mm:ss", myCulture) + "#, 'mm/dd/yyyy hh:nn:ss am/pm')"
+                                sql = "SELECT COUNT(*) FROM (SELECT DISTINCT " & criteria & " FROM Delivery WHERE Category = '" + catg + "' AND Delivery BETWEEN FORMAT(#" + DateTime.ParseExact(delvDate.ToShortDateString & " 00:00:01", "dd/MM/yyyy HH:mm:ss", myCulture) + "#, 'mm/dd/yyyy hh:nn:ss am/pm') AND FORMAT(#" + DateTime.ParseExact(delvDate.ToShortDateString & " 23:59:59", "dd/MM/yyyy HH:mm:ss", myCulture) + "#, 'mm/dd/yyyy hh:nn:ss am/pm'))"
                                 cmd = New OleDbCommand(sql, connection)
                                 dr = cmd.ExecuteReader
                                 dr.Read()
                                 noUnit = dr.GetInt32(0)
+                                Console.WriteLine(delvDate & " " & catg & " " & product & " " & scale & " " & unit & " " & criteria & " " & noUnit)
                                 row.Cells(6).Value = Format(noUnit * scale, "###0.000")
+
+                                row.Cells(7).Value = Format(0.0, "###0.000")
+                                row.Cells(8).Value = Format(Double.Parse(datagridRegister(5, rowID).Value) - (Double.Parse(datagridRegister(6, rowID).Value) + Double.Parse(datagridRegister(7, rowID).Value)), "###0.000")
                             Next
                         Next
                         delvDate = delvDate.AddDays(1)
