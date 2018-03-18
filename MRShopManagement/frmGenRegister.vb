@@ -124,7 +124,7 @@ Public Class frmGenRegister
         datagridRegister.Rows.Clear()
         datagridRegister.Columns.Clear()
         Me.Cursor = Cursors.WaitCursor
-        Console.WriteLine(RegType)
+        'Console.WriteLine(RegType)
         Select Case RegType
             Case regStock
                 With datagridRegister
@@ -197,7 +197,7 @@ Public Class frmGenRegister
                                 dr = cmd.ExecuteReader
                                 dr.Read()
                                 noUnit = dr.GetInt32(0)
-                                Console.WriteLine(delvDate & " " & catg & " " & product & " " & scale & " " & unit & " " & criteria & " " & noUnit)
+                                'Console.WriteLine(delvDate & " " & catg & " " & product & " " & scale & " " & unit & " " & criteria & " " & noUnit)
                                 row.Cells(6).Value = Format(noUnit * scale, "###0.000")
 
                                 row.Cells(7).Value = Format(0.0, "###0.000")
@@ -387,10 +387,12 @@ Public Class frmGenRegister
                     Me.Cursor = Cursors.Default
                 Catch ex As Exception
                     MsgBox("Fatal Error: " + ex.Message + "->" + ex.StackTrace)
+                Finally
+                    If connection.State = ConnectionState.Open Then
+                        connection.Close()
+                    End If
                 End Try
         End Select
-
-
     End Sub
 
     Private Sub datagridRegister_CellPainting(sender As Object, e As DataGridViewCellPaintingEventArgs) Handles datagridRegister.CellPainting
@@ -477,7 +479,7 @@ Public Class frmGenRegister
                                     fs.WriteLine(String.Format("      <ss:Cell ss:StyleID=""2"">" & "<ss:Data ss:Type=""String"">{0}</ss:Data></ss:Cell>", cellText.ToString))
                                 Case 2, 4, 5
                                     If Not datagridRegister.Item(1, i).Value.ToString = "Total" Then familyMember = datagridRegister.Item(5, i).Value - 1 Else familyMember = 0
-                                    Console.WriteLine(familyMember)
+                                    'Console.WriteLine(familyMember)
                                     fs.WriteLine(String.Format("      <ss:Cell ss:MergeDown=""{0}"" ss:StyleID=""2"">" & "<ss:Data ss:Type=""String"">{1}</ss:Data></ss:Cell>", familyMember, cellText.ToString))
                                 Case 6, 7, 8, 9
                                     fs.WriteLine(String.Format("      <ss:Cell ss:StyleID=""2"">" & "<ss:Data ss:Type=""String"">{0}</ss:Data></ss:Cell>", cellText.ToString))

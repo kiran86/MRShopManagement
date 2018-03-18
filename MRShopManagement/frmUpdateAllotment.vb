@@ -188,15 +188,15 @@ Public Class frmUpdateAllotment
                     Case "Stock"
                         txtbxName = txtbxName & table
                         txtbxControl = Me.Controls.Find(txtbxName, True)(0)
-                        sql = sql & "Received = " & txtbxControl.Text & " WHERE Category = '" & category & "' AND ProductID = " & productID
+                        sql = sql & "Received = " & Double.Parse(txtbxControl.Text) & " WHERE Category = '" & category & "' AND ProductID = " & productID
                     Case "Allotment"
                         txtbxName = txtbxName & table
                         txtbxControl = Me.Controls.Find(txtbxName, True)(0)
-                        sql = sql & "Scale = " & txtbxControl.Text & ", Unit = '" & cmbxControl.SelectedItem & "' WHERE Category = '" & category & "' AND ProductID = " & productID
+                        sql = sql & "Scale = " & Double.Parse(txtbxControl.Text) & ", Unit = '" & cmbxControl.SelectedItem & "' WHERE Category = '" & category & "' AND ProductID = " & productID
                     Case "Pricing"
                         txtbxName = txtbxName & table
                         txtbxControl = Me.Controls.Find(txtbxName, True)(0)
-                        sql = sql & "Price = " & txtbxControl.Text & " WHERE Category = '" & category & "' AND ProductID = " & productID
+                        sql = sql & "Price = " & Double.Parse(txtbxControl.Text) & " WHERE Category = '" & category & "' AND ProductID = " & productID
                 End Select
 
                 count = count + 1

@@ -24,9 +24,10 @@ Partial Class frmAutoDelivery
     Private Sub InitializeComponent()
         Me.prgbrStatus = New System.Windows.Forms.ProgressBar()
         Me.txtbxStatus = New System.Windows.Forms.TextBox()
-        Me.bttnLoad = New System.Windows.Forms.Button()
+        Me.bttnDeliver = New System.Windows.Forms.Button()
         Me.bttnStop = New System.Windows.Forms.Button()
         Me.dttmDeliveryDate = New System.Windows.Forms.DateTimePicker()
+        Me.lblDelvDate = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'prgbrStatus
@@ -47,14 +48,14 @@ Partial Class frmAutoDelivery
         Me.txtbxStatus.Size = New System.Drawing.Size(487, 211)
         Me.txtbxStatus.TabIndex = 1
         '
-        'bttnLoad
+        'bttnDeliver
         '
-        Me.bttnLoad.Location = New System.Drawing.Point(178, 287)
-        Me.bttnLoad.Name = "bttnLoad"
-        Me.bttnLoad.Size = New System.Drawing.Size(75, 23)
-        Me.bttnLoad.TabIndex = 2
-        Me.bttnLoad.Text = "Load"
-        Me.bttnLoad.UseVisualStyleBackColor = True
+        Me.bttnDeliver.Location = New System.Drawing.Point(178, 287)
+        Me.bttnDeliver.Name = "bttnDeliver"
+        Me.bttnDeliver.Size = New System.Drawing.Size(75, 23)
+        Me.bttnDeliver.TabIndex = 2
+        Me.bttnDeliver.Text = "Deliver"
+        Me.bttnDeliver.UseVisualStyleBackColor = True
         '
         'bttnStop
         '
@@ -68,19 +69,29 @@ Partial Class frmAutoDelivery
         'dttmDeliveryDate
         '
         Me.dttmDeliveryDate.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.dttmDeliveryDate.Location = New System.Drawing.Point(208, 13)
+        Me.dttmDeliveryDate.Location = New System.Drawing.Point(259, 12)
         Me.dttmDeliveryDate.Name = "dttmDeliveryDate"
         Me.dttmDeliveryDate.Size = New System.Drawing.Size(97, 22)
         Me.dttmDeliveryDate.TabIndex = 4
+        '
+        'lblDelvDate
+        '
+        Me.lblDelvDate.AutoSize = True
+        Me.lblDelvDate.Location = New System.Drawing.Point(160, 15)
+        Me.lblDelvDate.Name = "lblDelvDate"
+        Me.lblDelvDate.Size = New System.Drawing.Size(93, 16)
+        Me.lblDelvDate.TabIndex = 5
+        Me.lblDelvDate.Text = "Delivery Date:"
         '
         'frmAutoDelivery
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(512, 322)
+        Me.Controls.Add(Me.lblDelvDate)
         Me.Controls.Add(Me.dttmDeliveryDate)
         Me.Controls.Add(Me.bttnStop)
-        Me.Controls.Add(Me.bttnLoad)
+        Me.Controls.Add(Me.bttnDeliver)
         Me.Controls.Add(Me.txtbxStatus)
         Me.Controls.Add(Me.prgbrStatus)
         Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -95,7 +106,8 @@ Partial Class frmAutoDelivery
 
     Friend WithEvents prgbrStatus As ProgressBar
     Friend WithEvents txtbxStatus As TextBox
-    Friend WithEvents bttnLoad As Button
+    Friend WithEvents bttnDeliver As Button
     Friend WithEvents bttnStop As Button
     Friend WithEvents dttmDeliveryDate As DateTimePicker
+    Friend WithEvents lblDelvDate As Label
 End Class

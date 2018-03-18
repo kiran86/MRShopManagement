@@ -543,8 +543,8 @@ Public Class frmMain
     End Sub
 
     Private Sub AutoDeliveryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AutoDeliveryToolStripMenuItem.Click
-        'Me.Enabled = False
-        'frmAutoDelivery.Show()
+        Me.Hide()
+        frmAutoDelivery.Show()
     End Sub
 
     Private Sub ClearDeliveryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ClearDeliveryToolStripMenuItem.Click

@@ -135,7 +135,7 @@ Partial Class frmUpdateAllotment
         Me.cmbxKOilUnit.Location = New System.Drawing.Point(414, 214)
         Me.cmbxKOilUnit.Name = "cmbxKOilUnit"
         Me.cmbxKOilUnit.Size = New System.Drawing.Size(117, 24)
-        Me.cmbxKOilUnit.TabIndex = 47
+        Me.cmbxKOilUnit.TabIndex = 29
         '
         'txtbxKOilPricing
         '
@@ -144,7 +144,7 @@ Partial Class frmUpdateAllotment
         Me.txtbxKOilPricing.Location = New System.Drawing.Point(305, 214)
         Me.txtbxKOilPricing.Name = "txtbxKOilPricing"
         Me.txtbxKOilPricing.Size = New System.Drawing.Size(100, 24)
-        Me.txtbxKOilPricing.TabIndex = 46
+        Me.txtbxKOilPricing.TabIndex = 28
         '
         'txtbxKOilAllotment
         '
@@ -153,7 +153,7 @@ Partial Class frmUpdateAllotment
         Me.txtbxKOilAllotment.Location = New System.Drawing.Point(190, 214)
         Me.txtbxKOilAllotment.Name = "txtbxKOilAllotment"
         Me.txtbxKOilAllotment.Size = New System.Drawing.Size(106, 24)
-        Me.txtbxKOilAllotment.TabIndex = 45
+        Me.txtbxKOilAllotment.TabIndex = 27
         '
         'txtbxKOilStock
         '
@@ -162,7 +162,7 @@ Partial Class frmUpdateAllotment
         Me.txtbxKOilStock.Location = New System.Drawing.Point(81, 214)
         Me.txtbxKOilStock.Name = "txtbxKOilStock"
         Me.txtbxKOilStock.Size = New System.Drawing.Size(100, 24)
-        Me.txtbxKOilStock.TabIndex = 44
+        Me.txtbxKOilStock.TabIndex = 26
         '
         'chkbxKOil
         '
@@ -173,7 +173,7 @@ Partial Class frmUpdateAllotment
         Me.chkbxKOil.Location = New System.Drawing.Point(6, 214)
         Me.chkbxKOil.Name = "chkbxKOil"
         Me.chkbxKOil.Size = New System.Drawing.Size(66, 26)
-        Me.chkbxKOil.TabIndex = 43
+        Me.chkbxKOil.TabIndex = 25
         Me.chkbxKOil.Text = "K. Oil"
         Me.chkbxKOil.UseVisualStyleBackColor = True
         '
@@ -186,7 +186,7 @@ Partial Class frmUpdateAllotment
         Me.lnklblCancel.Name = "lnklblCancel"
         Me.TableLayoutPanel1.SetRowSpan(Me.lnklblCancel, 2)
         Me.lnklblCancel.Size = New System.Drawing.Size(64, 63)
-        Me.lnklblCancel.TabIndex = 41
+        Me.lnklblCancel.TabIndex = 31
         Me.lnklblCancel.TabStop = True
         Me.lnklblCancel.Text = "Cancel"
         Me.lnklblCancel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -211,7 +211,7 @@ Partial Class frmUpdateAllotment
         Me.cmbxSugarUnit.Location = New System.Drawing.Point(414, 181)
         Me.cmbxSugarUnit.Name = "cmbxSugarUnit"
         Me.cmbxSugarUnit.Size = New System.Drawing.Size(117, 24)
-        Me.cmbxSugarUnit.TabIndex = 38
+        Me.cmbxSugarUnit.TabIndex = 24
         '
         'txtbxSugarPricing
         '
@@ -220,7 +220,7 @@ Partial Class frmUpdateAllotment
         Me.txtbxSugarPricing.Location = New System.Drawing.Point(305, 181)
         Me.txtbxSugarPricing.Name = "txtbxSugarPricing"
         Me.txtbxSugarPricing.Size = New System.Drawing.Size(100, 24)
-        Me.txtbxSugarPricing.TabIndex = 37
+        Me.txtbxSugarPricing.TabIndex = 23
         '
         'txtbxSugarAllotment
         '
@@ -229,7 +229,7 @@ Partial Class frmUpdateAllotment
         Me.txtbxSugarAllotment.Location = New System.Drawing.Point(190, 181)
         Me.txtbxSugarAllotment.Name = "txtbxSugarAllotment"
         Me.txtbxSugarAllotment.Size = New System.Drawing.Size(106, 24)
-        Me.txtbxSugarAllotment.TabIndex = 36
+        Me.txtbxSugarAllotment.TabIndex = 22
         '
         'txtbxSugarStock
         '
@@ -238,7 +238,7 @@ Partial Class frmUpdateAllotment
         Me.txtbxSugarStock.Location = New System.Drawing.Point(81, 181)
         Me.txtbxSugarStock.Name = "txtbxSugarStock"
         Me.txtbxSugarStock.Size = New System.Drawing.Size(100, 24)
-        Me.txtbxSugarStock.TabIndex = 35
+        Me.txtbxSugarStock.TabIndex = 21
         '
         'chkbxSugar
         '
@@ -249,7 +249,7 @@ Partial Class frmUpdateAllotment
         Me.chkbxSugar.Location = New System.Drawing.Point(6, 181)
         Me.chkbxSugar.Name = "chkbxSugar"
         Me.chkbxSugar.Size = New System.Drawing.Size(66, 24)
-        Me.chkbxSugar.TabIndex = 34
+        Me.chkbxSugar.TabIndex = 20
         Me.chkbxSugar.Text = "Sugar"
         Me.chkbxSugar.UseVisualStyleBackColor = True
         '
@@ -260,7 +260,7 @@ Partial Class frmUpdateAllotment
         Me.cmbxAttaUnit.Location = New System.Drawing.Point(414, 148)
         Me.cmbxAttaUnit.Name = "cmbxAttaUnit"
         Me.cmbxAttaUnit.Size = New System.Drawing.Size(117, 24)
-        Me.cmbxAttaUnit.TabIndex = 33
+        Me.cmbxAttaUnit.TabIndex = 19
         '
         'txtbxAttaPricing
         '
@@ -269,7 +269,7 @@ Partial Class frmUpdateAllotment
         Me.txtbxAttaPricing.Location = New System.Drawing.Point(305, 148)
         Me.txtbxAttaPricing.Name = "txtbxAttaPricing"
         Me.txtbxAttaPricing.Size = New System.Drawing.Size(100, 24)
-        Me.txtbxAttaPricing.TabIndex = 32
+        Me.txtbxAttaPricing.TabIndex = 18
         '
         'txtbxAttaAllotment
         '
@@ -278,7 +278,7 @@ Partial Class frmUpdateAllotment
         Me.txtbxAttaAllotment.Location = New System.Drawing.Point(190, 148)
         Me.txtbxAttaAllotment.Name = "txtbxAttaAllotment"
         Me.txtbxAttaAllotment.Size = New System.Drawing.Size(106, 24)
-        Me.txtbxAttaAllotment.TabIndex = 31
+        Me.txtbxAttaAllotment.TabIndex = 17
         '
         'chkbxAtta
         '
@@ -289,7 +289,7 @@ Partial Class frmUpdateAllotment
         Me.chkbxAtta.Location = New System.Drawing.Point(6, 148)
         Me.chkbxAtta.Name = "chkbxAtta"
         Me.chkbxAtta.Size = New System.Drawing.Size(66, 24)
-        Me.chkbxAtta.TabIndex = 30
+        Me.chkbxAtta.TabIndex = 15
         Me.chkbxAtta.Text = "Atta"
         Me.chkbxAtta.UseVisualStyleBackColor = True
         '
@@ -302,7 +302,7 @@ Partial Class frmUpdateAllotment
         Me.chkbxWht.Location = New System.Drawing.Point(6, 115)
         Me.chkbxWht.Name = "chkbxWht"
         Me.chkbxWht.Size = New System.Drawing.Size(66, 24)
-        Me.chkbxWht.TabIndex = 29
+        Me.chkbxWht.TabIndex = 10
         Me.chkbxWht.Text = "Wheat"
         Me.chkbxWht.UseVisualStyleBackColor = True
         '
@@ -313,7 +313,7 @@ Partial Class frmUpdateAllotment
         Me.txtbxAttaStock.Location = New System.Drawing.Point(81, 148)
         Me.txtbxAttaStock.Name = "txtbxAttaStock"
         Me.txtbxAttaStock.Size = New System.Drawing.Size(100, 24)
-        Me.txtbxAttaStock.TabIndex = 27
+        Me.txtbxAttaStock.TabIndex = 16
         '
         'cmbxWhtUnit
         '
@@ -322,7 +322,7 @@ Partial Class frmUpdateAllotment
         Me.cmbxWhtUnit.Location = New System.Drawing.Point(414, 115)
         Me.cmbxWhtUnit.Name = "cmbxWhtUnit"
         Me.cmbxWhtUnit.Size = New System.Drawing.Size(117, 24)
-        Me.cmbxWhtUnit.TabIndex = 24
+        Me.cmbxWhtUnit.TabIndex = 14
         '
         'txtbxWhtPricing
         '
@@ -331,7 +331,7 @@ Partial Class frmUpdateAllotment
         Me.txtbxWhtPricing.Location = New System.Drawing.Point(305, 115)
         Me.txtbxWhtPricing.Name = "txtbxWhtPricing"
         Me.txtbxWhtPricing.Size = New System.Drawing.Size(100, 24)
-        Me.txtbxWhtPricing.TabIndex = 23
+        Me.txtbxWhtPricing.TabIndex = 13
         '
         'txtbxWhtAllotment
         '
@@ -340,7 +340,7 @@ Partial Class frmUpdateAllotment
         Me.txtbxWhtAllotment.Location = New System.Drawing.Point(190, 115)
         Me.txtbxWhtAllotment.Name = "txtbxWhtAllotment"
         Me.txtbxWhtAllotment.Size = New System.Drawing.Size(106, 24)
-        Me.txtbxWhtAllotment.TabIndex = 22
+        Me.txtbxWhtAllotment.TabIndex = 12
         '
         'txtbxWhtStock
         '
@@ -349,7 +349,7 @@ Partial Class frmUpdateAllotment
         Me.txtbxWhtStock.Location = New System.Drawing.Point(81, 115)
         Me.txtbxWhtStock.Name = "txtbxWhtStock"
         Me.txtbxWhtStock.Size = New System.Drawing.Size(100, 24)
-        Me.txtbxWhtStock.TabIndex = 21
+        Me.txtbxWhtStock.TabIndex = 11
         '
         'lblProducts
         '
@@ -439,7 +439,7 @@ Partial Class frmUpdateAllotment
         Me.txtbxRiceStock.Location = New System.Drawing.Point(81, 82)
         Me.txtbxRiceStock.Name = "txtbxRiceStock"
         Me.txtbxRiceStock.Size = New System.Drawing.Size(100, 24)
-        Me.txtbxRiceStock.TabIndex = 7
+        Me.txtbxRiceStock.TabIndex = 6
         '
         'txtbxRiceAllotment
         '
@@ -448,7 +448,7 @@ Partial Class frmUpdateAllotment
         Me.txtbxRiceAllotment.Location = New System.Drawing.Point(190, 82)
         Me.txtbxRiceAllotment.Name = "txtbxRiceAllotment"
         Me.txtbxRiceAllotment.Size = New System.Drawing.Size(106, 24)
-        Me.txtbxRiceAllotment.TabIndex = 8
+        Me.txtbxRiceAllotment.TabIndex = 7
         '
         'txtbxRicePricing
         '
@@ -457,7 +457,7 @@ Partial Class frmUpdateAllotment
         Me.txtbxRicePricing.Location = New System.Drawing.Point(305, 82)
         Me.txtbxRicePricing.Name = "txtbxRicePricing"
         Me.txtbxRicePricing.Size = New System.Drawing.Size(100, 24)
-        Me.txtbxRicePricing.TabIndex = 9
+        Me.txtbxRicePricing.TabIndex = 8
         '
         'cmbxRiceUnit
         '
@@ -466,7 +466,7 @@ Partial Class frmUpdateAllotment
         Me.cmbxRiceUnit.Location = New System.Drawing.Point(414, 82)
         Me.cmbxRiceUnit.Name = "cmbxRiceUnit"
         Me.cmbxRiceUnit.Size = New System.Drawing.Size(117, 24)
-        Me.cmbxRiceUnit.TabIndex = 10
+        Me.cmbxRiceUnit.TabIndex = 9
         '
         'chkbxRice
         '
@@ -477,7 +477,7 @@ Partial Class frmUpdateAllotment
         Me.chkbxRice.Location = New System.Drawing.Point(6, 82)
         Me.chkbxRice.Name = "chkbxRice"
         Me.chkbxRice.Size = New System.Drawing.Size(66, 24)
-        Me.chkbxRice.TabIndex = 28
+        Me.chkbxRice.TabIndex = 5
         Me.chkbxRice.Text = "Rice"
         Me.chkbxRice.UseVisualStyleBackColor = True
         '
@@ -490,7 +490,7 @@ Partial Class frmUpdateAllotment
         Me.lnklblUpdate.Name = "lnklblUpdate"
         Me.TableLayoutPanel1.SetRowSpan(Me.lnklblUpdate, 2)
         Me.lnklblUpdate.Size = New System.Drawing.Size(64, 63)
-        Me.lnklblUpdate.TabIndex = 40
+        Me.lnklblUpdate.TabIndex = 30
         Me.lnklblUpdate.TabStop = True
         Me.lnklblUpdate.Text = "Update"
         Me.lnklblUpdate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter

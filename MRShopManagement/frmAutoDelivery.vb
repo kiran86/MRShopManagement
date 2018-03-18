@@ -6,7 +6,10 @@ Public Class frmAutoDelivery
     Dim connString As String
     Public connection As OleDbConnection = New OleDbConnection
     Public dr As OleDbDataReader
-    Dim threadLoadFamilyID As Threading.Thread
+    Dim threadAutoDelivery As Threading.Thread
+    Dim MemoNo As Integer = 0
+    Dim oldFamily, newFamily As String
+    Dim DelvDate As Date
 
     Private Sub frmAutoDelivery_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         provider = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source ="
@@ -22,16 +25,14 @@ Public Class frmAutoDelivery
         If connection.State = ConnectionState.Open Then
             connection.Close()
         End If
-        Me.Visible = False
-        Me.Dispose()
-        frmMain.Enabled = True
+        frmMain.Show()
     End Sub
 
-    Private Sub bttnLoad_Click(sender As Object, e As EventArgs) Handles bttnLoad.Click
-        threadLoadFamilyID = New Threading.Thread(AddressOf LoadFamilyID)
-        threadLoadFamilyID.Start()
+    Private Sub bttnDeliver_Click(sender As Object, e As EventArgs) Handles bttnDeliver.Click
+        threadAutoDelivery = New Threading.Thread(AddressOf AutoDelivery)
+        threadAutoDelivery.Start()
         bttnStop.Enabled = True
-        bttnLoad.Enabled = False
+        bttnDeliver.Enabled = False
     End Sub
 
     Private Sub LoadForm()
@@ -40,8 +41,17 @@ Public Class frmAutoDelivery
         bttnStop.Enabled = False
         Try
             connection.Open()
-            sql = "SELECT COUNT(RCNo) FROM Delivery WHERE Delivery IS NULL"
+            sql = "SELECT MAX(CashMemoNo), MAX(Delivery.Delivery) FROM Delivery"
             Dim cmd As OleDbCommand = New OleDbCommand(sql, connection)
+            dr = cmd.ExecuteReader
+            If dr.HasRows Then
+                dr.Read()
+                MemoNo = dr.GetInt32(0)
+                DelvDate = dr.GetDateTime(1)
+                dttmDeliveryDate.Value = DelvDate.AddDays(1)
+            End If
+            sql = "SELECT COUNT(RCNo), MAX(CashMemoNo), MAX(Delivery.Delivery) FROM Delivery WHERE Delivery IS NULL"
+            cmd = New OleDbCommand(sql, connection)
             dr = cmd.ExecuteReader
             If dr.HasRows Then
                 dr.Read()
@@ -59,35 +69,42 @@ Public Class frmAutoDelivery
         End Try
     End Sub
 
-    Private Sub LoadFamilyID()
+    Private Sub AutoDelivery()
         Dim sql As String
         Dim cmd As OleDbCommand
-        Dim dr1 As OleDbDataReader
         Dim count As Integer = 0
         txtbxStatus.Cursor = Cursors.WaitCursor
         Try
             connection.Open()
-            sql = "SELECT Beneficiaries.RCNo, Beneficiaries.FamilyID, Beneficiaries.HoFName FROM Beneficiaries, Delivery WHERE Beneficiaries.RCNo = Delivery.RCNo AND Delivery.Delivery = NULL"
+            sql = "SELECT Beneficiaries.RCNo, Beneficiaries.FamilyID, Beneficiaries.HoFName FROM Beneficiaries, Delivery WHERE Beneficiaries.RCNo = Delivery.RCNo AND Delivery.Delivery IS NULL"
             cmd = New OleDbCommand(sql, connection)
             dr = cmd.ExecuteReader
             If Not dr.HasRows Then
                 MsgBox("No matching data found", MsgBoxStyle.OkOnly, "Error")
             Else
                 While dr.Read()
-                    If Not dr.IsDBNull("Beneficiaries.FamilyID") Then
-                        sql = "SELECT Delivery.Delivery FROM Beneficiaries, Delivery WHERE Beneficiaries.FamilyID = " & dr.GetString("Beneficiaries.FamilyID") & " AND Beneficiaries.RCNo = " & dr.GetInt32("Beneficiaries.RCNo") & " AND Beneficiaries.RCNo = Delivery.RCNo"
-                        cmd = New OleDbCommand(sql, connection)
-                        dr1 = cmd.ExecuteReader
-                        If dr1.HasRows Then
-                            If Not dr1.IsDBNull(0) Then
+                    If dr.IsDBNull(1) Then
+                        newFamily = dr.GetString(2)
+                    Else
+                        newFamily = dr.GetString(1)
+                    End If
 
-                            End If
-                        End If
+                    If Not newFamily = oldFamily Then
+                        oldFamily = newFamily
+                        MemoNo = MemoNo + 1
+                    End If
+                    sql = "UPDATE Delivery SET Delivery.CashMemoNo = " & MemoNo & ", Delivery.Delivery = '" & dttmDeliveryDate.Value & "' WHERE Delivery.RCNo = " & dr(0).ToString
+                    cmd = New OleDbCommand(sql, connection)
+                    If cmd.ExecuteNonQuery <= 0 Then
+                        Console.WriteLine("Error in updation: " + sql)
+                    Else
+                        count = count + 1
                     End If
                 End While
             End If
         Catch ex As Exception
             MsgBox("Error:" + ex.Message, MsgBoxStyle.OkOnly)
+            Console.WriteLine(ex.ToString)
         Finally
             If connection.State = ConnectionState.Open Then
                 connection.Close()
@@ -101,12 +118,12 @@ Public Class frmAutoDelivery
     End Sub
 
     Private Sub bttnStop_Click(sender As Object, e As EventArgs) Handles bttnStop.Click
-        If threadLoadFamilyID.IsAlive Then
-            threadLoadFamilyID.Abort()
-            threadLoadFamilyID.Join()
-            bttnLoad.Enabled = True
+        If threadAutoDelivery.IsAlive Then
+            threadAutoDelivery.Abort()
+            threadAutoDelivery.Join()
+            bttnDeliver.Enabled = True
         End If
-        If Not threadLoadFamilyID.IsAlive Then
+        If Not threadAutoDelivery.IsAlive Then
             LoadForm()
         End If
     End Sub
