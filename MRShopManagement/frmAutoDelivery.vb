@@ -91,7 +91,11 @@ Public Class frmAutoDelivery
 
                     If Not newFamily = oldFamily Then
                         oldFamily = newFamily
-                        MemoNo = MemoNo + 1
+                        If MemoNo >= 5000 Then
+                            MemoNo = 1
+                        Else
+                            MemoNo = MemoNo + 1
+                        End If
                     End If
                     sql = "UPDATE Delivery SET Delivery.CashMemoNo = " & MemoNo & ", Delivery.Delivery = '" & dttmDeliveryDate.Value & "' WHERE Delivery.RCNo = " & dr(0).ToString
                     cmd = New OleDbCommand(sql, connection)

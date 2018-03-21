@@ -85,20 +85,20 @@ Public Class frmMain
     Private Sub SetMemoNo()
         Try
             connection.Open()
-            Dim memoNo As Integer
+            Dim memoNo As Integer = 0
             Dim sql As String = "SELECT MAX(CashMemoNo) FROM Delivery"
             Dim cmd As OleDbCommand = New OleDbCommand(sql, connection)
             Dim dr As OleDbDataReader = cmd.ExecuteReader
             If dr.HasRows Then
                 dr.Read()
-                Console.WriteLine(dr.IsDBNull(0))
                 If Not dr.IsDBNull(0) Then
-                    memoNo = dr.GetInt32(0) + 1
-                Else
-                    memoNo = 1
+                    memoNo = dr.GetInt32(0)
                 End If
-            Else
+            End If
+            If memoNo >= 5000 Then
                 memoNo = 1
+            Else
+                memoNo = memoNo + 1
             End If
             txtbxCashMemoNo.Text = memoNo
         Catch ex As Exception
