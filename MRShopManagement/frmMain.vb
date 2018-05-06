@@ -85,16 +85,19 @@ Public Class frmMain
     Private Sub SetMemoNo()
         Try
             connection.Open()
-            Dim memoNo As Integer = 0
-            Dim sql As String = "SELECT MAX(CashMemoNo) FROM Delivery"
+            Dim memoNo As Integer
+            Dim sql As String = "SELECT MAX(CashMemoNo) FROM Delivery WHERE Delivery.Delivery = (SELECT MAX(Delivery.Delivery) FROM Delivery)"
             Dim cmd As OleDbCommand = New OleDbCommand(sql, connection)
             Dim dr As OleDbDataReader = cmd.ExecuteReader
             If dr.HasRows Then
                 dr.Read()
                 If Not dr.IsDBNull(0) Then
                     memoNo = dr.GetInt32(0)
+                Else
+                    memoNo = 0
                 End If
             End If
+            Console.WriteLine(memoNo)
             If memoNo >= 5000 Then
                 memoNo = 1
             Else
@@ -466,8 +469,13 @@ Public Class frmMain
         Next
         connection.Close()
         If MsgBox("Food supply delivered!", MsgBoxStyle.OkOnly, "Delivered") = MsgBoxResult.Ok Then
+            PrintMemo()
             ApplicationReload()
         End If
+    End Sub
+
+    Private Sub PrintMemo()
+
     End Sub
 
     Private Sub ApplicationReload()
