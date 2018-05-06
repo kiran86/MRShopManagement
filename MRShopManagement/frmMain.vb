@@ -30,7 +30,7 @@ Public Class frmMain
         connection.ConnectionString = connString
 
         DeliveryDate = Now.ToShortDateString
-        SetMemoNo()
+        'SetMemoNo()
         Dim customFont As PrivateFontCollection = New PrivateFontCollection
         customFont.AddFontFile("Fonts/digital-7.ttf")
         lblSystemDateTime.Font = New Font(customFont.Families(0), 16, FontStyle.Regular)
@@ -80,13 +80,16 @@ Public Class frmMain
         If Not txtbxCardNo.Text.Equals("") And IsNumeric(txtbxCardNo.Text) Then
             LoadData()
         End If
+        If Not txtbxCategory.Text.Equals("") Then
+            SetMemoNo()
+        End If
     End Sub
 
     Private Sub SetMemoNo()
         Try
             connection.Open()
             Dim memoNo As Integer
-            Dim sql As String = "SELECT MAX(CashMemoNo) FROM Delivery WHERE Delivery.Delivery = (SELECT MAX(Delivery.Delivery) FROM Delivery)"
+            Dim sql As String = "SELECT MAX(CashMemoNo) FROM Delivery WHERE Delivery.Delivery = (SELECT MAX(Delivery.Delivery) FROM Delivery WHERE Category = '" + txtbxCategory.Text + "') AND Category = '" + txtbxCategory.Text + "'"
             Dim cmd As OleDbCommand = New OleDbCommand(sql, connection)
             Dim dr As OleDbDataReader = cmd.ExecuteReader
             If dr.HasRows Then
@@ -486,7 +489,6 @@ Public Class frmMain
             lstvwFamily.Clear()
             lstvwRcNos.Clear()
         Next
-        SetMemoNo()
     End Sub
 
     Private Sub ViewSalesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ViewSalesToolStripMenuItem.Click
