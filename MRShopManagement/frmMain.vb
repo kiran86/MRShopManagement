@@ -496,17 +496,17 @@ Public Class frmMain
         frmViewSales.Show()
     End Sub
 
-    Private Sub StockToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles StockToolStripMenuItem.Click
+    Private Sub StockToolStripMenuItem_Click(sender As Object, e As EventArgs)
         Me.Enabled = False
         frmStock.Show()
     End Sub
 
-    Private Sub AllotmentToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AllotmentToolStripMenuItem.Click
+    Private Sub AllotmentToolStripMenuItem_Click(sender As Object, e As EventArgs)
         Me.Enabled = False
         frmAllotment.Show()
     End Sub
 
-    Private Sub PricingToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PricingToolStripMenuItem.Click
+    Private Sub PricingToolStripMenuItem_Click(sender As Object, e As EventArgs)
         Me.Enabled = False
         frmPricing.Show()
     End Sub

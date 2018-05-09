@@ -408,100 +408,44 @@ Public Class frmGenRegister
     End Sub
 
     Private Sub ExportToExcelToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExportToExcelToolStripMenuItem.Click
-        'If datagridRegister.RowCount > 0 Then
-        '    Dim fileName As String = System.Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) & "\Sale_Reg_" + cmboxCategory.SelectedItem.ToString + "_" + Format(Now, "dd-MM-yyyy").ToString + ".xls"
-        '    datagridRegister.ClipboardCopyMode = DataGridViewClipboardCopyMode.EnableAlwaysIncludeHeaderText
-        '    datagridRegister.SelectAll()
-        '    IO.File.WriteAllText(fileName, datagridRegister.GetClipboardContent.GetText.TrimEnd)
-        '    datagridRegister.ClearSelection()
-        '    Process.Start(fileName)
-        'End If
-        ExportToExcel()
+        ExportToExcel(datagridRegister)
     End Sub
 
-    Private Sub ExportToExcel()
-        Dim familyMember As Integer = 0
-        ' Choose the path, name, and extension for the Excel file
-        Dim myFile As String = System.Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) & "\Sale_Reg_" + cmboxCategory.SelectedItem.ToString + "_" + Format(Now, "dd-MM-yyyy").ToString + ".xls"
-        ' Open the file and write the headers
-        Dim fs As New IO.StreamWriter(myFile, False)
+    Private Sub ExportToExcel(ByVal DGV As DataGridView)
         Try
-            fs.WriteLine("<?xml version=""1.0""?>")
-            fs.WriteLine("<?mso-application progid=""Excel.Sheet""?>")
-            fs.WriteLine("<ss:Workbook xmlns:ss=""urn:schemas-microsoft-com:office:spreadsheet"">")
+            Dim DTB = New DataTable, RWS As Integer, CLS As Integer
 
-            ' Create the styles for the worksheet
-            fs.WriteLine("  <ss:Styles>")
-            ' Style for the column headers
-            fs.WriteLine("    <ss:Style ss:ID=""1"">")
-            fs.WriteLine("      <ss:Font ss:Bold=""1""/>")
-            fs.WriteLine("      <ss:Alignment ss:Horizontal=""Center"" ss:Vertical=""Center"" " & "ss:WrapText=""1""/>")
-            fs.WriteLine("      <ss:Interior ss:Color=""#C0C0C0"" ss:Pattern=""Solid""/>")
-            fs.WriteLine("    </ss:Style>")
-            ' Styles for the column information
-            fs.WriteLine("    <ss:Style ss:ID=""2"">")
-            fs.WriteLine("      <ss:Alignment ss:Vertical=""Center"" ss:WrapText=""1""/>")
-            fs.WriteLine("    </ss:Style>")
-            fs.WriteLine("  </ss:Styles>")
-
-            ' Write the worksheet contents
-
-            fs.WriteLine("<ss:Worksheet ss:Name=""Sheet1"">")
-            fs.WriteLine("  <ss:Table>")
-
-            For i As Integer = 0 To datagridRegister.Columns.Count - 1
-                fs.WriteLine(String.Format("    <ss:Column ss:Width=""{0}""/>", datagridRegister.Columns.Item(i).Width))
+            For CLS = 0 To DGV.ColumnCount - 1 ' COLUMNS OF DTB
+                DTB.Columns.Add(DGV.Columns(CLS).Name.ToString)
             Next
 
-            fs.WriteLine("    <ss:Row>")
-            For i As Integer = 0 To datagridRegister.Columns.Count - 1
-                If datagridRegister.Columns(i).Visible Then
-                    fs.WriteLine(String.Format("      <ss:Cell ss:StyleID=""1"">" & "<ss:Data ss:Type=""String"">{0}</ss:Data></ss:Cell>",
-                        datagridRegister.Columns.Item(i).HeaderText))
-                End If
-            Next
-            fs.WriteLine("    </ss:Row>")
+            Dim DRW As DataRow
 
-            '' Check for an empty row at the end due to Adding allowed on the DataGridView
-            Dim subtractBy As Integer, cellText As String
-            If datagridRegister.AllowUserToAddRows = True Then subtractBy = 2 Else subtractBy = 1
-            ' Write contents for each cell
-            For i As Integer = 0 To datagridRegister.RowCount - subtractBy
-                If datagridRegister.Rows(i).Visible Then
-                    fs.WriteLine(String.Format("    <ss:Row ss:Height=""{0}"">", datagridRegister.Rows(i).Height))
-                    For intCol As Integer = 0 To datagridRegister.Columns.Count - 1
-                        If datagridRegister.Columns(intCol).Visible And Not datagridRegister.Item(intCol, i).Value = Nothing Then
-                            cellText = datagridRegister.Item(intCol, i).Value.ToString
-                            ' Check for null cell and change it to empty to avoid error
-                            If cellText = vbNullString Then cellText = ""
-                            Select Case intCol
-                                Case 0, 1, 3
-                                    fs.WriteLine(String.Format("      <ss:Cell ss:StyleID=""2"">" & "<ss:Data ss:Type=""String"">{0}</ss:Data></ss:Cell>", cellText.ToString))
-                                Case 2, 4, 5
-                                    If Not datagridRegister.Item(1, i).Value.ToString = "Total" Then familyMember = datagridRegister.Item(5, i).Value - 1 Else familyMember = 0
-                                    'Console.WriteLine(familyMember)
-                                    fs.WriteLine(String.Format("      <ss:Cell ss:MergeDown=""{0}"" ss:StyleID=""2"">" & "<ss:Data ss:Type=""String"">{1}</ss:Data></ss:Cell>", familyMember, cellText.ToString))
-                                Case 6, 7, 8, 9
-                                    fs.WriteLine(String.Format("      <ss:Cell ss:StyleID=""2"">" & "<ss:Data ss:Type=""String"">{0}</ss:Data></ss:Cell>", cellText.ToString))
-                            End Select
-                        End If
-                    Next
-                    fs.WriteLine("    </ss:Row>")
-                End If
+            For RWS = 0 To DGV.Rows.Count - 1 ' FILL DTB WITH DATAGRIDVIEW
+                DRW = DTB.NewRow
+
+                For CLS = 0 To DGV.ColumnCount - 1
+                    Try
+                        DRW(DTB.Columns(CLS).ColumnName.ToString) = DGV.Rows(RWS).Cells(CLS).Value.ToString
+                    Catch ex As Exception
+
+                    End Try
+                Next
+
+                DTB.Rows.Add(DRW)
             Next
 
-            '' Close up the document
-            fs.WriteLine("  </ss:Table>")
-            fs.WriteLine("</ss:Worksheet>")
-            fs.WriteLine("</ss:Workbook>")
-            fs.Close()
-            Process.Start(myFile)
+            DTB.AcceptChanges()
+
+            Dim DST As New DataSet
+            DST.Tables.Add(DTB)
+            Dim FLE As String = "C:\Users\kiran\Documents\TEXT.xml" ' PATH AND FILE NAME WHERE THE XML WIL BE CREATED (EXEMPLE: C:\REPS\XML.xml)
+            DTB.WriteXml(FLE)
+            Dim EXL As String = "C:\Program Files\Microsoft Office\root\Office16\EXCEL.EXE" ' PATH OF/ EXCEL.EXE IN YOUR MICROSOFT OFFICE
+            Shell(Chr(34) & EXL & Chr(34) & " " & Chr(34) & FLE & Chr(34), vbNormalFocus) ' OPEN XML WITH EXCEL
+
         Catch ex As Exception
-            MessageBox.Show(ex.Message & ":" & ex.StackTrace, "ERROR: ", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Err.Clear()
-        Finally
-            myFile = Nothing
-            fs = Nothing
+            MsgBox(ex.ToString)
         End Try
     End Sub
 

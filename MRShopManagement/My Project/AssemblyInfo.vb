@@ -8,11 +8,11 @@ Imports System.Runtime.InteropServices
 
 ' Review the values of the assembly attributes
 
-<Assembly: AssemblyTitle("MR Shop Management")>
+<Assembly: AssemblyTitle("FPS Management")>
 <Assembly: AssemblyDescription("")>
 <Assembly: AssemblyCompany("SahajayanTech")>
-<Assembly: AssemblyProduct("MRShopManagement")> 
-<Assembly: AssemblyCopyright("Copyright ©  2016")> 
+<Assembly: AssemblyProduct("FPSManagement")>
+<Assembly: AssemblyCopyright("Copyright ©  2017")>
 <Assembly: AssemblyTrademark("")> 
 
 <Assembly: ComVisible(False)>

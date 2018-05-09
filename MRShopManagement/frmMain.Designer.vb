@@ -31,9 +31,6 @@ Partial Class frmMain
         Me.EditFamilyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.LoadDataToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.FoodSupplyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.StockToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.AllotmentToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.PricingToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.UpdateAllotmentToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.menuRegister = New System.Windows.Forms.ToolStripMenuItem()
         Me.ViewSalesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -143,28 +140,10 @@ Partial Class frmMain
         '
         'FoodSupplyToolStripMenuItem
         '
-        Me.FoodSupplyToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.StockToolStripMenuItem, Me.AllotmentToolStripMenuItem, Me.PricingToolStripMenuItem, Me.UpdateAllotmentToolStripMenuItem})
+        Me.FoodSupplyToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.UpdateAllotmentToolStripMenuItem})
         Me.FoodSupplyToolStripMenuItem.Name = "FoodSupplyToolStripMenuItem"
         Me.FoodSupplyToolStripMenuItem.Size = New System.Drawing.Size(85, 20)
         Me.FoodSupplyToolStripMenuItem.Text = "Food Supply"
-        '
-        'StockToolStripMenuItem
-        '
-        Me.StockToolStripMenuItem.Name = "StockToolStripMenuItem"
-        Me.StockToolStripMenuItem.Size = New System.Drawing.Size(168, 22)
-        Me.StockToolStripMenuItem.Text = "Stock"
-        '
-        'AllotmentToolStripMenuItem
-        '
-        Me.AllotmentToolStripMenuItem.Name = "AllotmentToolStripMenuItem"
-        Me.AllotmentToolStripMenuItem.Size = New System.Drawing.Size(168, 22)
-        Me.AllotmentToolStripMenuItem.Text = "Allotment"
-        '
-        'PricingToolStripMenuItem
-        '
-        Me.PricingToolStripMenuItem.Name = "PricingToolStripMenuItem"
-        Me.PricingToolStripMenuItem.Size = New System.Drawing.Size(168, 22)
-        Me.PricingToolStripMenuItem.Text = "Pricing"
         '
         'UpdateAllotmentToolStripMenuItem
         '
@@ -762,7 +741,7 @@ Partial Class frmMain
         Me.MaximizeBox = False
         Me.Name = "frmMain"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = " MR Shop Management"
+        Me.Text = " FPS Management"
         Me.MenuMRShopManagement.ResumeLayout(False)
         Me.MenuMRShopManagement.PerformLayout()
         Me.ResumeLayout(False)
@@ -808,9 +787,6 @@ Partial Class frmMain
     Friend WithEvents EditToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents EditFamilyToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
-    Friend WithEvents StockToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents AllotmentToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents PricingToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ViewSalesToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents StockRegisterToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents txtbxRicePrice As TextBox
