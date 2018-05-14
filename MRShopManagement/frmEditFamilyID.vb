@@ -22,9 +22,7 @@ Public Class frmEditFamilyID
         If connection.State = ConnectionState.Open Then
             connection.Close()
         End If
-        Me.Visible = False
-        Me.Dispose()
-        frmMain.Enabled = True
+        frmMain.Show()
     End Sub
 
     Private Sub bttnLoad_Click(sender As Object, e As EventArgs) Handles bttnLoad.Click
@@ -40,7 +38,7 @@ Public Class frmEditFamilyID
         bttnStop.Enabled = False
         Try
             connection.Open()
-            sql = "SELECT COUNT(RCNo) FROM Beneficiaries WHERE FamilyID IS NULL"
+            sql = "SELECT COUNT(RCNo) FROM Beneficiaries WHERE FamilyID IS NULL OR FamilyID = ''"
             Dim cmd As OleDbCommand = New OleDbCommand(sql, connection)
             dr = cmd.ExecuteReader
             If Not dr.HasRows Then
@@ -70,7 +68,7 @@ Public Class frmEditFamilyID
         txtbxStatus.Cursor = Cursors.WaitCursor
         Try
             connection.Open()
-            sql = "SELECT RCNo FROM Beneficiaries WHERE FamilyID IS NULL"
+            sql = "SELECT RCNo FROM Beneficiaries WHERE FamilyID IS NULL OR FamilyID = ''"
             cmd = New OleDbCommand(sql, connection)
             dr = cmd.ExecuteReader
             If Not dr.HasRows Then

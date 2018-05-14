@@ -38,7 +38,7 @@ Public Class frmLoadFamilyID
         bttnStop.Enabled = False
         Try
             connection.Open()
-            sql = "SELECT COUNT(RCNo) FROM Beneficiaries WHERE FamilyID IS NULL"
+            sql = "SELECT COUNT(RCNo) FROM Beneficiaries WHERE FamilyID IS NULL OR FamilyID = ''"
             Dim cmd As OleDbCommand = New OleDbCommand(sql, connection)
             dr = cmd.ExecuteReader
             If Not dr.HasRows Then
@@ -68,7 +68,7 @@ Public Class frmLoadFamilyID
         txtbxStatus.Cursor = Cursors.WaitCursor
         Try
             connection.Open()
-            sql = "SELECT RCNo FROM Beneficiaries WHERE FamilyID IS NULL"
+            sql = "SELECT RCNo FROM Beneficiaries WHERE FamilyID IS NULL OR FamilyID = ''"
             cmd = New OleDbCommand(sql, connection)
             dr = cmd.ExecuteReader
             If Not dr.HasRows Then

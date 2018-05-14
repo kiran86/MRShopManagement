@@ -548,7 +548,7 @@ Public Class frmMain
     End Sub
 
     Private Sub EditFamilyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EditFamilyToolStripMenuItem.Click
-        Me.Enabled = False
+        Me.Hide()
         frmEditFamilyID.Show()
     End Sub
 
@@ -582,7 +582,7 @@ Public Class frmMain
     End Sub
 
     Private Sub UpdateDatabaseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles UpdateDatabaseToolStripMenuItem.Click
-        Me.Enabled = False
+        Me.Hide()
         frmUpdateDB.Show()
     End Sub
 
