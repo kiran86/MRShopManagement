@@ -83,6 +83,7 @@ Public Class frmEditFamilyID
                         source = New Net.WebClient().DownloadString("https://www.wbpds.gov.in/DisplayRCData.aspx?RCNO=" + RCNo)
                         Dim recentSource As String = frmGetBenfDetails.GetTagContents(source, "<table width=""100%"" cellpadding=""5px"">", "</table>")
                         Dim familyID As String = frmGetBenfDetails.GetTagContents(recentSource, "<span id=""ctl00_ContentPlaceHolder1_lblFamily""><i>", "</i></span>")
+                        Console.WriteLine(familyID)
                         sql = "UPDATE Beneficiaries SET [FamilyID] = '" + familyID + "' WHERE [RCNo] = " + dr("RCNo").ToString
                         cmd = New OleDbCommand(sql, connection)
                         If cmd.ExecuteNonQuery = 1 Then

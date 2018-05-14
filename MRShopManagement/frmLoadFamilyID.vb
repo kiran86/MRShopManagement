@@ -1,4 +1,6 @@
 ﻿Imports System.Data.OleDb
+Imports HtmlAgilityPack
+
 
 Public Class frmLoadFamilyID
     Dim provider As String
@@ -80,10 +82,12 @@ Public Class frmLoadFamilyID
                     RCNo = dr("RCNo").ToString.PadLeft(10, "0"c)
                     txtbxStatus.AppendText("RC No " & RCNo & ": ")
                     Try
-                        source = New Net.WebClient().DownloadString("https://www.wbpds.gov.in/DisplayRCData.aspx?RCNO=" + RCNo)
-                        Dim recentSource As String = frmGetBenfDetails.GetTagContents(source, "<table width=""100%"" cellpadding=""5px"">", "</table>")
-                        Dim familyID As String = frmGetBenfDetails.GetTagContents(recentSource, "<span id=""ctl00_ContentPlaceHolder1_lblFamily""><i>", "</i></span>")
-                        sql = "UPDATE Beneficiaries SET [FamilyID] = '" + familyID + "' WHERE [RCNo] = " + dr("RCNo").ToString
+                        'source = New Net.WebClient().DownloadString("https://www.wbpds.gov.in/DisplayRCData.aspx?RCNO=" + RCNo)
+                        'Dim recentSource As String = frmGetBenfDetails.GetTagContents(source, "<table width=""100%"" cellpadding=""5px"">", "</table>")
+                        'Dim familyID As String = frmGetBenfDetails.GetTagContents(recentSource, "<span id=""ctl00_ContentPlaceHolder1_lblFamily""><i>", "</i></span>")
+
+                        Console.WriteLine(GetFamilyID(RCNo))
+                        sql = "UPDATE Beneficiaries SET [FamilyID] = '" + GetFamilyID(RCNo) + "' WHERE [RCNo] = " + dr("RCNo").ToString
                         cmd = New OleDbCommand(sql, connection)
                         If cmd.ExecuteNonQuery = 1 Then
                             txtbxStatus.AppendText("Success" + Environment.NewLine)
@@ -108,6 +112,40 @@ Public Class frmLoadFamilyID
             End If
         End Try
     End Sub
+
+    Private Function GetFamilyID(ByVal RCNo As String) As String
+        Dim FamilyID As String
+        Dim uri As String = "https://www.wbpds.gov.in/DisplayRCData.aspx?RCNO=" + RCNo
+        Dim i, j As Integer
+        Dim web As New HtmlWeb()
+        Console.WriteLine(uri)
+        Dim doc As HtmlDocument = web.Load(uri)
+
+        ' Get all tables in the document
+        Dim tables As HtmlNodeCollection = doc.DocumentNode.SelectNodes("//table[@id='ctl00_ContentPlaceHolder1_gd_view']")
+
+        ' Iterate all rows in the first table
+        Dim rows As HtmlNodeCollection = tables(0).SelectNodes("//tr")
+        Try
+            For i = 0 To rows.Count - 1
+
+                ' Iterate all columns in this row
+                Dim cols As HtmlNodeCollection = rows(i).SelectNodes("//td")
+                For j = 0 To cols.Count - 1
+
+                    ' Get the value of the column and print it
+                    Dim value As String = cols(j).InnerText
+                    If value = "FamilyId" Then
+                        Exit Try
+                    End If
+                Next
+            Next
+        Finally
+            Dim cols As HtmlNodeCollection = rows(1).SelectNodes("//td")
+            FamilyID = cols(j).InnerText
+        End Try
+        Return FamilyID
+    End Function
 
     Private Sub bttnStop_Click(sender As Object, e As EventArgs) Handles bttnStop.Click
         If threadLoadFamilyID.IsAlive Then
