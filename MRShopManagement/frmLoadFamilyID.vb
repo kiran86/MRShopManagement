@@ -115,36 +115,29 @@ Public Class frmLoadFamilyID
 
     Private Function GetFamilyID(ByVal RCNo As String) As String
         Dim FamilyID As String
-        'Dim uri As String = "https://www.wbpds.gov.in/DisplayRCData.aspx?RCNO=" + RCNo
+        RCNo.PadLeft(10, "0"c)
+        Dim uri As String = "https://www.wbpds.gov.in/DisplayRCData.aspx?RCNO=" + RCNo
         Dim i, j As Integer
         Dim web As New HtmlWeb()
         'Console.WriteLine(uri)
-        Dim doc As HtmlDocument = New HtmlDocument()
-        web.Load("C:\Users\kiran\Documents\Test.html")
+        Dim doc As HtmlDocument = web.Load(uri)
+
+        ' Test connection
+        Dim node = doc.DocumentNode.SelectSingleNode("//head/title")
+        'Console.WriteLine("Node Name: " + node.Name + "\n" + node.OuterHtml)
 
         ' Get all tables in the document
-        Dim tables As HtmlNodeCollection = doc.DocumentNode.SelectNodes("//table[@id='ctl00_ContentPlaceHolder1_gd_view']")
+        'Dim tables As HtmlNodeCollection = doc.DocumentNode.SelectNodes("//table[@id='ctl00_ContentPlaceHolder1_gd_view']")
+        Dim tables As HtmlNode = doc.GetElementbyId("ctl00_ContentPlaceHolder1_gd_view")
 
         ' Iterate all rows in the first table
-        Dim rows As HtmlNodeCollection = tables(0).SelectNodes("//tr")
-        Try
-            For i = 0 To rows.Count - 1
+        Dim rows As HtmlNodeCollection = tables.SelectNodes("tr")
 
-                ' Iterate all columns in this row
-                Dim cols As HtmlNodeCollection = rows(i).SelectNodes("//td")
-                For j = 0 To cols.Count - 1
+        ' Iterate all columns in the first table
+        Dim cols As HtmlNodeCollection = rows(1).SelectNodes("td")
 
-                    ' Get the value of the column and print it
-                    Dim value As String = cols(j).InnerText
-                    If value = "FamilyId" Then
-                        Exit Try
-                    End If
-                Next
-            Next
-        Finally
-            Dim cols As HtmlNodeCollection = rows(1).SelectNodes("//td")
-            FamilyID = cols(j).InnerText
-        End Try
+        FamilyID = cols(11).InnerText
+
         Return FamilyID
     End Function
 

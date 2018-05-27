@@ -53,30 +53,17 @@ Public Class frmGetBenfDetails
         'Console.WriteLine("Node Name: " + node.Name + "\n" + node.OuterHtml)
 
         ' Get all tables in the document
-        Dim tables As HtmlNodeCollection = doc.DocumentNode.SelectNodes("//table[@id='ctl00_ContentPlaceHolder1_gd_view']")
+        'Dim tables As HtmlNodeCollection = doc.DocumentNode.SelectNodes("//table[@id='ctl00_ContentPlaceHolder1_gd_view']")
+        Dim tables As HtmlNode = doc.GetElementbyId("ctl00_ContentPlaceHolder1_gd_view")
 
         ' Iterate all rows in the first table
-        Dim rows As HtmlNodeCollection = tables(0).SelectNodes("//tr")
+        Dim rows As HtmlNodeCollection = tables.SelectNodes("tr")
 
-        Try
-            For i = 0 To rows.Count - 1
+        ' Iterate all columns in the first table
+        Dim cols As HtmlNodeCollection = rows(1).SelectNodes("td")
 
-                ' Iterate all columns in this row
-                Dim cols As HtmlNodeCollection = rows(i).SelectNodes("//td")
-                For j = 0 To cols.Count - 1
+        FamilyID = cols(11).InnerText
 
-                    ' Get the value of the column and print it
-                    Dim value As String = cols(j).InnerHtml
-                    Console.WriteLine(value)
-                    If value = "FamilyId" Then
-                        Exit Try
-                    End If
-                Next
-            Next
-        Finally
-            Dim cols As HtmlNodeCollection = rows(1).SelectNodes("//td")
-            FamilyID = cols(j).InnerText
-        End Try
         Return FamilyID
     End Function
 End Class
