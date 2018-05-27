@@ -41,14 +41,14 @@ Public Class frmAutoDelivery
         bttnStop.Enabled = False
         Try
             connection.Open()
-            sql = "SELECT MAX(CashMemoNo), MAX(Delivery.Delivery) FROM Delivery"
+            sql = "SELECT MAX(Delivery.Delivery) FROM Delivery"
             Dim cmd As OleDbCommand = New OleDbCommand(sql, connection)
             dr = cmd.ExecuteReader
             If dr.HasRows Then
                 dr.Read()
-                MemoNo = dr.GetInt32(0)
-                DelvDate = dr.GetDateTime(1)
-                dttmDeliveryDate.Value = DelvDate.AddDays(1)
+                DelvDate = dr.GetDateTime(0)
+                DelvDate = New DateTime(DelvDate.Year, DelvDate.Month, DelvDate.Day + 1, 8, 0, 0, 0)
+                dttmDeliveryDate.Value = DelvDate
             End If
             sql = "SELECT COUNT(RCNo), MAX(CashMemoNo), MAX(Delivery.Delivery) FROM Delivery WHERE Delivery IS NULL"
             cmd = New OleDbCommand(sql, connection)
@@ -72,11 +72,13 @@ Public Class frmAutoDelivery
     Private Sub AutoDelivery()
         Dim sql As String
         Dim cmd As OleDbCommand
+        Dim dr1 As OleDbDataReader
         Dim count As Integer = 0
         txtbxStatus.Cursor = Cursors.WaitCursor
+
         Try
             connection.Open()
-            sql = "SELECT Beneficiaries.RCNo, Beneficiaries.FamilyID, Beneficiaries.HoFName FROM Beneficiaries, Delivery WHERE Beneficiaries.RCNo = Delivery.RCNo AND Delivery.Delivery IS NULL"
+            sql = "SELECT Beneficiaries.RCNo, Beneficiaries.FamilyID, Beneficiaries.HoFName, Beneficiaries.Category FROM Beneficiaries, Delivery WHERE Beneficiaries.RCNo = Delivery.RCNo AND Delivery.Delivery IS NULL"
             cmd = New OleDbCommand(sql, connection)
             dr = cmd.ExecuteReader
             If Not dr.HasRows Then
@@ -91,13 +93,26 @@ Public Class frmAutoDelivery
 
                     If Not newFamily = oldFamily Then
                         oldFamily = newFamily
+
+                        sql = "SELECT CashMemoNo FROM Delivery WHERE Delivery.Category = '" + dr.GetString(3) +
+                              "' AND Delivery.Delivery = (SELECT MAX(Delivery.Delivery) FROM Delivery WHERE Delivery.Category = '" + dr.GetString(3) + "')"
+                        cmd = New OleDbCommand(sql, connection)
+                        dr1 = cmd.ExecuteReader
+                        If dr1.HasRows Then
+                            dr1.Read()
+                            MemoNo = dr1.GetInt32(0)
+                        End If
+
                         If MemoNo >= 5000 Then
                             MemoNo = 1
                         Else
                             MemoNo = MemoNo + 1
                         End If
                     End If
-                    sql = "UPDATE Delivery SET Delivery.CashMemoNo = " & MemoNo & ", Delivery.Delivery = '" & dttmDeliveryDate.Value & "' WHERE Delivery.RCNo = " & dr(0).ToString
+
+                    DelvDate.AddSeconds(30)
+
+                    sql = "UPDATE Delivery SET Delivery.CashMemoNo = " & MemoNo & ", Delivery.Delivery = '" & DelvDate.ToString & "' WHERE Delivery.RCNo = " & dr(0).ToString
                     cmd = New OleDbCommand(sql, connection)
                     If cmd.ExecuteNonQuery <= 0 Then
                         Console.WriteLine("Error in updation: " + sql)

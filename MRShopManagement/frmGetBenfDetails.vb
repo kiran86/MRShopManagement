@@ -31,10 +31,52 @@ Public Class frmGetBenfDetails
             txtbxHoF.Text = GetTagContents(recentSource, "<span id=""ctl00_ContentPlaceHolder1_lblHOF""><i>", "</i></span>")
             txtbxFHName.Text = GetTagContents(recentSource, "<span id=""ctl00_ContentPlaceHolder1_lblFHName""><i>", "</i></span>")
             txtbxCategory.Text = GetTagContents(recentSource, "<span id=""ctl00_ContentPlaceHolder1_lblRC""><i>", "</i></span>")
-            txtbxFamilyID.Text = GetTagContents(recentSource, "<span id=""ctl00_ContentPlaceHolder1_lblFamily""><i>", "</i></span>")
+            'txtbxFamilyID.Text = GetTagContents(recentSource, "<span id=""ctl00_ContentPlaceHolder1_lblFamily""><i>", "</i></span>")
+            txtbxFamilyID.Text = GetFamilyID(txtbxCardNo.Text)
             txtbxFPS.Text = GetTagContents(recentSource, "<span id=""ctl00_ContentPlaceHolder1_lblFPS""><i>", "</i></span>")
         Catch ex As Exception
             MsgBox("Some error occured. Please try after some time.")
         End Try
     End Sub
+
+    Private Function GetFamilyID(ByVal RCNo As String) As String
+        Dim FamilyID As String
+        RCNo.PadLeft(10, "0"c)
+        Dim uri As String = "https://www.wbpds.gov.in/DisplayRCData.aspx?RCNO=" + RCNo
+        Dim i, j As Integer
+        Dim web As New HtmlWeb()
+        'Console.WriteLine(uri)
+        Dim doc As HtmlDocument = web.Load(uri)
+
+        ' Test connection
+        Dim node = doc.DocumentNode.SelectSingleNode("//head/title")
+        'Console.WriteLine("Node Name: " + node.Name + "\n" + node.OuterHtml)
+
+        ' Get all tables in the document
+        Dim tables As HtmlNodeCollection = doc.DocumentNode.SelectNodes("//table[@id='ctl00_ContentPlaceHolder1_gd_view']")
+
+        ' Iterate all rows in the first table
+        Dim rows As HtmlNodeCollection = tables(0).SelectNodes("//tr")
+
+        Try
+            For i = 0 To rows.Count - 1
+
+                ' Iterate all columns in this row
+                Dim cols As HtmlNodeCollection = rows(i).SelectNodes("//td")
+                For j = 0 To cols.Count - 1
+
+                    ' Get the value of the column and print it
+                    Dim value As String = cols(j).InnerHtml
+                    Console.WriteLine(value)
+                    If value = "FamilyId" Then
+                        Exit Try
+                    End If
+                Next
+            Next
+        Finally
+            Dim cols As HtmlNodeCollection = rows(1).SelectNodes("//td")
+            FamilyID = cols(j).InnerText
+        End Try
+        Return FamilyID
+    End Function
 End Class

@@ -115,11 +115,12 @@ Public Class frmLoadFamilyID
 
     Private Function GetFamilyID(ByVal RCNo As String) As String
         Dim FamilyID As String
-        Dim uri As String = "https://www.wbpds.gov.in/DisplayRCData.aspx?RCNO=" + RCNo
+        'Dim uri As String = "https://www.wbpds.gov.in/DisplayRCData.aspx?RCNO=" + RCNo
         Dim i, j As Integer
         Dim web As New HtmlWeb()
-        Console.WriteLine(uri)
-        Dim doc As HtmlDocument = web.Load(uri)
+        'Console.WriteLine(uri)
+        Dim doc As HtmlDocument = New HtmlDocument()
+        web.Load("C:\Users\kiran\Documents\Test.html")
 
         ' Get all tables in the document
         Dim tables As HtmlNodeCollection = doc.DocumentNode.SelectNodes("//table[@id='ctl00_ContentPlaceHolder1_gd_view']")
