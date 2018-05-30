@@ -78,14 +78,15 @@ Public Class frmAutoDelivery
 
         Try
             connection.Open()
-            sql = "SELECT Beneficiaries.RCNo, Beneficiaries.FamilyID, Beneficiaries.HoFName, Beneficiaries.Category FROM Beneficiaries, Delivery WHERE Beneficiaries.RCNo = Delivery.RCNo AND Delivery.Delivery IS NULL"
+            sql = "SELECT Beneficiaries.RCNo, Beneficiaries.FamilyID, Beneficiaries.HoFName, Beneficiaries.Category" +
+                  " FROM Beneficiaries, Delivery WHERE Beneficiaries.RCNo = Delivery.RCNo AND Delivery.Delivery IS NULL"
             cmd = New OleDbCommand(sql, connection)
             dr = cmd.ExecuteReader
             If Not dr.HasRows Then
                 MsgBox("No matching data found", MsgBoxStyle.OkOnly, "Error")
             Else
                 While dr.Read()
-                    If dr.IsDBNull(1) Then
+                    If dr.IsDBNull(1) Or dr.GetString(1) = "" Then
                         newFamily = dr.GetString(2)
                     Else
                         newFamily = dr.GetString(1)
