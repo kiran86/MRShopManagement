@@ -85,40 +85,58 @@ Public Class frmAutoDelivery
             If Not dr.HasRows Then
                 MsgBox("No matching data found", MsgBoxStyle.OkOnly, "Error")
             Else
+                ' Loop through not delivered RCs
                 While dr.Read()
-                    If dr.IsDBNull(1) Or dr.GetString(1) = "" Then
-                        newFamily = dr.GetString(2)
-                    Else
-                        newFamily = dr.GetString(1)
-                    End If
 
-                    If Not newFamily = oldFamily Then
-                        oldFamily = newFamily
-
-                        sql = "SELECT CashMemoNo FROM Delivery WHERE Delivery.Category = '" + dr.GetString(3) +
-                              "' AND Delivery.Delivery = (SELECT MAX(Delivery.Delivery) FROM Delivery WHERE Delivery.Category = '" + dr.GetString(3) + "')"
-                        cmd = New OleDbCommand(sql, connection)
-                        dr1 = cmd.ExecuteReader
-                        If dr1.HasRows Then
-                            dr1.Read()
-                            MemoNo = dr1.GetInt32(0)
-                        End If
-
-                        If MemoNo >= 5000 Then
-                            MemoNo = 1
-                        Else
-                            MemoNo = MemoNo + 1
-                        End If
-                    End If
-
-                    DelvDate.AddSeconds(30)
-
-                    sql = "UPDATE Delivery SET Delivery.CashMemoNo = " & MemoNo & ", Delivery.Delivery = '" & DelvDate.ToString & "' WHERE Delivery.RCNo = " & dr(0).ToString
+                    ' Check if delivered
+                    sql = "SELECT Delivery.Delivery FROM Delivery WHERE Delivery.RCNo = " + dr(0).ToString
                     cmd = New OleDbCommand(sql, connection)
-                    If cmd.ExecuteNonQuery <= 0 Then
-                        Console.WriteLine("Error in updation: " + sql)
+                    dr1 = cmd.ExecuteReader
+
+                    If dr1.HasRows Then
+                        dr1.Read()
+                        If Not dr1.IsDBNull(0) Then
+                            Continue While
+                        End If
+                    End If
+
+                    ' Get CashMemoNo for this category
+                    sql = "SELECT CashMemoNo FROM Delivery WHERE Delivery.Category = '" + dr.GetString(3) +
+                          "' AND Delivery.Delivery = (SELECT MAX(Delivery.Delivery) FROM Delivery WHERE Delivery.Category = '" + dr.GetString(3) + "')"
+                    cmd = New OleDbCommand(sql, connection)
+                    dr1 = cmd.ExecuteReader
+                    If dr1.HasRows Then
+                        dr1.Read()
+                        MemoNo = dr1.GetInt32(0)
                     Else
-                        count = count + 1
+                        MemoNo = 0
+                    End If
+
+                    If MemoNo >= 5000 Then
+                        MemoNo = 1
+                    Else
+                        MemoNo = MemoNo + 1
+                    End If
+
+                    'Get all member RCs in this family which are not delivered
+                    If dr.IsDBNull(1) Or dr.GetString(1) = "" Then
+                        sql = "SELECT Beneficiaries.RCNo FROM Beneficiaries, Delivery WHERE Beneficiaries.HoFName = '" + dr.GetString(2) + "' AND Beneficiaries.RCNo = Delivery.RCNo AND Delivery.Delivery IS NULL"
+                    Else
+                        sql = "SELECT Beneficiaries.RCNo FROM Beneficiaries, Delivery WHERE Beneficiaries.FamilyID = '" + dr.GetString(1) + "' AND Beneficiaries.RCNo = Delivery.RCNo AND Delivery.Delivery IS NULL"
+                    End If
+                    cmd = New OleDbCommand(sql, connection)
+                    dr1 = cmd.ExecuteReader
+                    If dr1.HasRows Then
+                        While dr1.Read()
+                            DelvDate.AddSeconds(30)
+                            sql = "UPDATE Delivery SET Delivery.CashMemoNo = " & MemoNo & ", Delivery.Delivery = '" & DelvDate.ToString & "' WHERE Delivery.RCNo = " & dr1(0).ToString
+                            cmd = New OleDbCommand(sql, connection)
+                            If cmd.ExecuteNonQuery <= 0 Then
+                                Console.WriteLine("Error in updation: " + sql)
+                            Else
+                                count = count + 1
+                            End If
+                        End While
                     End If
                 End While
             End If
