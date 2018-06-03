@@ -127,8 +127,8 @@ Public Class frmAutoDelivery
                     cmd = New OleDbCommand(sql, connection)
                     dr1 = cmd.ExecuteReader
                     If dr1.HasRows Then
+                        DelvDate.AddSeconds(30)
                         While dr1.Read()
-                            DelvDate.AddSeconds(30)
                             sql = "UPDATE Delivery SET Delivery.CashMemoNo = " & MemoNo & ", Delivery.Delivery = '" & DelvDate.ToString & "' WHERE Delivery.RCNo = " & dr1(0).ToString
                             cmd = New OleDbCommand(sql, connection)
                             If cmd.ExecuteNonQuery <= 0 Then
