@@ -73,36 +73,35 @@ Public Class frmAutoDelivery
         Dim sql As String
         Dim cmd As OleDbCommand
         Dim dr1 As OleDbDataReader
+        Dim category As String
         Dim count As Integer = 0
         txtbxStatus.Cursor = Cursors.WaitCursor
 
         Try
             connection.Open()
-            sql = "SELECT Beneficiaries.RCNo, Beneficiaries.FamilyID, Beneficiaries.HoFName, Beneficiaries.Category" +
-                  " FROM Beneficiaries, Delivery WHERE Beneficiaries.RCNo = Delivery.RCNo AND Delivery.Delivery IS NULL"
+            sql = "SELECT DISTINCT Beneficiaries.FamilyID FROM Beneficiaries, Delivery WHERE Beneficiaries.RCNo = Delivery.RCNo AND Delivery.Delivery IS NULL"
             cmd = New OleDbCommand(sql, connection)
             dr = cmd.ExecuteReader
             If Not dr.HasRows Then
                 MsgBox("No matching data found", MsgBoxStyle.OkOnly, "Error")
             Else
-                ' Loop through not delivered RCs
+                ' Loop through not delivered Families
                 While dr.Read()
+                    txtbxStatus.AppendText("Family ID: " + dr.GetString(0) + ", ")
 
-                    ' Check if delivered
-                    sql = "SELECT Delivery.Delivery FROM Delivery WHERE Delivery.RCNo = " + dr(0).ToString
+                    ' Get category of this family
+                    sql = "SELECT DISTINCT Category FROM Beneficiaries WHERE FamilyID = '" + dr(0).ToString + "'"
                     cmd = New OleDbCommand(sql, connection)
                     dr1 = cmd.ExecuteReader
 
                     If dr1.HasRows Then
                         dr1.Read()
-                        If Not dr1.IsDBNull(0) Then
-                            Continue While
-                        End If
+                        category = dr1.GetString(0)
                     End If
-
+                    txtbxStatus.AppendText("Category: " + category + ", " + "Delivery Time: " + DelvDate.ToString + ", ")
                     ' Get CashMemoNo for this category
-                    sql = "SELECT CashMemoNo FROM Delivery WHERE Delivery.Category = '" + dr.GetString(3) +
-                          "' AND Delivery.Delivery = (SELECT MAX(Delivery.Delivery) FROM Delivery WHERE Delivery.Category = '" + dr.GetString(3) + "')"
+                    sql = "SELECT Delivery.CashMemoNo FROM Delivery WHERE Delivery.Category = '" + category +
+                          "' AND Delivery.Delivery = (SELECT MAX(Delivery.Delivery) FROM Delivery WHERE Delivery.Category = '" + category + "')"
                     cmd = New OleDbCommand(sql, connection)
                     dr1 = cmd.ExecuteReader
                     If dr1.HasRows Then
@@ -118,23 +117,26 @@ Public Class frmAutoDelivery
                         MemoNo = MemoNo + 1
                     End If
 
+                    txtbxStatus.AppendText("Cash Memo No.: " + MemoNo.ToString + Environment.NewLine)
+
                     'Get all member RCs in this family which are not delivered
-                    If dr.IsDBNull(1) Or dr.GetString(1) = "" Then
-                        sql = "SELECT Beneficiaries.RCNo FROM Beneficiaries, Delivery WHERE Beneficiaries.HoFName = '" + dr.GetString(2) + "' AND Beneficiaries.RCNo = Delivery.RCNo AND Delivery.Delivery IS NULL"
-                    Else
-                        sql = "SELECT Beneficiaries.RCNo FROM Beneficiaries, Delivery WHERE Beneficiaries.FamilyID = '" + dr.GetString(1) + "' AND Beneficiaries.RCNo = Delivery.RCNo AND Delivery.Delivery IS NULL"
-                    End If
+                    sql = "SELECT Beneficiaries.RCNo FROM Beneficiaries, Delivery WHERE Beneficiaries.FamilyID = '" + dr.GetString(0) +
+                          "' AND Beneficiaries.RCNo = Delivery.RCNo AND Delivery.Delivery IS NULL"
+
                     cmd = New OleDbCommand(sql, connection)
                     dr1 = cmd.ExecuteReader
                     If dr1.HasRows Then
-                        DelvDate.AddSeconds(30)
+                        DelvDate = DelvDate.AddSeconds(30)
                         While dr1.Read()
+                            txtbxStatus.AppendText("Ration Card No. " + dr1(0).ToString + ": ")
                             sql = "UPDATE Delivery SET Delivery.CashMemoNo = " & MemoNo & ", Delivery.Delivery = '" & DelvDate.ToString & "' WHERE Delivery.RCNo = " & dr1(0).ToString
                             cmd = New OleDbCommand(sql, connection)
                             If cmd.ExecuteNonQuery <= 0 Then
+                                txtbxStatus.AppendText("Falied" + Environment.NewLine)
                                 Console.WriteLine("Error in updation: " + sql)
                             Else
                                 count = count + 1
+                                txtbxStatus.AppendText("Delivered" + Environment.NewLine)
                             End If
                         End While
                     End If
@@ -147,7 +149,7 @@ Public Class frmAutoDelivery
             If connection.State = ConnectionState.Open Then
                 connection.Close()
             End If
-            txtbxStatus.AppendText("Total " & count & " no of Benificiaries data updated successfully." & Environment.NewLine)
+            txtbxStatus.AppendText(Environment.NewLine + "Total " & count & " no of Benificiaries data updated successfully." & Environment.NewLine)
             txtbxStatus.Cursor = Cursors.Default
             If bttnStop.Enabled = True Then
                 bttnStop.Enabled = False

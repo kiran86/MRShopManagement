@@ -82,10 +82,6 @@ Public Class frmLoadFamilyID
                     RCNo = dr("RCNo").ToString.PadLeft(10, "0"c)
                     txtbxStatus.AppendText("RC No " & RCNo & ": ")
                     Try
-                        'source = New Net.WebClient().DownloadString("https://www.wbpds.gov.in/DisplayRCData.aspx?RCNO=" + RCNo)
-                        'Dim recentSource As String = frmGetBenfDetails.GetTagContents(source, "<table width=""100%"" cellpadding=""5px"">", "</table>")
-                        'Dim familyID As String = frmGetBenfDetails.GetTagContents(recentSource, "<span id=""ctl00_ContentPlaceHolder1_lblFamily""><i>", "</i></span>")
-
                         Console.WriteLine(GetFamilyID(RCNo))
                         sql = "UPDATE Beneficiaries SET [FamilyID] = '" + GetFamilyID(RCNo) + "' WHERE [RCNo] = " + dr("RCNo").ToString
                         cmd = New OleDbCommand(sql, connection)
