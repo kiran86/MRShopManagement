@@ -16,7 +16,6 @@ Public Class frmAutoDelivery
         dataFile = "|DataDirectory|\mrshop.mdb"
         connString = provider & dataFile
         connection.ConnectionString = connString
-
         LoadForm()
         CheckForIllegalCrossThreadCalls = False
     End Sub
@@ -47,10 +46,12 @@ Public Class frmAutoDelivery
             If dr.HasRows Then
                 dr.Read()
                 DelvDate = dr.GetDateTime(0)
-                DelvDate = New DateTime(DelvDate.Year, DelvDate.Month, DelvDate.Day + 1, 8, 0, 0, 0)
+                If Not DelvDate.DayOfWeek = DayOfWeek.Sunday Then
+                    DelvDate = New DateTime(DelvDate.Year, DelvDate.Month, DelvDate.Day + 1, 8, 0, 0, 0)
+                End If
                 dttmDeliveryDate.Value = DelvDate
-            End If
-            sql = "SELECT COUNT(RCNo), MAX(CashMemoNo), MAX(Delivery.Delivery) FROM Delivery WHERE Delivery IS NULL"
+                End If
+                sql = "SELECT COUNT(RCNo), MAX(CashMemoNo), MAX(Delivery.Delivery) FROM Delivery WHERE Delivery IS NULL"
             cmd = New OleDbCommand(sql, connection)
             dr = cmd.ExecuteReader
             If dr.HasRows Then
@@ -145,6 +146,9 @@ Public Class frmAutoDelivery
         Catch ex As Exception
             MsgBox("Error:" + ex.Message, MsgBoxStyle.OkOnly)
             Console.WriteLine(ex.ToString)
+            If connection.State = ConnectionState.Open Then
+                connection.Close()
+            End If
         Finally
             If connection.State = ConnectionState.Open Then
                 connection.Close()
