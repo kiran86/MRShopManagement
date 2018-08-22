@@ -8,9 +8,9 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{E1D20A41-1E50-4207-B3E8-EE7D6AAED204}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <StartupObject>MRShopManagement.My.MyApplication</StartupObject>
-    <RootNamespace>MRShopManagement</RootNamespace>
-    <AssemblyName>MRShopManagement</AssemblyName>
+    <StartupObject>FPSManagement.My.MyApplication</StartupObject>
+    <RootNamespace>FPSManagement</RootNamespace>
+    <AssemblyName>FPSManagement</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>WindowsForms</MyType>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
@@ -26,7 +26,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>7</ApplicationRevision>
+    <ApplicationRevision>8</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -39,7 +39,7 @@
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\Debug\</OutputPath>
-    <DocumentationFile>MRShopManagement.xml</DocumentationFile>
+    <DocumentationFile>FPSManagement.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
@@ -49,7 +49,7 @@
     <DefineTrace>true</DefineTrace>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DocumentationFile>MRShopManagement.xml</DocumentationFile>
+    <DocumentationFile>FPSManagement.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup>

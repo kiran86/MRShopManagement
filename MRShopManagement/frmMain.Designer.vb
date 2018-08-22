@@ -23,7 +23,7 @@ Partial Class frmMain
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Me.MenuMRShopManagement = New System.Windows.Forms.MenuStrip()
+        Me.MenuFPSManagement = New System.Windows.Forms.MenuStrip()
         Me.BenefiToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AddToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.EditToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -89,18 +89,18 @@ Partial Class frmMain
         Me.txtbxKOilPrice = New System.Windows.Forms.TextBox()
         Me.txtbxKOil = New System.Windows.Forms.TextBox()
         Me.lblKOil = New System.Windows.Forms.Label()
-        Me.MenuMRShopManagement.SuspendLayout()
+        Me.MenuFPSManagement.SuspendLayout()
         Me.SuspendLayout()
         '
-        'MenuMRShopManagement
+        'MenuFPSManagement
         '
-        Me.MenuMRShopManagement.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.BenefiToolStripMenuItem, Me.FoodSupplyToolStripMenuItem, Me.menuRegister, Me.SystemToolStripMenuItem})
-        Me.MenuMRShopManagement.Location = New System.Drawing.Point(0, 0)
-        Me.MenuMRShopManagement.Name = "MenuMRShopManagement"
-        Me.MenuMRShopManagement.Padding = New System.Windows.Forms.Padding(8, 2, 0, 2)
-        Me.MenuMRShopManagement.Size = New System.Drawing.Size(1008, 24)
-        Me.MenuMRShopManagement.TabIndex = 0
-        Me.MenuMRShopManagement.Text = "MenuMRShopManagement"
+        Me.MenuFPSManagement.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.BenefiToolStripMenuItem, Me.FoodSupplyToolStripMenuItem, Me.menuRegister, Me.SystemToolStripMenuItem})
+        Me.MenuFPSManagement.Location = New System.Drawing.Point(0, 0)
+        Me.MenuFPSManagement.Name = "MenuFPSManagement"
+        Me.MenuFPSManagement.Padding = New System.Windows.Forms.Padding(8, 2, 0, 2)
+        Me.MenuFPSManagement.Size = New System.Drawing.Size(1008, 24)
+        Me.MenuFPSManagement.TabIndex = 0
+        Me.MenuFPSManagement.Text = "MenuKOilDealerManagement"
         '
         'BenefiToolStripMenuItem
         '
@@ -733,22 +733,22 @@ Partial Class frmMain
         Me.Controls.Add(Me.lblName)
         Me.Controls.Add(Me.btnFind)
         Me.Controls.Add(Me.txtbxCardNo)
-        Me.Controls.Add(Me.MenuMRShopManagement)
+        Me.Controls.Add(Me.MenuFPSManagement)
         Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
-        Me.MainMenuStrip = Me.MenuMRShopManagement
+        Me.MainMenuStrip = Me.MenuFPSManagement
         Me.Margin = New System.Windows.Forms.Padding(4)
         Me.MaximizeBox = False
         Me.Name = "frmMain"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = " FPS Management"
-        Me.MenuMRShopManagement.ResumeLayout(False)
-        Me.MenuMRShopManagement.PerformLayout()
+        Me.MenuFPSManagement.ResumeLayout(False)
+        Me.MenuFPSManagement.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents MenuMRShopManagement As System.Windows.Forms.MenuStrip
+    Friend WithEvents MenuFPSManagement As System.Windows.Forms.MenuStrip
     Friend WithEvents menuRegister As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents lblName As System.Windows.Forms.Label
     Friend WithEvents txtbxName As System.Windows.Forms.TextBox

@@ -63,6 +63,8 @@ Partial Class frmUpdateAllotment
         Me.rdobtnSPHH = New System.Windows.Forms.RadioButton()
         Me.rdobtnPHH = New System.Windows.Forms.RadioButton()
         Me.rdobtnAAY = New System.Windows.Forms.RadioButton()
+        Me.lnklblAdd = New System.Windows.Forms.LinkLabel()
+        Me.lnklblRemove = New System.Windows.Forms.LinkLabel()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.grpbxCategory.SuspendLayout()
         Me.SuspendLayout()
@@ -71,20 +73,21 @@ Partial Class frmUpdateAllotment
         '
         Me.TableLayoutPanel1.AutoSize = True
         Me.TableLayoutPanel1.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.OutsetPartial
-        Me.TableLayoutPanel1.ColumnCount = 6
+        Me.TableLayoutPanel1.ColumnCount = 5
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.TableLayoutPanel1.Controls.Add(Me.lnklblRemove, 3, 7)
+        Me.TableLayoutPanel1.Controls.Add(Me.lnklblAdd, 2, 7)
         Me.TableLayoutPanel1.Controls.Add(Me.cmbxKOilUnit, 4, 6)
         Me.TableLayoutPanel1.Controls.Add(Me.txtbxKOilPricing, 3, 6)
         Me.TableLayoutPanel1.Controls.Add(Me.txtbxKOilAllotment, 2, 6)
         Me.TableLayoutPanel1.Controls.Add(Me.txtbxKOilStock, 1, 6)
         Me.TableLayoutPanel1.Controls.Add(Me.chkbxKOil, 0, 6)
-        Me.TableLayoutPanel1.Controls.Add(Me.lnklblCancel, 5, 4)
-        Me.TableLayoutPanel1.Controls.Add(Me.lblAction, 5, 1)
+        Me.TableLayoutPanel1.Controls.Add(Me.lnklblCancel, 4, 7)
+        Me.TableLayoutPanel1.Controls.Add(Me.lblAction, 0, 7)
         Me.TableLayoutPanel1.Controls.Add(Me.cmbxSugarUnit, 4, 5)
         Me.TableLayoutPanel1.Controls.Add(Me.txtbxSugarPricing, 3, 5)
         Me.TableLayoutPanel1.Controls.Add(Me.txtbxSugarAllotment, 2, 5)
@@ -111,7 +114,7 @@ Partial Class frmUpdateAllotment
         Me.TableLayoutPanel1.Controls.Add(Me.txtbxRicePricing, 3, 2)
         Me.TableLayoutPanel1.Controls.Add(Me.cmbxRiceUnit, 4, 2)
         Me.TableLayoutPanel1.Controls.Add(Me.chkbxRice, 0, 2)
-        Me.TableLayoutPanel1.Controls.Add(Me.lnklblUpdate, 5, 2)
+        Me.TableLayoutPanel1.Controls.Add(Me.lnklblUpdate, 1, 7)
         Me.TableLayoutPanel1.Controls.Add(Me.grpbxCategory, 2, 0)
         Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 0)
@@ -125,7 +128,8 @@ Partial Class frmUpdateAllotment
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30.0!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(604, 246)
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(539, 276)
         Me.TableLayoutPanel1.TabIndex = 0
         '
         'cmbxKOilUnit
@@ -172,7 +176,7 @@ Partial Class frmUpdateAllotment
         Me.chkbxKOil.Dock = System.Windows.Forms.DockStyle.Fill
         Me.chkbxKOil.Location = New System.Drawing.Point(6, 214)
         Me.chkbxKOil.Name = "chkbxKOil"
-        Me.chkbxKOil.Size = New System.Drawing.Size(66, 26)
+        Me.chkbxKOil.Size = New System.Drawing.Size(66, 24)
         Me.chkbxKOil.TabIndex = 25
         Me.chkbxKOil.Text = "K. Oil"
         Me.chkbxKOil.UseVisualStyleBackColor = True
@@ -181,11 +185,10 @@ Partial Class frmUpdateAllotment
         '
         Me.lnklblCancel.AutoSize = True
         Me.lnklblCancel.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.lnklblCancel.Location = New System.Drawing.Point(537, 145)
+        Me.lnklblCancel.Location = New System.Drawing.Point(411, 244)
         Me.lnklblCancel.Margin = New System.Windows.Forms.Padding(0)
         Me.lnklblCancel.Name = "lnklblCancel"
-        Me.TableLayoutPanel1.SetRowSpan(Me.lnklblCancel, 2)
-        Me.lnklblCancel.Size = New System.Drawing.Size(64, 63)
+        Me.lnklblCancel.Size = New System.Drawing.Size(125, 29)
         Me.lnklblCancel.TabIndex = 31
         Me.lnklblCancel.TabStop = True
         Me.lnklblCancel.Text = "Cancel"
@@ -196,10 +199,10 @@ Partial Class frmUpdateAllotment
         Me.lblAction.AutoSize = True
         Me.lblAction.Dock = System.Windows.Forms.DockStyle.Fill
         Me.lblAction.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblAction.Location = New System.Drawing.Point(540, 49)
+        Me.lblAction.Location = New System.Drawing.Point(6, 247)
         Me.lblAction.Margin = New System.Windows.Forms.Padding(3)
         Me.lblAction.Name = "lblAction"
-        Me.lblAction.Size = New System.Drawing.Size(58, 24)
+        Me.lblAction.Size = New System.Drawing.Size(66, 23)
         Me.lblAction.TabIndex = 39
         Me.lblAction.Text = "Action"
         Me.lblAction.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -425,7 +428,7 @@ Partial Class frmUpdateAllotment
         Me.lblRiceUnit.Location = New System.Drawing.Point(414, 49)
         Me.lblRiceUnit.Margin = New System.Windows.Forms.Padding(3)
         Me.lblRiceUnit.Name = "lblRiceUnit"
-        Me.lblRiceUnit.Size = New System.Drawing.Size(117, 24)
+        Me.lblRiceUnit.Size = New System.Drawing.Size(119, 24)
         Me.lblRiceUnit.TabIndex = 5
         Me.lblRiceUnit.Text = "Unit"
         Me.lblRiceUnit.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -485,11 +488,10 @@ Partial Class frmUpdateAllotment
         '
         Me.lnklblUpdate.AutoSize = True
         Me.lnklblUpdate.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.lnklblUpdate.Location = New System.Drawing.Point(537, 79)
+        Me.lnklblUpdate.Location = New System.Drawing.Point(78, 244)
         Me.lnklblUpdate.Margin = New System.Windows.Forms.Padding(0)
         Me.lnklblUpdate.Name = "lnklblUpdate"
-        Me.TableLayoutPanel1.SetRowSpan(Me.lnklblUpdate, 2)
-        Me.lnklblUpdate.Size = New System.Drawing.Size(64, 63)
+        Me.lnklblUpdate.Size = New System.Drawing.Size(106, 29)
         Me.lnklblUpdate.TabIndex = 30
         Me.lnklblUpdate.TabStop = True
         Me.lnklblUpdate.Text = "Update"
@@ -502,7 +504,7 @@ Partial Class frmUpdateAllotment
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.grpbxCategory.AutoSize = True
         Me.grpbxCategory.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.TableLayoutPanel1.SetColumnSpan(Me.grpbxCategory, 4)
+        Me.TableLayoutPanel1.SetColumnSpan(Me.grpbxCategory, 3)
         Me.grpbxCategory.Controls.Add(Me.rdobtnRKSYII)
         Me.grpbxCategory.Controls.Add(Me.rdobtnRKSYI)
         Me.grpbxCategory.Controls.Add(Me.rdobtnSPHH)
@@ -513,7 +515,7 @@ Partial Class frmUpdateAllotment
         Me.grpbxCategory.Margin = New System.Windows.Forms.Padding(0)
         Me.grpbxCategory.Name = "grpbxCategory"
         Me.grpbxCategory.Padding = New System.Windows.Forms.Padding(0)
-        Me.grpbxCategory.Size = New System.Drawing.Size(414, 40)
+        Me.grpbxCategory.Size = New System.Drawing.Size(349, 40)
         Me.grpbxCategory.TabIndex = 42
         Me.grpbxCategory.TabStop = False
         '
@@ -572,12 +574,38 @@ Partial Class frmUpdateAllotment
         Me.rdobtnAAY.Text = "AAY"
         Me.rdobtnAAY.UseVisualStyleBackColor = True
         '
+        'lnklblAdd
+        '
+        Me.lnklblAdd.AutoSize = True
+        Me.lnklblAdd.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.lnklblAdd.Location = New System.Drawing.Point(187, 244)
+        Me.lnklblAdd.Margin = New System.Windows.Forms.Padding(0)
+        Me.lnklblAdd.Name = "lnklblAdd"
+        Me.lnklblAdd.Size = New System.Drawing.Size(112, 29)
+        Me.lnklblAdd.TabIndex = 43
+        Me.lnklblAdd.TabStop = True
+        Me.lnklblAdd.Text = "Add"
+        Me.lnklblAdd.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'lnklblRemove
+        '
+        Me.lnklblRemove.AutoSize = True
+        Me.lnklblRemove.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.lnklblRemove.Location = New System.Drawing.Point(302, 244)
+        Me.lnklblRemove.Margin = New System.Windows.Forms.Padding(0)
+        Me.lnklblRemove.Name = "lnklblRemove"
+        Me.lnklblRemove.Size = New System.Drawing.Size(106, 29)
+        Me.lnklblRemove.TabIndex = 44
+        Me.lnklblRemove.TabStop = True
+        Me.lnklblRemove.Text = "Remove"
+        Me.lnklblRemove.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
         'frmUpdateAllotment
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
         Me.AutoSize = True
         Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ClientSize = New System.Drawing.Size(604, 246)
+        Me.ClientSize = New System.Drawing.Size(539, 276)
         Me.Controls.Add(Me.TableLayoutPanel1)
         Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Margin = New System.Windows.Forms.Padding(4)
@@ -634,4 +662,6 @@ Partial Class frmUpdateAllotment
     Friend WithEvents txtbxKOilAllotment As TextBox
     Friend WithEvents txtbxKOilStock As TextBox
     Friend WithEvents chkbxKOil As CheckBox
+    Friend WithEvents lnklblRemove As LinkLabel
+    Friend WithEvents lnklblAdd As LinkLabel
 End Class

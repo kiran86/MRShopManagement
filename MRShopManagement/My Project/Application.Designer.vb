@@ -24,7 +24,7 @@ Namespace My
         <Global.System.Diagnostics.DebuggerStepThroughAttribute()>  _
         Public Sub New()
             MyBase.New(Global.Microsoft.VisualBasic.ApplicationServices.AuthenticationMode.Windows)
-            Me.IsSingleInstance = true
+            Me.IsSingleInstance = false
             Me.EnableVisualStyles = false
             Me.SaveMySettingsOnExit = true
             Me.ShutDownStyle = Global.Microsoft.VisualBasic.ApplicationServices.ShutdownMode.AfterMainFormCloses
@@ -32,12 +32,12 @@ Namespace My
         
         <Global.System.Diagnostics.DebuggerStepThroughAttribute()>  _
         Protected Overrides Sub OnCreateMainForm()
-            Me.MainForm = Global.MRShopManagement.frmMain
+            Me.MainForm = Global.FPSManagement.frmMain
         End Sub
         
         <Global.System.Diagnostics.DebuggerStepThroughAttribute()>  _
         Protected Overrides Sub OnCreateSplashScreen()
-            Me.SplashScreen = Global.MRShopManagement.SplashScreen1
+            Me.SplashScreen = Global.FPSManagement.SplashScreen1
         End Sub
     End Class
 End Namespace

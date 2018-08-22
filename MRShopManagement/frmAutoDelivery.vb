@@ -47,7 +47,8 @@ Public Class frmAutoDelivery
                 dr.Read()
                 DelvDate = dr.GetDateTime(0)
                 If Not DelvDate.DayOfWeek = DayOfWeek.Sunday Then
-                    DelvDate = New DateTime(DelvDate.Year, DelvDate.Month, DelvDate.Day + 1, 8, 0, 0, 0)
+                    'DelvDate = New DateTime(DelvDate.Year, DelvDate.Month, DelvDate.Day + 1, 8, 0, 0, 0)
+                    DelvDate = DelvDate.AddDays(1)
                 End If
                 dttmDeliveryDate.Value = DelvDate
                 End If
@@ -62,7 +63,8 @@ Public Class frmAutoDelivery
                 txtbxStatus.AppendText("Total " + dr(0).ToString + " no. of Benificiaries didn't came." + Environment.NewLine)
             End If
         Catch ex As Exception
-            MsgBox("Error:" + ex.Message + "\n" + ex.StackTrace)
+            MsgBox("Some error occured. Please contact developer.",, "Fatal Error")
+            Console.WriteLine(ex.StackTrace)
         Finally
             If connection.State = ConnectionState.Open Then
                 connection.Close()
