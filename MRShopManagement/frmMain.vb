@@ -330,7 +330,7 @@ Public Class frmMain
             Try
                 qty = Double.Parse(Split(lstvwRcNos.SelectedItems.Item(0).SubItems(3).Text)(0))
                 price = Double.Parse(Split(lstvwRcNos.SelectedItems.Item(0).SubItems(4).Text)(1))
-            Catch ex As ArgumentOutOfRangeException
+            Catch ex As Exception
                 qty = 0
                 price = 0
             End Try
@@ -340,7 +340,7 @@ Public Class frmMain
             Try
                 qty = Double.Parse(Split(lstvwRcNos.SelectedItems.Item(0).SubItems(5).Text)(0))
                 price = Double.Parse(Split(lstvwRcNos.SelectedItems.Item(0).SubItems(6).Text)(1))
-            Catch ex As ArgumentOutOfRangeException
+            Catch ex As Exception
                 qty = 0
                 price = 0
             End Try
@@ -350,7 +350,7 @@ Public Class frmMain
             Try
                 qty = Double.Parse(Split(lstvwRcNos.SelectedItems.Item(0).SubItems(7).Text)(0))
                 price = Double.Parse(Split(lstvwRcNos.SelectedItems.Item(0).SubItems(8).Text)(1))
-            Catch ex As ArgumentOutOfRangeException
+            Catch ex As Exception
                 qty = 0
                 price = 0
             End Try
@@ -360,7 +360,7 @@ Public Class frmMain
             Try
                 qty = Double.Parse(Split(lstvwRcNos.SelectedItems.Item(0).SubItems(9).Text)(0))
                 price = Double.Parse(Split(lstvwRcNos.SelectedItems.Item(0).SubItems(10).Text)(1))
-            Catch ex As ArgumentOutOfRangeException
+            Catch ex As Exception
                 qty = 0
                 price = 0
             End Try
@@ -370,7 +370,7 @@ Public Class frmMain
             Try
                 qty = Double.Parse(Split(lstvwRcNos.SelectedItems.Item(0).SubItems(11).Text)(0))
                 price = Double.Parse(Split(lstvwRcNos.SelectedItems.Item(0).SubItems(12).Text)(1))
-            Catch ex As ArgumentOutOfRangeException
+            Catch ex As Exception
                 qty = 0
                 price = 0
             End Try
